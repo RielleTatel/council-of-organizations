@@ -10,8 +10,9 @@ export interface Organization {
   slug: string
   cluster: OrganizationCluster
   description: string
-  logo: string
+  logo?: string
   officers: string[]
+  link?: string
 }
 
 export interface Event {
