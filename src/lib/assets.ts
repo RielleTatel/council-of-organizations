@@ -43,7 +43,7 @@ export const threadsByColor: Record<ThreadColor, string[]> = {
   purple: [],
 }
 
-/** Blank embroidery-hoop frames on varying fabric tones — use to frame photos/content. */
+/** Blank embroidery-hoop frames on varying fabric tones, used to frame photos/content. */
 export const hoopFrames: string[] = Array.from({ length: 10 }, (_, i) => `${hoopBase}/hoop-${i + 1}.jpg`)
 
 /** OrgFair 2026 event wordmark. */
@@ -51,4 +51,13 @@ export const orgFairLogo = `${hoopBase}/OrgFair.png`
 
 export function randomFrom<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)]
+}
+
+export const threadHex: Record<ThreadColor, string> = {
+  red: '#c41e3a',
+  blue: '#1e5aa8',
+  green: '#2d8a3e',
+  yellow: '#e4c41a',
+  pink: '#e85a9a',
+  purple: '#7b3fa0',
 }
