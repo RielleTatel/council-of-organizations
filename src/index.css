@@ -106,3 +106,36 @@ body {
   border-top: 2px dashed var(--color-stitch-gray);
   background: none;
 }
+
+/* Focus ring — stitch-dash pattern (design system §5.D) */
+:focus-visible {
+  outline: 3px dashed var(--color-stitch-gray);
+  outline-offset: 3px;
+}
+
+/* Scroll reveal: content fades up 20px over 600ms ease-out (design system §6) */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 600ms ease-out, transform 600ms ease-out;
+  will-change: opacity, transform;
+}
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
