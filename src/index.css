@@ -1,1 +1,108 @@
 @import "tailwindcss";
+
+/* ---------------------------------------------------------------------- */
+/* Fonts — /public/FONTS                                                   */
+/* ---------------------------------------------------------------------- */
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY THIN_PERSONAL USE.OTF") format("opentype");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY LIGHT_PERSONAL USE.OTF") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY REGULAR_PERSONAL USE.OTF") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY MEDIUM_PERSONAL USE.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY BOLD_PERSONAL USE.OTF") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Made Tommy";
+  src: url("/FONTS/MADE TOMMY BLACK_PERSONAL USE.OTF") format("opentype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Omegle";
+  src: url("/FONTS/OMEGLE.OTF") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Design tokens — COA-Z "Interwoven Beyond" design system                */
+/* docs/COA-Z_Interwoven_Beyond_Design_System.md                          */
+/* ---------------------------------------------------------------------- */
+
+@theme {
+  /* Typography */
+  --font-display: "Made Tommy", sans-serif;
+  --font-body: "Made Tommy", sans-serif;
+  --font-accent: "Omegle", cursive;
+
+  /* Primary palette */
+  --color-trust-blue: #2e4a8f;
+  --color-canvas-cream: #f5f0e8;
+  --color-linen-white: #faf8f5;
+
+  /* Thread accents (diversity spectrum) */
+  --color-thread-red: #c41e3a;
+  --color-thread-blue: #1e5aa8;
+  --color-thread-green: #2d8a3e;
+  --color-thread-yellow: #e4c41a;
+  --color-thread-pink: #e85a9a;
+  --color-thread-purple: #7b3fa0;
+
+  /* Neutral & utility */
+  --color-fabric-dark: #3d3d3d;
+  --color-stitch-gray: #8a8a8a;
+  --color-shadow-thread: rgba(46, 74, 143, 0.08);
+}
+
+/* ---------------------------------------------------------------------- */
+/* Base styles                                                             */
+/* ---------------------------------------------------------------------- */
+
+body {
+  background-color: var(--color-canvas-cream);
+  color: var(--color-fabric-dark);
+  font-family: var(--font-body);
+}
+
+/* Stitch-line divider: dash-gap-dash-gap, per section D of the design system */
+.stitch-divider {
+  border: none;
+  border-top: 2px dashed var(--color-stitch-gray);
+  background: none;
+}
