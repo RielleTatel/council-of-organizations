@@ -67,7 +67,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "jieep-adzu",
-    name: "Junior Institute of Electronics Engineers of the Philippines – AdZU Chapter",
+    name: "Junior Institute of Electronics Engineers of the Philippines - AdZU Chapter",
     category: "Academic",
     description:
       "Supports electronics engineering students through technical learning, leadership opportunities, and professional development.",
@@ -195,7 +195,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "jma-adzu",
-    name: "Junior Marketing Association – AdZU (JMA-AdZU)",
+    name: "Junior Marketing Association - AdZU (JMA-AdZU)",
     category: "Business",
     description:
       "Develops future marketing professionals through leadership opportunities, strategic thinking, and practical learning experiences.",
@@ -220,7 +220,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "junior-jaycees-chamber-adzu",
-    name: "Junior Jaycees Chamber – AdZU",
+    name: "Junior Jaycees Chamber - AdZU",
     category: "Socio-Civic and Political",
     description:
       "The AdZU chapter of the Junior Chamber International, developing young leaders through civic projects, community service, and hands-on leadership training.",
@@ -458,7 +458,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "cfc-youth-for-christ-adzu",
-    name: "CFC Youth For Christ – ADZU Campus Based",
+    name: "CFC Youth For Christ - ADZU Campus Based",
     category: "Faith and Formation",
     description:
       "A faith-based youth community rooted in the Couples for Christ charism, fostering spiritual growth, discipleship, and Christian living among students.",
@@ -467,7 +467,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "christian-life-community-adzu",
-    name: "Christian Life Community – AdZU",
+    name: "Christian Life Community - AdZU",
     category: "Faith and Formation",
     description:
       "A Jesuit-inspired faith community that accompanies students in their spiritual journey through prayer, discernment, and apostolic service grounded in Ignatian spirituality.",
@@ -479,13 +479,13 @@ export const organizations: Organization[] = [
     name: "Every Nation Campus",
     category: "Faith and Formation",
     description:
-      "A campus ministry that empowers students for Life — Leadership, Integrity, Faith, and Excellence — building a vibrant Christian community within AdZU.",
+      "A campus ministry that empowers students for Life - Leadership, Integrity, Faith, and Excellence - building a vibrant Christian community within AdZU.",
     logo: "/logos/Every Nation Campus.jpg",
     link: "https://www.facebook.com/profile.php?id=61578812772584",
   },
   {
     id: "muslim-students-association-adzu",
-    name: "Muslim Students Association – AdZU",
+    name: "Muslim Students Association - AdZU",
     category: "Faith and Formation",
     description:
       "The only officially recognized Muslim youth organization at AdZU, providing a safe haven for Muslim students to freely express their faith and fostering harmony and inter-religious dialogue on campus.",
@@ -502,7 +502,7 @@ export const organizations: Organization[] = [
   },
   {
     id: "society-of-the-knights-of-ignatius",
-    name: "Society of the Knights of Ignatius – ADZU College",
+    name: "Society of the Knights of Ignatius - ADZU College",
     category: "Faith and Formation",
     description:
       "The official organization of altar servers of AdZU, forming students into servant-leaders through liturgical ministry and Ignatian spirituality.",
