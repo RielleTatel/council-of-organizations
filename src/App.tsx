@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom'
+import { SiteLayout } from './components/layout/SiteLayout'
 import Home from './pages/Home'
 import About from './pages/About'
 import Leadership from './pages/Leadership'
@@ -11,14 +12,16 @@ import NotFound from './pages/NotFound'
 export default function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/leadership" element={<Leadership />} />
-      <Route path="/organizations" element={<Organizations />} />
-      <Route path="/organizations/:slug" element={<OrganizationProfile />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/events/:slug" element={<EventDetail />} />
-      <Route path="*" element={<NotFound />} />
+      <Route element={<SiteLayout />}>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/leadership" element={<Leadership />} />
+        <Route path="/organizations" element={<Organizations />} />
+        <Route path="/organizations/:slug" element={<OrganizationProfile />} />
+        <Route path="/events" element={<Events />} />
+        <Route path="/events/:slug" element={<EventDetail />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
     </Routes>
   )
 }
