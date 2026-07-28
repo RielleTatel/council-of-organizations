@@ -27,10 +27,10 @@ export function useFeaturedOrganization() {
   }
 }
 
-export function useSpotlightOrganizations() {
+export function useSpotlightOrganizations(count = 6) {
   const orgs = useOrganizations()
   return {
-    organizations: selectSpotlightOrganizations(orgs.data ?? [], clusters.map((c) => c.slug)),
+    organizations: selectSpotlightOrganizations(orgs.data ?? [], clusters.map((c) => c.slug)).slice(0, count),
     isLoading: orgs.isLoading,
   }
 }
