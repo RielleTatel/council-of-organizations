@@ -3,24 +3,31 @@ import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { ThreadDivider } from '../ThreadDivider'
-import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
 import { SectionGlow } from '../ui/SectionGlow'
 import { FloatingAccent } from '../ui/FloatingAccent'
 
 export function AboutSection() {
   return (
-    <section className="relative bg-canvas-cream py-20 md:py-28">
-      <ThreadBorder
-        color="yellow"
-        edge="top"
-        flip
-        className="absolute left-[58%] top-0 w-72 max-w-none -translate-x-1/2 -translate-y-1/2"
-      />
-      <div className="mx-auto max-w-[1200px] px-6">
-        <Reveal className="relative mx-auto max-w-[68ch]">
+    <section className="relative bg-canvas-cream py-10 md:py-10">
+
+
+      <div className="mx-auto grid max-w-[1600px] grid-cols-2 items-center gap-10 px-6 md:grid-cols-2">
+        <Reveal className="relative mx-auto w-full max-w-md">
+          <img
+            src="/groupPicture.jpg"
+            alt="COA-Z member organizations gathered together"
+            className="aspect-[4/3 ] w-full rounded-[8px] object-cover shadow-[0_4px_20px_rgba(46,74,143,0.06)]"
+            loading="lazy"
+          />
+          <FloatingAccent duration={6.5} distance={8} rotate={-6} className="absolute -right-4 -top-4">
+            <EmbroideredAccent color="pink" index={0} size={52} />
+          </FloatingAccent>
+        </Reveal>
+
+        <Reveal delay={100} className="relative">
           <SectionGlow className="left-1/2 -top-8 -translate-x-1/2" />
-          <FloatingAccent duration={6} distance={8} rotate={6} className="absolute -left-6 -top-10 hidden md:block">
+          <FloatingAccent duration={6} distance={8} rotate={6} className="absolute -left-10 -top-10 hidden md:block">
             <EmbroideredAccent color="green" index={0} size={56} />
           </FloatingAccent>
 

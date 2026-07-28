@@ -19,7 +19,7 @@ const PURPOSES: Purpose[] = [
 
 export function PurposeSection() {
   return (
-    <section className="bg-canvas-cream py-20 md:py-28">
+    <section className="bg-canvas-cream py-10 md:py-10">
       <div className="mx-auto max-w-[1200px] px-6">
         <Reveal className="relative mb-12 text-center">
           <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />

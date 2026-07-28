@@ -3,6 +3,7 @@ import { defaultSeo } from '../config/seo'
 import { Hero } from '../components/home/Hero'
 import { QuickStats } from '../components/home/QuickStats'
 import { AboutSection } from '../components/home/AboutSection'
+import { GallerySection } from '../components/home/GallerySection'
 import { PurposeSection } from '../components/home/PurposeSection'
 import { FeaturedOrganization } from '../components/home/FeaturedOrganization'
 import { UpcomingEvents } from '../components/home/UpcomingEvents'
@@ -15,6 +16,7 @@ export default function Home() {
       <Hero />
       <QuickStats />
       <AboutSection />
+      <GallerySection />
       <PurposeSection />
       <FeaturedOrganization />
       <UpcomingEvents />

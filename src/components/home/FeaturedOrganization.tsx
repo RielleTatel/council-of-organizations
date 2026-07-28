@@ -42,14 +42,19 @@ export function FeaturedOrganization() {
               className="h-auto w-full"
             />
             {isLoading ? (
-              <span className="absolute inset-1/4 animate-pulse rounded-full bg-stitch-gray/20" aria-hidden />
-            ) : organization?.logo ? (
-              <img
-                src={organization.logo}
-                alt={`${organization.name} logo`}
-                className="absolute left-1/2 top-1/2 w-2/5 -translate-x-1/2 -translate-y-1/2 object-contain"
-                loading="lazy"
+              <span
+                className="absolute left-1/2 top-1/2 h-[55%] w-[55%] -translate-x-1/2 -translate-y-1/2 animate-pulse rounded-full bg-stitch-gray/20"
+                aria-hidden
               />
+            ) : organization?.logo ? (
+              <div className="absolute left-1/2 top-1/2 h-[60%] w-[60%] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full bg-linen-white shadow-[0_2px_12px_rgba(46,74,143,0.1)]">
+                <img
+                  src={organization.logo}
+                  alt={`${organization.name} logo`}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+              </div>
             ) : null}
             <FloatingAccent duration={6.5} distance={9} rotate={-6} className="absolute -right-3 top-6">
               <EmbroideredAccent color="pink" index={0} size={52} />

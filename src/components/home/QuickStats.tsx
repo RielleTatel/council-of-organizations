@@ -17,9 +17,9 @@ export function QuickStats() {
       <ThreadBorder
         color="blue"
         edge="top"
-        className="absolute left-[42%] top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
+        className="absolute left-[42%] top-0 -z-10 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
       />
-      <Reveal className="mx-auto grid max-w-[1200px] grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:divide-x md:divide-dashed md:divide-stitch-gray/40">
+      <Reveal className="relative z-10 mx-auto grid max-w-[1200px] grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:divide-x md:divide-dashed md:divide-stitch-gray/40">
         {LABELS.map(({ key, label }) => (
           <div key={key} className="flex flex-col items-center gap-2 px-4 text-center">
             {isLoading ? (
