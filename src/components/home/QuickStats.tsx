@@ -1,5 +1,6 @@
 import { useHomeStats } from '../../hooks/useHomeData'
 import { Reveal } from '../ui/Reveal'
+import { ThreadBorder } from '../ThreadBorder'
 
 const LABELS = [
   { key: 'organizations', label: 'Accredited Organizations' },
@@ -12,7 +13,12 @@ export function QuickStats() {
   const { stats, isLoading } = useHomeStats()
 
   return (
-    <section className="bg-linen-white py-16 md:py-20">
+    <section className="relative bg-linen-white py-16 md:py-20">
+      <ThreadBorder
+        color="blue"
+        edge="top"
+        className="absolute left-[42%] top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
+      />
       <Reveal className="mx-auto grid max-w-[1200px] grid-cols-2 gap-y-10 px-6 md:grid-cols-4 md:divide-x md:divide-dashed md:divide-stitch-gray/40">
         {LABELS.map(({ key, label }) => (
           <div key={key} className="flex flex-col items-center gap-2 px-4 text-center">

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { Calendar, ArrowRight } from 'lucide-react'
 import type { Event } from '../../lib/contentful/types'
+import { EmbroideredAccent } from '../EmbroideredAccent'
 import { cn } from '../../lib/utils'
 
 function formatDate(iso: string): string {
@@ -18,10 +19,11 @@ export function EventCard({ event, muted = false }: EventCardProps) {
   return (
     <article
       className={cn(
-        'flex h-full flex-col overflow-hidden rounded-[8px] bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]',
+        'relative flex h-full flex-col overflow-hidden rounded-[8px] bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]',
         muted && 'opacity-80',
       )}
     >
+      <EmbroideredAccent color="yellow" index={0} size={28} className="absolute right-2 top-2 z-10 opacity-90" />
       {event.image ? (
         <img
           src={event.image}

@@ -3,7 +3,10 @@ import { ArrowRight } from 'lucide-react'
 import { useFeaturedOrganization } from '../../hooks/useHomeData'
 import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
+import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
+import { SectionGlow } from '../ui/SectionGlow'
+import { FloatingAccent } from '../ui/FloatingAccent'
 import { hoopFrames } from '../../lib/assets'
 
 export function FeaturedOrganization() {
@@ -12,9 +15,15 @@ export function FeaturedOrganization() {
   if (!isLoading && !organization) return null
 
   return (
-    <section className="bg-linen-white py-20 md:py-28">
+    <section className="relative bg-linen-white py-20 md:py-28">
+      <ThreadBorder
+        color="pink"
+        edge="top"
+        className="absolute left-1/2 top-0 w-60 max-w-none -translate-x-1/2 -translate-y-1/2"
+      />
       <div className="mx-auto max-w-[1200px] px-6">
-        <Reveal className="mb-12 text-center">
+        <Reveal className="relative mb-12 text-center">
+          <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
           <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
             Organization Spotlight
           </h2>
@@ -22,6 +31,7 @@ export function FeaturedOrganization() {
 
         <Reveal className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           <div className="relative mx-auto w-full max-w-sm">
+            <SectionGlow className="left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
             <img
               src={hoopFrames[2]}
               alt=""
@@ -41,7 +51,9 @@ export function FeaturedOrganization() {
                 loading="lazy"
               />
             ) : null}
-            <EmbroideredAccent color="pink" index={0} size={52} className="absolute -right-3 top-6" />
+            <FloatingAccent duration={6.5} distance={9} rotate={-6} className="absolute -right-3 top-6">
+              <EmbroideredAccent color="pink" index={0} size={52} />
+            </FloatingAccent>
           </div>
 
           <div className="flex flex-col gap-4 text-center md:text-left">

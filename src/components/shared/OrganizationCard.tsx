@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import type { Organization } from '../../lib/contentful/types'
 import { ClusterBadge } from './ClusterBadge'
+import { EmbroideredAccent } from '../EmbroideredAccent'
 import { threadHex } from '../../lib/assets'
 import { clusterBySlug } from '../../config/clusters'
 
@@ -16,8 +17,16 @@ export function OrganizationCard({ organization }: OrganizationCardProps) {
   return (
     <Link
       to={`/organizations/${organization.slug}`}
-      className="group flex h-full flex-col overflow-hidden rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-transform hover:-translate-y-1"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-transform hover:-translate-y-1"
     >
+      {cluster && (
+        <EmbroideredAccent
+          color={cluster.color}
+          index={0}
+          size={28}
+          className="absolute right-2 top-2 z-10 opacity-90"
+        />
+      )}
       {organization.logo ? (
         <img
           src={organization.logo}

@@ -1,15 +1,24 @@
 import { useUpcomingEvents } from '../../hooks/useHomeData'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { EventCard } from '../shared/EventCard'
+import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
+import { SectionGlow } from '../ui/SectionGlow'
 
 export function UpcomingEvents() {
   const { events, isLoading } = useUpcomingEvents(3)
 
   return (
-    <section className="bg-canvas-cream py-20 md:py-28">
+    <section className="relative bg-canvas-cream py-20 md:py-28">
+      <ThreadBorder
+        color="green"
+        edge="top"
+        flip
+        className="absolute left-[38%] top-0 w-64 max-w-none -translate-x-1/2 -translate-y-1/2"
+      />
       <div className="mx-auto max-w-[1200px] px-6">
-        <Reveal className="mb-12 text-center">
+        <Reveal className="relative mb-12 text-center">
+          <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
           <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
             Upcoming Activities
           </h2>

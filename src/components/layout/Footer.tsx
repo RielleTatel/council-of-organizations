@@ -4,13 +4,18 @@ import { navItems } from '../../config/navigation'
 import { siteConfig } from '../../config/site'
 import { siteLogo } from '../../lib/assets'
 import { EmbroideredAccent } from '../EmbroideredAccent'
+import { ThreadDivider } from '../ThreadDivider'
 
 export function Footer() {
   const year = new Date().getFullYear()
   const { facebook, instagram } = siteConfig.socialLinks
 
   return (
-    <footer className="border-t border-dashed border-stitch-gray/40 bg-linen-white">
+    <footer className="relative border-t border-dashed border-stitch-gray/40 bg-linen-white">
+      <ThreadDivider
+        flowerColor="blue"
+        className="absolute left-1/2 top-0 w-48 -translate-x-1/2 -translate-y-1/2 bg-linen-white px-4"
+      />
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 px-6 py-16 md:grid-cols-3">
         <div className="flex flex-col gap-3">
           <span className="flex items-center gap-2 font-display text-lg font-black text-trust-blue">

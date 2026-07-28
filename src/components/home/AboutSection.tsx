@@ -3,14 +3,26 @@ import { ArrowRight } from 'lucide-react'
 import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { ThreadDivider } from '../ThreadDivider'
+import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
+import { SectionGlow } from '../ui/SectionGlow'
+import { FloatingAccent } from '../ui/FloatingAccent'
 
 export function AboutSection() {
   return (
     <section className="relative bg-canvas-cream py-20 md:py-28">
+      <ThreadBorder
+        color="yellow"
+        edge="top"
+        flip
+        className="absolute left-[58%] top-0 w-72 max-w-none -translate-x-1/2 -translate-y-1/2"
+      />
       <div className="mx-auto max-w-[1200px] px-6">
         <Reveal className="relative mx-auto max-w-[68ch]">
-          <EmbroideredAccent color="green" index={0} size={56} className="absolute -left-6 -top-10 hidden md:block" />
+          <SectionGlow className="left-1/2 -top-8 -translate-x-1/2" />
+          <FloatingAccent duration={6} distance={8} rotate={6} className="absolute -left-6 -top-10 hidden md:block">
+            <EmbroideredAccent color="green" index={0} size={56} />
+          </FloatingAccent>
 
           <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
             Building a Stronger Community of Student Organizations

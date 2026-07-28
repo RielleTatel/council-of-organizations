@@ -4,7 +4,17 @@ import { ChevronDown } from 'lucide-react'
 import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { ThreadBorder } from '../ThreadBorder'
+import { SectionGlow } from '../ui/SectionGlow'
 import { siteLogo } from '../../lib/assets'
+
+const fabricNoise =
+  'data:image/svg+xml;utf8,' +
+  encodeURIComponent(
+    "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>" +
+      "<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/>" +
+      "<feColorMatrix type='matrix' values='0 0 0 0 0.24  0 0 0 0 0.24  0 0 0 0 0.24  0 0 0 0.5 0'/></filter>" +
+      "<rect width='100%' height='100%' filter='url(#n)'/></svg>",
+  )
 
 const containerVariants: Variants = {
   hidden: {},
@@ -48,7 +58,27 @@ export function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      <ThreadBorder color="purple" edge="top" className="absolute left-6 top-24 hidden lg:block" />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
+        style={{ backgroundImage: `url("${fabricNoise}")`, backgroundSize: '220px 220px' }}
+      />
+
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -right-24 -top-24 h-72 w-72 rounded-full border-2 border-dashed border-stitch-gray/[0.08]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute -bottom-16 -left-16 h-56 w-56 rounded-full border-2 border-dashed border-stitch-gray/[0.08]"
+      />
+
+      <ThreadBorder
+        color="blue"
+        edge="bottom"
+        flip
+        className="absolute -bottom-2 left-0 w-72 max-w-none opacity-40 hidden lg:block"
+      />
 
       <motion.div
         aria-hidden
@@ -60,11 +90,13 @@ export function Hero() {
 
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-6 px-10 py-20 lg:grid-cols-[1.1fr_0.9fr]">
         <motion.div
-          className="flex flex-col gap-6 text-center lg:text-left"
+          className="relative flex flex-col gap-6 text-center lg:text-left"
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
+          <SectionGlow className="left-1/4 top-0 hidden lg:block" />
+
           <motion.span
             variants={itemVariants}
             className="mx-auto inline-flex items-center gap-2 rounded-full bg-linen-white px-4 py-2 font-body text-xs font-medium uppercase tracking-[0.14em] text-trust-blue shadow-[0_4px_20px_rgba(46,74,143,0.06)] lg:mx-0"
@@ -106,6 +138,24 @@ export function Hero() {
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.6, ease: 'easeOut' }}
         >
+          <ThreadBorder
+            color="blue"
+            edge="bottom"
+            className="pointer-events-none absolute -top-10 right-0 w-72 max-w-none rotate-12 opacity-30"
+          />
+
+          <motion.div
+            aria-hidden
+            className="pointer-events-none absolute inset-[-4%] rounded-full border-2 border-dashed border-stitch-gray/15"
+            animate={shouldReduceMotion ? undefined : { rotate: 360 }}
+            transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
+          />
+
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-x-[12%] bottom-[4%] h-6 rounded-full bg-fabric-dark/10 blur-xl"
+          />
+
           <motion.div style={{ x: logoX, y: logoY }}>
             <motion.img
               src={siteLogo}
@@ -118,6 +168,26 @@ export function Hero() {
               transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 1.2 }}
             />
           </motion.div>
+
+          <motion.svg
+            aria-hidden
+            viewBox="0 0 100 100"
+            preserveAspectRatio="none"
+            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.6, ease: 'easeOut' }}
+          >
+            <path
+              d="M 8 14 C -8 48, 18 88, 40 82 S 88 78, 93 78"
+              fill="none"
+              stroke="var(--color-thread-blue)"
+              strokeOpacity={0.35}
+              strokeWidth={1.6}
+              strokeLinecap="round"
+              strokeDasharray="4 4"
+            />
+          </motion.svg>
 
           <motion.div
             className="absolute -left-4 top-8"
