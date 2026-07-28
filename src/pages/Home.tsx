@@ -6,7 +6,7 @@ import { AboutSection } from '../components/home/AboutSection'
 import { GallerySection } from '../components/home/GallerySection'
 import { PurposeSection } from '../components/home/PurposeSection'
 import { OrganizationSpotlight } from '../components/home/OrganizationSpotlight'
-import { UpcomingEvents } from '../components/home/UpcomingEvents'
+import { EventHighlights } from '../components/home/EventHighlights'
 import { HomeCTA } from '../components/home/HomeCTA'
 
 export default function Home() {
@@ -19,7 +19,7 @@ export default function Home() {
       <GallerySection />
       <PurposeSection />
       <OrganizationSpotlight />
-      <UpcomingEvents />
+      <EventHighlights />
       <HomeCTA />
     </>
   )

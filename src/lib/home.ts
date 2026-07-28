@@ -41,3 +41,8 @@ export function selectUpcomingEvents(events: Event[], now: Date, count: number):
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
     .slice(0, count)
 }
+
+/** Most recently published Event Highlights stories, newest first. */
+export function selectRecentEvents(events: Event[], count: number): Event[] {
+  return [...events].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, count)
+}

@@ -4,6 +4,7 @@ import { useEvents } from './useEvents'
 import {
   deriveHomeStats,
   selectFeaturedOrganization,
+  selectRecentEvents,
   selectSpotlightOrganizations,
   selectUpcomingEvents,
   type HomeStats,
@@ -39,6 +40,14 @@ export function useUpcomingEvents(count = 3) {
   const events = useEvents()
   return {
     events: selectUpcomingEvents(events.data ?? [], new Date(), count),
+    isLoading: events.isLoading,
+  }
+}
+
+export function useRecentEvents(count = 3) {
+  const events = useEvents()
+  return {
+    events: selectRecentEvents(events.data ?? [], count),
     isLoading: events.isLoading,
   }
 }
