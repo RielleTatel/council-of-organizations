@@ -188,7 +188,7 @@ export function Hero() {
             />
             <BadHandwriting
               text="Empowering Student Organizations. Inspiring Collaborative Leadership."
-              fontSize={64}
+              fontSize={46}
               fontWeight={700}
               lineHeight={1.1}
               color="#2e4a8f"

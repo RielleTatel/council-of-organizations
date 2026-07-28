@@ -10,7 +10,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-40 bg-linen-white/95 shadow-[0_2px_16px_rgba(46,74,143,0.06)] backdrop-blur">
+    <header className="sticky top-0 z-40 bg-linen-white shadow-[0_2px_16px_rgba(46,74,143,0.06)]">
       <nav className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
         <Link to="/" className="flex items-center gap-2 font-display text-xl font-black tracking-[-0.02em] text-trust-blue">
           <img src={siteLogo} alt="" className="h-9 w-9" />
