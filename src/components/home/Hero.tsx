@@ -97,13 +97,6 @@ export function Hero() {
         >
           <SectionGlow className="left-1/4 top-0 hidden lg:block" />
 
-          <motion.span
-            variants={itemVariants}
-            className="mx-auto inline-flex items-center gap-2 rounded-full bg-linen-white px-4 py-2 font-body text-xs font-medium uppercase tracking-[0.14em] text-trust-blue shadow-[0_4px_20px_rgba(46,74,143,0.06)] lg:mx-0"
-          >
-            Council of the Organizations of the Ateneo - Zamboanga
-          </motion.span>
-
           <motion.h1
             variants={itemVariants}
             className="font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl"
