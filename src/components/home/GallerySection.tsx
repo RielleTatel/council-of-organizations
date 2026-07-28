@@ -103,7 +103,7 @@ export function GallerySection() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
 
   return (
-    <section className="relative bg-linen-white py-16 md:py-20">
+    <section id="gallery" className="relative scroll-mt-24 bg-linen-white py-16 md:py-20">
       <div className="mx-auto max-w-[1200px] px-6">
         <Reveal className="relative mb-12 text-center">
           <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
