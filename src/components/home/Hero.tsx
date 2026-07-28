@@ -87,7 +87,7 @@ export function Hero() {
 
       {/* Scattered small embroidered accents, randomly picked per reload */}
       <motion.div
-        className="pointer-events-none absolute left-[8%] top-[18%] opacity-70 hidden md:block"
+        className="pointer-events-none absolute left-[8%] top-[18%] opacity-70"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 0.7, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.4 }}
@@ -101,7 +101,7 @@ export function Hero() {
       </motion.div>
 
       <motion.div
-        className="pointer-events-none absolute left-[22%] bottom-[14%] opacity-60 hidden lg:block"
+        className="pointer-events-none absolute left-[22%] bottom-[14%] opacity-60"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 0.6, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.6 }}
@@ -115,7 +115,7 @@ export function Hero() {
       </motion.div>
 
       <motion.div
-        className="pointer-events-none absolute right-[30%] top-[12%] opacity-65 hidden md:block"
+        className="pointer-events-none absolute right-[30%] top-[12%] opacity-65"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 0.65, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.5 }}
@@ -129,7 +129,7 @@ export function Hero() {
       </motion.div>
 
       <motion.div
-        className="pointer-events-none absolute right-[6%] bottom-[22%] opacity-60 hidden lg:block"
+        className="pointer-events-none absolute right-[6%] bottom-[22%] opacity-60"
         initial={{ opacity: 0, scale: 0.6 }}
         animate={{ opacity: 0.6, scale: 1 }}
         transition={{ duration: 0.5, delay: 0.7 }}
@@ -210,26 +210,26 @@ export function Hero() {
           <ThreadBorder
             color="blue"
             edge="bottom"
-            className="pointer-events-none absolute -top-10 right-0 w-80 max-w-none rotate-12 opacity-30"
+            className="pointer-events-none absolute -top-10 right-0 -z-10 hidden w-80 max-w-none rotate-12 opacity-30 sm:block"
           />
 
           {/* Small stitched sparkle accents around the logo */}
           <span
             aria-hidden
-            className="pointer-events-none absolute -left-2 bottom-1/3 text-stitch-gray/25"
+            className="pointer-events-none absolute -left-2 bottom-1/3 -z-10 text-stitch-gray/25"
           >
             ✦
           </span>
           <span
             aria-hidden
-            className="pointer-events-none absolute -right-1 top-1/4 text-lg text-stitch-gray/20"
+            className="pointer-events-none absolute -right-1 top-1/4 -z-10 text-lg text-stitch-gray/20"
           >
             ✦
           </span>
 
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute inset-[-4%] rounded-full border-2 border-dashed border-stitch-gray/15"
+            className="pointer-events-none absolute inset-[-4%] -z-10 rounded-full border-2 border-dashed border-stitch-gray/15"
             initial={{ opacity: 0 }}
             animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, rotate: 360 }}
             transition={{ opacity: { duration: 0.5, delay: 1.6 }, rotate: { duration: 90, repeat: Infinity, ease: 'linear' } }}
@@ -237,7 +237,7 @@ export function Hero() {
 
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute inset-x-[12%] bottom-[4%] h-6 rounded-full bg-fabric-dark/10 blur-xl"
+            className="pointer-events-none absolute inset-x-[12%] bottom-[4%] -z-10 h-6 rounded-full bg-fabric-dark/10 blur-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.6 }}
@@ -248,7 +248,7 @@ export function Hero() {
             aria-hidden
             viewBox="0 0 100 100"
             preserveAspectRatio="none"
-            className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
+            className="pointer-events-none absolute inset-0 -z-10 h-full w-full overflow-visible"
           >
             <path
               d="M 8 14 C -8 48, 18 88, 40 82 S 88 78, 93 78"
@@ -263,7 +263,7 @@ export function Hero() {
 
           {/* Flowers are embroidered onto the thread once it reaches them */}
           <motion.div
-            className="absolute -left-10 top-4"
+            className="absolute z-10 -left-10 top-4"
             style={{ x: flowerX, y: flowerY }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -278,7 +278,7 @@ export function Hero() {
           </motion.div>
 
           <motion.div
-            className="absolute -right-8 bottom-4"
+            className="absolute z-10 -right-8 bottom-4"
             style={{ x: flowerX, y: flowerY }}
             initial={{ opacity: 0, scale: 0.5 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -294,6 +294,7 @@ export function Hero() {
 
           {/* Logo arrives last, as the completed centerpiece */}
           <motion.div
+            className="relative z-10"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6, delay: 1.6, ease: 'easeOut' }}

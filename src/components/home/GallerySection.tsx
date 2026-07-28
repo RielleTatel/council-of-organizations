@@ -1,8 +1,11 @@
 import { useEffect, useState, type MouseEvent } from 'react'
 import { createPortal } from 'react-dom'
-import { X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { X, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
 import { Reveal } from '../ui/Reveal'
 import { SectionGlow } from '../ui/SectionGlow'
+import { cn } from '../../lib/utils'
+
+const MOBILE_PREVIEW_COUNT = 4
 
 const GALLERY_FILES = [
   '739118430_1074677254957266_5028353376119372688_n.jpg',
@@ -101,6 +104,7 @@ function Lightbox({ index, onClose, onPrev, onNext }: LightboxProps) {
 
 export function GallerySection() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
+  const [showAll, setShowAll] = useState(false)
 
   return (
     <section id="gallery" className="relative scroll-mt-24 bg-linen-white py-16 md:py-20">
@@ -122,7 +126,10 @@ export function GallerySection() {
               type="button"
               onClick={() => setLightboxIndex(index)}
               aria-label={`View ${item.alt} in full size`}
-              className="group relative overflow-hidden rounded-[8px] shadow-[0_4px_20px_rgba(46,74,143,0.06)]"
+              className={cn(
+                'group relative overflow-hidden rounded-[8px] shadow-[0_4px_20px_rgba(46,74,143,0.06)]',
+                index >= MOBILE_PREVIEW_COUNT && !showAll && 'hidden sm:block',
+              )}
               style={{ gridRow: `span ${ROW_SPANS[index % ROW_SPANS.length]}` }}
             >
               <img
@@ -134,6 +141,21 @@ export function GallerySection() {
             </button>
           ))}
         </Reveal>
+
+        {GALLERY_IMAGES.length > MOBILE_PREVIEW_COUNT && (
+          <button
+            type="button"
+            onClick={() => setShowAll((v) => !v)}
+            className="mx-auto mt-6 flex items-center gap-2 font-body text-sm font-medium text-trust-blue transition-colors hover:text-thread-red sm:hidden"
+          >
+            {showAll ? 'Show Fewer Photos' : 'Show More Photos'}
+            <ChevronDown
+              size={16}
+              strokeWidth={1.75}
+              className={cn('transition-transform duration-300', showAll && 'rotate-180')}
+            />
+          </button>
+        )}
       </div>
 
       {lightboxIndex !== null && (
