@@ -33,13 +33,13 @@ export function OrganizationSpotlight() {
         </Reveal>
 
         {isLoading ? (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="h-96 animate-pulse rounded-[8px] bg-canvas-cream" />
+              <div key={i} className="h-72 animate-pulse rounded-[8px] bg-canvas-cream" />
             ))}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {organizations.map((org, i) => {
               const color = clusterBySlug(org.cluster.slug)?.color ?? 'blue'
               const hex = threadHex[color]
@@ -55,32 +55,34 @@ export function OrganizationSpotlight() {
                         alt=""
                         role="presentation"
                         loading="lazy"
-                        className="aspect-[16/9] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                        className="aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                       />
                       {org.logo && (
-                        <div className="absolute left-1/2 top-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-4 border-linen-white bg-linen-white shadow-[0_4px_16px_rgba(46,74,143,0.16)]">
+                        <div className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-[3px] border-linen-white bg-linen-white shadow-[0_4px_16px_rgba(46,74,143,0.16)]">
                           <img src={org.logo} alt={`${org.name} logo`} className="h-full w-full object-cover" loading="lazy" />
                         </div>
                       )}
                       <EmbroideredAccent
                         color={color}
                         index={0}
-                        size={32}
-                        className="absolute right-3 top-3 opacity-90"
+                        size={24}
+                        className="absolute right-2 top-2 opacity-90"
                       />
                     </div>
 
-                    <div className="flex flex-1 flex-col gap-3 p-6 text-center md:text-left">
-                      <h3 className="font-display text-xl font-bold text-trust-blue">{org.name}</h3>
-                      <ClusterBadge slug={org.cluster.slug} className="mx-auto md:mx-0" />
-                      <p className="font-body leading-relaxed text-fabric-dark">{org.description}</p>
+                    <div className="flex flex-1 flex-col gap-2 p-4 text-center md:text-left">
+                      <h3 className="font-display text-base font-bold leading-tight text-trust-blue">{org.name}</h3>
+                      <ClusterBadge slug={org.cluster.slug} className="mx-auto px-2 py-0.5 text-[10px] md:mx-0" />
+                      <p className="line-clamp-3 font-body text-sm leading-relaxed text-fabric-dark">
+                        {org.description}
+                      </p>
 
                       <Link
                         to={`/organizations/${org.slug}`}
-                        className="mt-auto inline-flex items-center justify-center gap-1.5 self-center pt-2 font-body font-medium text-trust-blue transition-all duration-300 hover:gap-2.5 hover:text-[var(--accent)] md:justify-start md:self-start"
+                        className="mt-auto inline-flex items-center justify-center gap-1.5 self-center pt-1 font-body text-sm font-medium text-trust-blue transition-all duration-300 hover:gap-2.5 hover:text-[var(--accent)] md:justify-start md:self-start"
                       >
                         View Story
-                        <ArrowRight size={16} strokeWidth={1.75} />
+                        <ArrowRight size={14} strokeWidth={1.75} />
                       </Link>
                     </div>
                   </article>

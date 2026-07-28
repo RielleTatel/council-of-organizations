@@ -24,6 +24,19 @@ export interface Event {
   image: string
   isFeatured: boolean
   isFlagship: boolean
+  /** Organization the story is about, e.g. "Junior Jaycees Chamber - AdZU". */
+  organization?: string
+  /** Short 1-2 sentence teaser shown on story cards. */
+  excerpt?: string
+  /** Full story body, one paragraph per entry. Falls back to `description` when absent. */
+  body?: string[]
+  /** Attribution line, e.g. "Caption by ... · Layout by ...". */
+  credit?: string
+  socialLinks?: {
+    facebook?: string
+    instagram?: string
+    email?: string
+  }
 }
 
 export interface Leader {
