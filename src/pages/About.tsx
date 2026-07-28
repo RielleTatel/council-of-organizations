@@ -3,6 +3,9 @@ import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
 import { ThreadDivider } from '../components/ThreadDivider'
+import { ThreadBorder } from '../components/ThreadBorder'
+import { SectionGlow } from '../components/ui/SectionGlow'
+import { FloatingAccent } from '../components/ui/FloatingAccent'
 import type { ThreadColor } from '../lib/assets'
 
 const FUNCTIONS: { title: string; body: string; color: ThreadColor }[] = [
@@ -71,7 +74,12 @@ export default function About() {
         description="The sole alliance of all Ateneo de Zamboanga University College-accredited organizations, and the primary bridge between El Consejo Atenista and the campus organizations it oversees."
       />
 
-      <section className="bg-canvas-cream py-16 md:py-20">
+      <section className="relative bg-canvas-cream py-16 md:py-20">
+        <ThreadBorder
+          color="green"
+          edge="top"
+          className="absolute left-[45%] top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
         <Reveal className="mx-auto max-w-[68ch] px-6">
           <div className="flex flex-col gap-5 font-body text-lg leading-relaxed text-fabric-dark">
             <p>
@@ -89,9 +97,16 @@ export default function About() {
         </Reveal>
       </section>
 
-      <section className="bg-linen-white py-20 md:py-28">
+      <section className="relative bg-linen-white py-20 md:py-28">
+        <ThreadBorder
+          color="yellow"
+          edge="top"
+          flip
+          className="absolute left-[56%] top-0 w-64 max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
         <div className="mx-auto max-w-[1200px] px-6">
-          <Reveal className="mb-12 text-center">
+          <Reveal className="relative mb-12 text-center">
+            <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
             <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
               Our Purpose
             </h2>
@@ -103,7 +118,15 @@ export default function About() {
             {FUNCTIONS.map((f, i) => (
               <Reveal key={`${f.title}-${i}`} delay={(i % 3) * 80}>
                 <article className="relative h-full overflow-hidden rounded-[8px] border border-trust-blue/10 bg-canvas-cream p-8 shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
-                  <EmbroideredAccent color={f.color} index={0} size={40} className="absolute right-5 top-5 opacity-90" />
+                  <FloatingAccent
+                    duration={5 + (i % 3) * 0.6}
+                    delay={(i % 3) * 0.3}
+                    distance={6}
+                    rotate={i % 2 === 0 ? 6 : -6}
+                    className="absolute right-5 top-5 opacity-90"
+                  >
+                    <EmbroideredAccent color={f.color} index={0} size={40} />
+                  </FloatingAccent>
                   <h3 className="max-w-[16ch] font-display text-xl font-bold text-trust-blue">{f.title}</h3>
                   <p className="mt-3 font-body leading-relaxed text-fabric-dark">{f.body}</p>
                 </article>
@@ -113,7 +136,12 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-canvas-cream py-20 md:py-28">
+      <section className="relative bg-canvas-cream py-20 md:py-28">
+        <ThreadBorder
+          color="pink"
+          edge="top"
+          className="absolute left-[40%] top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 px-6 md:grid-cols-2">
           <Reveal className="flex flex-col gap-4 rounded-[8px] bg-linen-white p-8 shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
             <span className="font-accent text-3xl text-thread-purple">Our Vision</span>
@@ -137,9 +165,16 @@ export default function About() {
         </div>
       </section>
 
-      <section className="bg-linen-white py-20 md:py-28">
+      <section className="relative bg-linen-white py-20 md:py-28">
+        <ThreadBorder
+          color="blue"
+          edge="top"
+          flip
+          className="absolute left-[60%] top-0 w-60 max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
         <div className="mx-auto max-w-[1000px] px-6">
-          <Reveal className="mb-10 text-center">
+          <Reveal className="relative mb-10 text-center">
+            <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
             <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
               Core Principles
             </h2>
@@ -148,7 +183,9 @@ export default function About() {
             {PRINCIPLES.map((p, i) => (
               <Reveal key={p.title}>
                 <div className="flex flex-col items-center gap-3 py-8 text-center md:flex-row md:items-start md:gap-6 md:text-left">
-                  <EmbroideredAccent color={p.color} index={0} size={48} className="shrink-0" />
+                  <FloatingAccent duration={5.5 + i * 0.5} delay={i * 0.3} distance={6} rotate={i % 2 === 0 ? 6 : -6} className="shrink-0">
+                    <EmbroideredAccent color={p.color} index={0} size={48} />
+                  </FloatingAccent>
                   <div>
                     <h3 className="font-display text-2xl font-bold text-trust-blue">{p.title}</h3>
                     <p className="mt-2 max-w-[60ch] font-body leading-relaxed text-fabric-dark">{p.body}</p>

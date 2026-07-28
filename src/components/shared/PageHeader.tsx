@@ -1,5 +1,6 @@
 import { ThreadDivider } from '../ThreadDivider'
 import { Reveal } from '../ui/Reveal'
+import { SectionGlow } from '../ui/SectionGlow'
 import type { ThreadColor } from '../../lib/assets'
 
 interface PageHeaderProps {
@@ -12,7 +13,8 @@ interface PageHeaderProps {
 export function PageHeader({ eyebrow, title, description, accent = 'blue' }: PageHeaderProps) {
   return (
     <section className="bg-canvas-cream pt-28 pb-12 md:pt-32 md:pb-16">
-      <Reveal className="mx-auto max-w-[1200px] px-6 text-center">
+      <Reveal className="relative mx-auto max-w-[1200px] px-6 text-center">
+        <SectionGlow className="left-1/2 top-8 -translate-x-1/2" />
         {eyebrow && (
           <span className="font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray">
             {eyebrow}

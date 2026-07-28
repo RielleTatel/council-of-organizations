@@ -5,6 +5,8 @@ import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
 import { OrganizationCard } from '../components/shared/OrganizationCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
+import { ThreadBorder } from '../components/ThreadBorder'
+import { SectionGlow } from '../components/ui/SectionGlow'
 import { clusters } from '../config/clusters'
 import { threadHex } from '../lib/assets'
 import { useOrganizations } from '../hooks/useOrganizations'
@@ -63,9 +65,15 @@ export default function Organizations() {
         </div>
       </section>
 
-      <section className="bg-canvas-cream py-16 md:py-20">
+      <section className="relative bg-canvas-cream py-16 md:py-20">
+        <ThreadBorder
+          color="blue"
+          edge="top"
+          className="absolute left-[44%] top-0 w-60 max-w-none -translate-x-1/2 -translate-y-1/2"
+        />
         <div className="mx-auto max-w-[1200px] px-6">
-          <Reveal className="mb-8 flex flex-col gap-6">
+          <Reveal className="relative mb-8 flex flex-col gap-6">
+            <SectionGlow className="left-1/4 top-0" />
             <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
               Organization Directory
             </h2>

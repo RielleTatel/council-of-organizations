@@ -1,4 +1,5 @@
 import { EmbroideredAccent } from './EmbroideredAccent'
+import { FloatingAccent } from './ui/FloatingAccent'
 import { cn } from '../lib/utils'
 import type { ThreadColor } from '../lib/assets'
 
@@ -16,7 +17,9 @@ export function ThreadDivider({ flowerColor, className }: ThreadDividerProps) {
   return (
     <div className={cn('flex items-center gap-4', className)} role="separator">
       <hr className="stitch-divider flex-1" />
-      <EmbroideredAccent color={flowerColor} size={28} />
+      <FloatingAccent duration={5.5} distance={5} rotate={8}>
+        <EmbroideredAccent color={flowerColor} size={28} />
+      </FloatingAccent>
       <hr className="stitch-divider flex-1" />
     </div>
   )

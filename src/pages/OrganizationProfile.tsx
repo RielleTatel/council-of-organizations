@@ -5,6 +5,9 @@ import { Reveal } from '../components/ui/Reveal'
 import { ClusterBadge } from '../components/shared/ClusterBadge'
 import { OrganizationCard } from '../components/shared/OrganizationCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
+import { ThreadBorder } from '../components/ThreadBorder'
+import { SectionGlow } from '../components/ui/SectionGlow'
+import { FloatingAccent } from '../components/ui/FloatingAccent'
 import { buttonVariants } from '../components/ui/Button'
 import { useOrganization } from '../hooks/useOrganization'
 import { useOrganizations } from '../hooks/useOrganizations'
@@ -51,7 +54,8 @@ export default function OrganizationProfile() {
     <>
       <Seo title={`${organization.name} | COA-Z`} description={organization.description} />
 
-      <section className="bg-canvas-cream pt-28 pb-16 md:pt-32 md:pb-20">
+      <section className="relative bg-canvas-cream pt-28 pb-16 md:pt-32 md:pb-20">
+        <SectionGlow className="right-0 top-1/3 h-72 w-72" />
         <div className="mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
           <Reveal className="relative mx-auto w-full max-w-sm">
             {organization.logo ? (
@@ -76,7 +80,9 @@ export default function OrganizationProfile() {
                   .toUpperCase()}
               </div>
             )}
-            <EmbroideredAccent color="pink" index={0} size={52} className="absolute -right-3 -top-4" />
+            <FloatingAccent duration={6.5} distance={9} rotate={-6} className="absolute -right-3 -top-4">
+              <EmbroideredAccent color="pink" index={0} size={52} />
+            </FloatingAccent>
           </Reveal>
 
           <Reveal delay={120} className="flex flex-col items-start gap-4">
@@ -103,7 +109,12 @@ export default function OrganizationProfile() {
       </section>
 
       {organization.officers.length > 0 && (
-        <section className="bg-linen-white py-16 md:py-20">
+        <section className="relative bg-linen-white py-16 md:py-20">
+          <ThreadBorder
+            color="blue"
+            edge="top"
+            className="absolute left-[42%] top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2"
+          />
           <div className="mx-auto max-w-[1000px] px-6">
             <Reveal>
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
@@ -122,7 +133,13 @@ export default function OrganizationProfile() {
       )}
 
       {related.length > 0 && (
-        <section className="bg-canvas-cream py-16 md:py-20">
+        <section className="relative bg-canvas-cream py-16 md:py-20">
+          <ThreadBorder
+            color="yellow"
+            edge="top"
+            flip
+            className="absolute left-[58%] top-0 w-60 max-w-none -translate-x-1/2 -translate-y-1/2"
+          />
           <div className="mx-auto max-w-[1200px] px-6">
             <Reveal className="mb-8">
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">

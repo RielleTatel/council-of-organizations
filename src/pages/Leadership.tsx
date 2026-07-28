@@ -3,6 +3,8 @@ import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
 import { OfficerCard } from '../components/shared/OfficerCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
+import { ThreadBorder } from '../components/ThreadBorder'
+import { FloatingAccent } from '../components/ui/FloatingAccent'
 import { offices, buklodCommittee } from '../config/leadership'
 import { useLeadership } from '../hooks/useLeadership'
 import { groupLeadersByOffice } from '../lib/directory'
@@ -47,7 +49,9 @@ export default function Leadership() {
                 return (
                   <Reveal key={group.office} className="flex flex-col gap-6">
                     <div className="flex items-start gap-4">
-                      <EmbroideredAccent color={meta?.color ?? 'blue'} index={0} size={44} className="mt-1 shrink-0" />
+                      <FloatingAccent duration={6} distance={6} rotate={6} className="mt-1 shrink-0">
+                        <EmbroideredAccent color={meta?.color ?? 'blue'} index={0} size={44} />
+                      </FloatingAccent>
                       <div>
                         <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
                           {group.office}
@@ -70,9 +74,16 @@ export default function Leadership() {
         </div>
       </section>
 
-      <section className="bg-trust-blue py-20 md:py-24">
+      <section className="relative bg-trust-blue py-20 md:py-24">
+        <ThreadBorder
+          color="yellow"
+          edge="top"
+          className="absolute left-1/2 top-0 w-56 max-w-none -translate-x-1/2 -translate-y-1/2 opacity-90"
+        />
         <Reveal className="mx-auto flex max-w-[800px] flex-col items-center gap-5 px-6 text-center">
-          <EmbroideredAccent color="yellow" index={0} size={56} />
+          <FloatingAccent duration={6.5} distance={8} rotate={-6}>
+            <EmbroideredAccent color="yellow" index={0} size={56} />
+          </FloatingAccent>
           <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-linen-white md:text-3xl">
             {buklodCommittee.title}
           </h2>

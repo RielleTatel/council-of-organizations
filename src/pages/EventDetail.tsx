@@ -4,6 +4,8 @@ import { Seo } from '../components/Seo'
 import { Reveal } from '../components/ui/Reveal'
 import { EventCard } from '../components/shared/EventCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
+import { ThreadBorder } from '../components/ThreadBorder'
+import { SectionGlow } from '../components/ui/SectionGlow'
 import { buttonVariants } from '../components/ui/Button'
 import { useEvent } from '../hooks/useEvent'
 import { useEvents } from '../hooks/useEvents'
@@ -67,8 +69,9 @@ export default function EventDetail() {
         )}
       </section>
 
-      <section className="bg-canvas-cream py-12 md:py-16">
-        <Reveal className="mx-auto max-w-[68ch] px-6">
+      <section className="relative bg-canvas-cream py-12 md:py-16">
+        <Reveal className="relative mx-auto max-w-[68ch] px-6">
+          <SectionGlow className="left-0 top-0 h-56 w-56" />
           <h1 className="font-display text-4xl font-bold tracking-[-0.02em] text-trust-blue md:text-5xl">
             {event.title}
           </h1>
@@ -81,7 +84,13 @@ export default function EventDetail() {
       </section>
 
       {others.length > 0 && (
-        <section className="bg-linen-white py-16 md:py-20">
+        <section className="relative bg-linen-white py-16 md:py-20">
+          <ThreadBorder
+            color="green"
+            edge="top"
+            flip
+            className="absolute left-[58%] top-0 w-60 max-w-none -translate-x-1/2 -translate-y-1/2"
+          />
           <div className="mx-auto max-w-[1200px] px-6">
             <Reveal className="mb-8">
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">

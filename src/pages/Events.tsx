@@ -3,6 +3,7 @@ import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
 import { EventCard } from '../components/shared/EventCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
+import { SectionGlow } from '../components/ui/SectionGlow'
 import { useEvents } from '../hooks/useEvents'
 import { splitEventsByTime } from '../lib/directory'
 
@@ -41,7 +42,8 @@ export default function Events() {
           ) : (
             <div className="flex flex-col gap-20">
               <div>
-                <Reveal className="mb-8">
+                <Reveal className="relative mb-8">
+                  <SectionGlow className="left-0 top-0 h-48 w-48" />
                   <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
                     Upcoming
                   </h2>
