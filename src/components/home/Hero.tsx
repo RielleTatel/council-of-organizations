@@ -207,7 +207,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
 
-        <div className="relative mx-auto w-full max-w-md lg:ml-10 lg:mr-0">
+        <div className="relative order-first mx-auto w-full max-w-md lg:order-none lg:ml-10 lg:mr-0">
           <ThreadBorder
             color="blue"
             edge="bottom"
