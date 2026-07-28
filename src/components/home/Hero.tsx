@@ -4,7 +4,6 @@ import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { ThreadBorder } from '../ThreadBorder'
 import { SectionGlow } from '../ui/SectionGlow'
-import { BadHandwriting } from '../ui/BadHandwriting'
 import { siteLogo } from '../../lib/assets'
 
 const fabricNoise =
@@ -186,14 +185,9 @@ export function Hero() {
               size={26}
               className="absolute -left-8 bottom-0 hidden opacity-80 lg:block"
             />
-            <BadHandwriting
-              text="Empowering Student Organizations. Inspiring Collaborative Leadership."
-              fontSize={46}
-              fontWeight={700}
-              lineHeight={1.1}
-              color="#2e4a8f"
-              seed={12}
-            />
+            <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
+              Empowering Student Organizations. Inspiring Collaborative Leadership.
+            </h1>
           </motion.div>
 
           <motion.p
