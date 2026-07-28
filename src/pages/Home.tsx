@@ -5,7 +5,7 @@ import { QuickStats } from '../components/home/QuickStats'
 import { AboutSection } from '../components/home/AboutSection'
 import { GallerySection } from '../components/home/GallerySection'
 import { PurposeSection } from '../components/home/PurposeSection'
-import { FeaturedOrganization } from '../components/home/FeaturedOrganization'
+import { OrganizationSpotlight } from '../components/home/OrganizationSpotlight'
 import { UpcomingEvents } from '../components/home/UpcomingEvents'
 import { HomeCTA } from '../components/home/HomeCTA'
 
@@ -18,7 +18,7 @@ export default function Home() {
       <AboutSection />
       <GallerySection />
       <PurposeSection />
-      <FeaturedOrganization />
+      <OrganizationSpotlight />
       <UpcomingEvents />
       <HomeCTA />
     </>

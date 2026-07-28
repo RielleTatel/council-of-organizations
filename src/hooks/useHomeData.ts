@@ -1,7 +1,14 @@
 import { useOrganizations } from './useOrganizations'
 import { useLeadership } from './useLeadership'
 import { useEvents } from './useEvents'
-import { deriveHomeStats, selectFeaturedOrganization, selectUpcomingEvents, type HomeStats } from '../lib/home'
+import {
+  deriveHomeStats,
+  selectFeaturedOrganization,
+  selectSpotlightOrganizations,
+  selectUpcomingEvents,
+  type HomeStats,
+} from '../lib/home'
+import { clusters } from '../config/clusters'
 
 export function useHomeStats(): { stats: HomeStats; isLoading: boolean } {
   const orgs = useOrganizations()
@@ -16,6 +23,14 @@ export function useFeaturedOrganization() {
   const orgs = useOrganizations()
   return {
     organization: selectFeaturedOrganization(orgs.data ?? [], new Date()),
+    isLoading: orgs.isLoading,
+  }
+}
+
+export function useSpotlightOrganizations() {
+  const orgs = useOrganizations()
+  return {
+    organizations: selectSpotlightOrganizations(orgs.data ?? [], clusters.map((c) => c.slug)),
     isLoading: orgs.isLoading,
   }
 }

@@ -25,6 +25,16 @@ export function selectFeaturedOrganization(orgs: Organization[], date: Date): Or
   return orgs[dayIndex(date) % orgs.length]
 }
 
+/** One representative organization per cluster (in cluster order), for the homepage spotlight carousel. */
+export function selectSpotlightOrganizations(orgs: Organization[], clusterSlugs: string[]): Organization[] {
+  const picks: Organization[] = []
+  for (const slug of clusterSlugs) {
+    const match = orgs.find((o) => o.cluster.slug === slug)
+    if (match) picks.push(match)
+  }
+  return picks
+}
+
 export function selectUpcomingEvents(events: Event[], now: Date, count: number): Event[] {
   return events
     .filter((e) => new Date(e.date).getTime() >= now.getTime())
