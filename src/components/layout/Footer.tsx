@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Mail, ExternalLink } from 'lucide-react'
 import { navItems } from '../../config/navigation'
 import { siteConfig } from '../../config/site'
+import { siteLogo } from '../../lib/assets'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 
 export function Footer() {
@@ -12,7 +13,8 @@ export function Footer() {
     <footer className="border-t border-dashed border-stitch-gray/40 bg-linen-white">
       <div className="mx-auto grid max-w-[1200px] grid-cols-1 gap-10 px-6 py-16 md:grid-cols-3">
         <div className="flex flex-col gap-3">
-          <span className="font-display text-lg font-black text-trust-blue">
+          <span className="flex items-center gap-2 font-display text-lg font-black text-trust-blue">
+            <img src={siteLogo} alt="" className="h-8 w-8" />
             Council of the Organizations of the Ateneo - Zamboanga
           </span>
           <EmbroideredAccent color="blue" index={0} size={40} />

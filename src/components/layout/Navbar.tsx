@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { navItems } from '../../config/navigation'
 import { siteConfig } from '../../config/site'
+import { siteLogo } from '../../lib/assets'
 import { cn } from '../../lib/utils'
 
 export function Navbar() {
@@ -11,7 +12,8 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 bg-linen-white/95 shadow-[0_2px_16px_rgba(46,74,143,0.06)] backdrop-blur">
       <nav className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
-        <Link to="/" className="font-display text-xl font-black tracking-[-0.02em] text-trust-blue">
+        <Link to="/" className="flex items-center gap-2 font-display text-xl font-black tracking-[-0.02em] text-trust-blue">
+          <img src={siteLogo} alt="" className="h-9 w-9" />
           {siteConfig.name}
         </Link>
 
@@ -48,7 +50,10 @@ export function Navbar() {
       {open && (
         <div className="fixed inset-0 z-50 bg-canvas-cream md:hidden">
           <div className="flex h-[72px] items-center justify-between px-6">
-            <span className="font-display text-xl font-black text-trust-blue">{siteConfig.name}</span>
+            <span className="flex items-center gap-2 font-display text-xl font-black text-trust-blue">
+              <img src={siteLogo} alt="" className="h-9 w-9" />
+              {siteConfig.name}
+            </span>
             <button type="button" aria-label="Close menu" onClick={() => setOpen(false)} className="text-trust-blue">
               <X strokeWidth={1.75} />
             </button>

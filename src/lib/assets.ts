@@ -10,25 +10,18 @@ const yarnBase = '/ELEMENTS/yarn'
 const hoopBase = '/ELEMENTS'
 
 export const flowersByColor: Record<ThreadColor, string[]> = {
-  red: [`${flowerBase}/flower-red-bloom-1.png`, `${flowerBase}/flower-red-bud-1.png`, `${flowerBase}/flower-red-bud-2.png`],
-  blue: [
-    `${flowerBase}/flower-blue-bloom-1.png`,
-    `${flowerBase}/flower-blue-bloom-2.png`,
-    `${flowerBase}/flower-blue-bud-1.png`,
-    `${flowerBase}/flower-blue-bud-2.png`,
-  ],
+  red: [`${flowerBase}/flower-red-bud-1.png`],
+  blue: [`${flowerBase}/flower-blue-bud-2.png`],
   green: [
     `${flowerBase}/flower-green-clover-1.png`,
     `${flowerBase}/flower-green-leaf-1.png`,
     `${flowerBase}/flower-green-bud-1.png`,
-    `${flowerBase}/flower-green-bud-2.png`,
     `${flowerBase}/flower-green-bud-3.png`,
   ],
   yellow: [`${flowerBase}/flower-yellow-1.png`, `${flowerBase}/flower-yellow-2.png`, `${flowerBase}/flower-yellow-3.png`],
   pink: [`${flowerBase}/flower-pink-bloom-1.png`],
   purple: [
     `${flowerBase}/flower-purple-bloom-1.png`,
-    `${flowerBase}/flower-purple-bloom-2.png`,
     `${flowerBase}/flower-purple-bud-1.png`,
     `${flowerBase}/flower-purple-bud-2.png`,
   ],
@@ -48,6 +41,9 @@ export const hoopFrames: string[] = Array.from({ length: 10 }, (_, i) => `${hoop
 
 /** OrgFair 2026 event wordmark. */
 export const orgFairLogo = `${hoopBase}/OrgFair.png`
+
+/** Site logo / favicon icon. */
+export const siteLogo = '/Icon.png'
 
 export function randomFrom<T>(items: T[]): T {
   return items[Math.floor(Math.random() * items.length)]
