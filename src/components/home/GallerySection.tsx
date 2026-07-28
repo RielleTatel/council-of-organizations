@@ -25,7 +25,7 @@ const GALLERY_IMAGES = GALLERY_FILES.map((file, i) => ({
 /** Deliberately uneven cell heights (in grid rows) so the grid reads as a hand-arranged
  * bento layout rather than a uniform grid — needed since the source photos are almost
  * all the same landscape aspect ratio and won't create variation on their own. */
-const ROW_SPANS = [2, 1, 2, 1, 1, 2, 1, 1, 2] as const
+const ROW_SPANS = [2, 1, 2, 1, 1, 2, 1, 1, 1] as const
 
 interface LightboxProps {
   index: number
