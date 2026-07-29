@@ -46,6 +46,8 @@ export interface Leader {
   office: string
   image: string
   bio: string
+  /** Sub-team within the office, e.g. "Documentation and Videography" under Creatives and Branding. */
+  team?: string
 }
 
 export interface SiteSettings {

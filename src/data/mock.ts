@@ -1,34 +1,58 @@
 import type { Event, Leader } from '../lib/contentful/types'
 
-function leader(id: string, name: string, role: string, office: string): Leader {
+function leader(id: string, name: string, role: string, office: string, team?: string): Leader {
   return {
     id,
     name,
     role,
     office,
-    image: `https://picsum.photos/seed/coaz-officer-${id}/400/400`,
+    team,
+    image: '',
     bio: '',
   }
 }
 
 export const mockLeaders: Leader[] = [
-  leader('chair', 'Sofia Margarita del Rosario', 'Chairperson', 'Office of the Chairperson'),
-  leader('exec-sec', 'Lorenzo Miguel Aquino', 'Executive Secretary to the Chairperson', 'Office of the Chairperson'),
-  leader('under-internal', 'Beatriz Camille Yulo', 'Undersecretary for Internal Affairs', 'Office of the Chairperson'),
-  leader('under-external', 'Gabriel Ignacio Lozano', 'Undersecretary for External Affairs', 'Office of the Chairperson'),
-  leader('legal', 'Andrea Lucille Panganiban', 'Chief Legal and Policy Adviser', 'Office of the Chairperson'),
-  leader('sec-gen', 'Rafael Dominic Suarez', 'Secretary-General', 'Office of the Secretary-General'),
-  leader('under-transparency', 'Ma. Angelica Ferrer', 'Undersecretary for Transparency', 'Office of the Secretary-General'),
-  leader('comms-head', 'Julia Kristine Mercado', 'Communications Head', 'Office of Communications'),
-  leader('social-media', 'Enzo Gabriel Villanueva', 'Social Media Handler', 'Office of Communications'),
-  leader('content', 'Nadine Patricia Sison', 'Content Manager', 'Office of Communications'),
-  leader('creatives-head', 'Sebastian Kyle Ramos', 'Creatives Head', 'Office of Creatives and Branding'),
-  leader('docu-head', 'Alexandra Rose Chua', 'Documentation Head', 'Office of Creatives and Branding'),
-  leader('creatives-assoc', 'Miguel Lorenzo Tanjuatco', 'Creatives Associate', 'Office of Creatives and Branding'),
-  leader('docu-assoc', 'Chloe Isabelle Ang', 'Documentation Associate', 'Office of Creatives and Branding'),
-  leader('finance-head', 'Vincent Carlo Magsino', 'Finance Head', 'Office of Finance'),
-  leader('treasurer', 'Katrina Bianca Ocampo', 'Treasurer', 'Office of Finance'),
-  leader('subsidy', 'Paolo Martin Guevarra', 'Subsidy Officer', 'Office of Finance'),
+  leader('chair-exec-sec', 'Aubrey Mae L. Tomong', 'Executive Secretary', 'Office of the Chairperson'),
+  leader('chair-under-internal', 'Gina M. Salamuddin', 'Undersecretary for Internal Affairs', 'Office of the Chairperson'),
+  leader('chair-under-external', 'Ryle Xyrex L. Jumawan', 'Undersecretary for External Affairs', 'Office of the Chairperson'),
+  leader('chair-legal', 'Marc Justin E. Casino', 'Chief Legal and Policy Adviser', 'Office of the Chairperson'),
+
+  leader('secgen-secgen', 'Ken S. Ordeniza', 'Secretary General', 'Office of the Secretary-General'),
+  leader('secgen-transparency', 'Jhan Drei T. Araña', 'Undersecretary for Transparency', 'Office of the Secretary-General'),
+  leader('secgen-social-action', 'Nolram Carpio', 'Undersecretary for Social Action and Advocacy', 'Office of the Secretary-General'),
+
+  leader('comms-head', 'Jamea Roushiana S. Rajah', 'Communications Head', 'Office of Communications'),
+  leader('comms-social-media', 'Kristel Ricalde', 'Social Media Handler', 'Office of Communications'),
+  leader('comms-content-1', 'Erika Sheena Lim', 'Content Manager', 'Office of Communications'),
+  leader('comms-content-2', 'Khameela Jzanna M. Kasim', 'Content Manager', 'Office of Communications'),
+
+  leader(
+    'creatives-head',
+    'Leo Leireen C. Magpantay',
+    'Creatives Head',
+    'Office of Creatives and Branding',
+    'Creatives and Branding',
+  ),
+  leader(
+    'creatives-assoc',
+    'Mico R. Morales',
+    'Creatives Associate',
+    'Office of Creatives and Branding',
+    'Creatives and Branding',
+  ),
+  leader(
+    'docu-head',
+    'Roy Lorenz C. Jaculan',
+    'Documentations Head',
+    'Office of Creatives and Branding',
+    'Documentation and Videography',
+  ),
+
+  leader('finance-head', 'David Isidore D.R. De Leon', 'Finance Head', 'Office of Finance'),
+  leader('treasurer', 'Louise Anne O. Sieras', 'Treasurer', 'Office of Finance'),
+  leader('finance-subsidy', 'John Paul Miranda', 'Subsidy Officer', 'Office of Finance'),
+  leader('finance-associate', 'Queenie M. Raciles', 'Finance Associate', 'Office of Finance'),
 ]
 
 function story(fields: Omit<Event, 'id' | 'isFeatured' | 'isFlagship'> & { isFeatured?: boolean; isFlagship?: boolean }): Event {
