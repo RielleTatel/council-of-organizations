@@ -116,7 +116,8 @@ export const venues: Venue[] = [
     landmarks: [
       { id: 'p-path-h', type: 'pathway', label: 'Pathway', x: 22, y: 38, width: 118, height: 30 },
       { id: 'p-path-v', type: 'pathway', label: 'Path Way', x: 96, y: 8, width: 12, height: 30 },
-      { id: 'p-path-d', type: 'pathway', label: 'Path Way', x: 79, y: 80, width: 47, height: 8, rotation: 42 },
+      { id: 'p-path-d1', type: 'pathway', label: 'Path Way', x: 90, y: 68, width: 8, height: 30 },
+      { id: 'p-path-d2', type: 'pathway', x: 90, y: 90, width: 26, height: 8 },
       { id: 'p-church', type: 'church', label: 'Univ Church', x: 108, y: 78, width: 40, height: 20 },
     ],
     booths: [
