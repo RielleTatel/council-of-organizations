@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest'
 import { heroAccents } from './heroAccents'
 import type { ThreadColor } from './assets'
 
-const ALL: ThreadColor[] = ['red', 'blue', 'green', 'yellow', 'pink', 'purple']
+const ALL: ThreadColor[] = ['red', 'blue', 'green', 'yellow', 'pink', 'purple', 'gold', 'teal']
 
 describe('heroAccents', () => {
   it('is deterministic for the same accent', () => {

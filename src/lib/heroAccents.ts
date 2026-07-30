@@ -27,6 +27,8 @@ const COMPANIONS: Record<ThreadColor, [ThreadColor, ThreadColor]> = {
   yellow: ['green', 'pink'],
   pink: ['purple', 'blue'],
   purple: ['pink', 'blue'],
+  gold: ['yellow', 'pink'],
+  teal: ['blue', 'green'],
 }
 
 /**

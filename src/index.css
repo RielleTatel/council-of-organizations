@@ -98,6 +98,9 @@ body {
   background-color: var(--color-canvas-cream);
   color: var(--color-fabric-dark);
   font-family: var(--font-body);
+  /* Prevents mobile browsers from re-adjusting scroll position as images load in below the fold,
+     which otherwise fights the route-change scroll-to-top reset on slower connections. */
+  overflow-anchor: none;
 }
 
 /* Paper texture overlay: fixed above all content (so opaque section backgrounds can't hide it),
