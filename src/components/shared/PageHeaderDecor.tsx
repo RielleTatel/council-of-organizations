@@ -20,17 +20,18 @@ export function PageHeaderDecor({ accent, variant }: PageHeaderDecorProps) {
 
   return (
     <>
-      {/* Woven thread edges — signature element (§5.A) */}
+      {/* Woven thread edges — signature element (§5.A). Corner-anchored, well clear
+          of the centered text column; mobile keeps only the small top accent (§9). */}
       <ThreadBorder
         color={accent}
         edge="top"
-        className="absolute -top-2 left-1/2 w-72 max-w-none -translate-x-1/2 opacity-50"
+        className="absolute -top-3 -left-3 w-28 max-w-none opacity-40 sm:w-36 lg:w-44"
       />
       <ThreadBorder
         color={accent}
         edge="bottom"
         flip
-        className="absolute -bottom-2 left-1/2 hidden w-72 max-w-none -translate-x-1/2 opacity-50 lg:block"
+        className="absolute -bottom-3 -right-3 hidden w-36 max-w-none opacity-40 lg:block lg:w-44"
       />
 
       {/* Dashed stitch-circle corner motifs (mirrors landing hero) — depth + frame */}

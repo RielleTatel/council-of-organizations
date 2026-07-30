@@ -57,11 +57,6 @@ export function Hero() {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
-      {/* TEMP DEBUG — remove after diagnosing mobile motion issue */}
-      <div className="fixed left-2 top-2 z-[9999] rounded bg-black px-2 py-1 font-mono text-[10px] text-white">
-        reducedMotion: {String(shouldReduceMotion)}
-      </div>
-
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
