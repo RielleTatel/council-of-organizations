@@ -3,6 +3,7 @@ import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { VenueTabs } from '../components/recweek/VenueTabs'
 import { BoothMap } from '../components/recweek/BoothMap'
+import { OrganizationSidebar } from '../components/recweek/OrganizationSidebar'
 import { venues, type VenueId } from '../data/recweekBooths'
 
 export default function RecWeek() {
@@ -17,6 +18,8 @@ export default function RecWeek() {
     setSelectedBoothId(null)
     setHoveredBoothId(null)
   }
+
+  const selectBooth = (id: string) => setSelectedBoothId(id === '' ? null : id)
 
   return (
     <>
@@ -34,16 +37,19 @@ export default function RecWeek() {
         <div className="mx-auto max-w-[1200px] px-6">
           <VenueTabs venues={venues} activeVenueId={activeVenueId} onSelect={changeVenue} />
 
-          {/* Sidebar | Map — wired in Tasks 3-4 */}
           <div className="mt-10 grid gap-6 lg:grid-cols-[35%_65%]">
-            <div className="rounded-[8px] border border-trust-blue/10 bg-linen-white p-4 shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
-              <p className="font-body text-sm text-stitch-gray">{venue.booths.length} booths</p>
-            </div>
+            <OrganizationSidebar
+              venue={venue}
+              selectedBoothId={selectedBoothId}
+              hoveredBoothId={hoveredBoothId}
+              onBoothSelect={selectBooth}
+              onBoothHover={setHoveredBoothId}
+            />
             <BoothMap
               venue={venue}
               selectedBoothId={selectedBoothId}
               hoveredBoothId={hoveredBoothId}
-              onBoothSelect={setSelectedBoothId}
+              onBoothSelect={selectBooth}
               onBoothHover={setHoveredBoothId}
             />
           </div>

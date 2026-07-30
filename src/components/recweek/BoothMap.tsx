@@ -1,10 +1,11 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { TransformWrapper, TransformComponent, type ReactZoomPanPinchRef } from 'react-zoom-pan-pinch'
 import type { Venue } from '../../data/recweekBooths'
 import { LandmarkShape } from './LandmarkShape'
 import { BoothShape } from './BoothShape'
 import { MapControls } from './MapControls'
 import { MapLegend } from './MapLegend'
+import { BoothPreviewCard } from './BoothPreviewCard'
 
 interface BoothMapProps {
   venue: Venue
@@ -16,6 +17,14 @@ interface BoothMapProps {
 
 export function BoothMap({ venue, selectedBoothId, hoveredBoothId, onBoothSelect, onBoothHover }: BoothMapProps) {
   const transformRef = useRef<ReactZoomPanPinchRef>(null)
+
+  useEffect(() => {
+    if (selectedBoothId) {
+      transformRef.current?.zoomToElement(`booth-${selectedBoothId}`, 1.8, 400)
+    }
+  }, [selectedBoothId])
+
+  const selectedBooth = venue.booths.find((b) => b.id === selectedBoothId) ?? null
 
   return (
     <div className="relative overflow-hidden rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
@@ -42,6 +51,7 @@ export function BoothMap({ venue, selectedBoothId, hoveredBoothId, onBoothSelect
         onReset={() => transformRef.current?.resetTransform()}
       />
       <MapLegend />
+      <BoothPreviewCard booth={selectedBooth} venueLabel={venue.label} onClose={() => onBoothSelect('')} />
     </div>
   )
 }

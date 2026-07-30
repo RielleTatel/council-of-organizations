@@ -32,8 +32,12 @@ export function BoothShape({ booth, isSelected, isHovered, onSelect, onHover }: 
       onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSelect(id) } }}
       onMouseEnter={() => onHover(id)}
       onMouseLeave={() => onHover(null)}
-      animate={{ scale: active ? 1.03 : 1 }}
-      transition={{ duration: 0.2 }}
+      animate={
+        isSelected
+          ? { scale: [1, 1.12, 1.05] }
+          : { scale: isHovered ? 1.03 : 1 }
+      }
+      transition={isSelected ? { duration: 0.5, times: [0, 0.5, 1] } : { duration: 0.2 }}
     >
       <rect
         x={x} y={y} width={width} height={height} rx={1.6}
@@ -41,7 +45,9 @@ export function BoothShape({ booth, isSelected, isHovered, onSelect, onHover }: 
         stroke="var(--color-trust-blue)"
         strokeOpacity={active ? 0.9 : 0.5}
         strokeWidth={active ? 0.7 : 0.4}
-        style={{ filter: active ? 'drop-shadow(0 1px 2px rgba(46,74,143,0.25))' : 'drop-shadow(0 0.5px 1px rgba(46,74,143,0.12))' }}
+        style={{ filter: isSelected
+          ? 'drop-shadow(0 0 3px rgba(46,74,143,0.55))'
+          : active ? 'drop-shadow(0 1px 2px rgba(46,74,143,0.25))' : 'drop-shadow(0 0.5px 1px rgba(46,74,143,0.12))' }}
       />
       <text
         x={cx} y={cy} textAnchor="middle" dominantBaseline="central"
