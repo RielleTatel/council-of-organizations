@@ -174,7 +174,7 @@ export function RecWeekHero() {
                 className={cn(buttonVariants({ variant: 'primary' }), 'group transition-shadow hover:shadow-[0_14px_32px_rgba(46,74,143,0.22)]')}
               >
                 <Compass size={18} strokeWidth={1.75} />
-                Look for you organization booth!
+                Recweek Map!
                 <motion.span className="inline-flex" whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
                   <ArrowRight size={18} strokeWidth={1.75} />
                 </motion.span>
