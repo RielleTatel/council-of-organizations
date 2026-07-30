@@ -22,7 +22,7 @@ describe('realOrganizations adapter', () => {
   })
 
   it('leaves logo undefined for organizations with no matching asset', () => {
-    const coaz = realOrganizations.find((o) => o.id === 'coaz')
-    expect(coaz?.logo).toBeUndefined()
+    const atcomm = realOrganizations.find((o) => o.id === 'the-ateneo-communicators')
+    expect(atcomm?.logo).toBeUndefined()
   })
 })
