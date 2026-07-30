@@ -92,7 +92,7 @@ function TimelineItem({ milestone, index }: { milestone: Milestone; index: numbe
   )
 }
 
-export function RecWeekTimeline() {
+export function RecWeekTimeline()  {
   const containerRef = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({
     target: containerRef,
