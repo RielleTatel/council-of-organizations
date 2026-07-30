@@ -39,8 +39,8 @@ export const threadsByColor: Record<ThreadColor, string[]> = {
 /** Blank embroidery-hoop frames on varying fabric tones, used to frame photos/content. */
 export const hoopFrames: string[] = Array.from({ length: 10 }, (_, i) => `${hoopBase}/hoop-${i + 1}.jpg`)
 
-/** Dia de Colores OrgFair 2026 header artwork (seals, wordmark, embroidered patches). */
-export const orgFairLogo = '/header.png'
+/** OrgFair 2026 event wordmark. */
+export const orgFairLogo = `${hoopBase}/OrgFair.png`
 
 /** Site logo / favicon icon. */
 export const siteLogo = '/Icon.png'

@@ -35,23 +35,20 @@ export function RecWeekHero() {
       </FloatingAccent>
 
       <div className="relative mx-auto max-w-[800px] px-6 text-center">
-        {/* Rendered outside Reveal: Reveal's transform/will-change would create a
-            stacking context that isolates mix-blend-mode from the page background. */}
-        <div className="relative mx-auto flex justify-center">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12]"
-            style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-thread-yellow), transparent 70%)' }}
-          />
-          <img
-            src={orgFairLogo}
-            alt="Dia de Colores OrgFair 2026"
-            className="w-[90%] sm:w-[560px] lg:w-[720px]"
-            style={{ mixBlendMode: 'multiply' }}
-          />
-        </div>
-
         <Reveal>
+          <div className="relative mx-auto flex justify-center">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12]"
+              style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-thread-yellow), transparent 70%)' }}
+            />
+            <img
+              src={orgFairLogo}
+              alt="Dia de Colores OrgFair 2026"
+              className="w-[85%] sm:w-[480px] lg:w-[620px]"
+            />
+          </div>
+
           <h1 className="mt-10 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
             Discover Organizations.
             <br />
