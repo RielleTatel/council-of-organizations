@@ -1,10 +1,11 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown } from 'lucide-react'
-import { buttonVariants } from '../ui/Button'
+import { ChevronDown } from 'lucide-react'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
 import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
+import { venues } from '../../data/recweekBooths'
+import { cn } from '../../lib/utils'
 
 export function RecWeekHero() {
   return (
@@ -26,32 +27,38 @@ export function RecWeekHero() {
         <Reveal>
           <span className="font-accent text-2xl text-thread-red">RecWeek 2026</span>
           <h1 className="mt-2 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
-            Find Your Community. Discover Your Passion.
+            Discover organizations.
+            <br />
+            Meet new people.
+            <br />
+            Find your community.
           </h1>
-          <p className="mx-auto mt-6 max-w-[64ch] font-body text-lg leading-relaxed text-fabric-dark">
-            Every journey at Ateneo begins with a single step. Recruitment Week is COA-Z&apos;s annual
-            university-wide event where students discover accredited organizations, meet fellow Atenistas, and
-            find communities that align with their passions, interests, and advocacies.
-          </p>
-          <p className="mx-auto mt-4 max-w-[60ch] font-body text-lg leading-relaxed text-fabric-dark">
-            Whether you&apos;re passionate about technology, leadership, culture, service, faith, media, or
-            wellness, there&apos;s an organization waiting for you.
+          <p className="mx-auto mt-6 font-body text-lg font-medium uppercase tracking-[0.1em] text-stitch-gray">
+            August 11–13, 2026
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-6">
-            <Link to="/organizations" className={buttonVariants({ variant: 'primary' })}>
-              Explore Organizations
-              <ArrowRight size={18} strokeWidth={1.75} />
-            </Link>
-
-            <a
-              href="#timeline"
-              className="inline-flex flex-col items-center gap-1 font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray transition-colors hover:text-trust-blue"
-            >
-              Scroll to Begin
-              <ChevronDown size={18} strokeWidth={1.75} />
-            </a>
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            {venues.map((venue) => (
+              <Link
+                key={venue.id}
+                to={`/recweek/map?venue=${venue.slug}`}
+                className={cn(
+                  'w-full rounded-full border-2 border-trust-blue px-6 py-3 text-center font-body font-medium text-trust-blue',
+                  'transition-all duration-300 hover:-translate-y-1 hover:bg-trust-blue hover:text-linen-white sm:w-auto',
+                )}
+              >
+                {venue.label}
+              </Link>
+            ))}
           </div>
+
+          <a
+            href="#timeline"
+            className="mt-10 inline-flex flex-col items-center gap-1 font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray transition-colors hover:text-trust-blue"
+          >
+            Scroll to Begin
+            <ChevronDown size={18} strokeWidth={1.75} />
+          </a>
         </Reveal>
       </div>
     </section>

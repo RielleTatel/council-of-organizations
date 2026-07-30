@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { venues, boothOrg, boothFullName, boothHref, type BoothShape } from './recweekBooths'
+import { venues, boothOrg, boothFullName, boothHref, venueBySlug, type BoothShape } from './recweekBooths'
 import { organizations } from './organizations'
 
 const allBooths: BoothShape[] = venues.flatMap((v) => v.booths)
@@ -25,6 +25,18 @@ describe('recweek venues', () => {
     for (const v of venues) {
       expect(v.viewBox).toMatch(/^-?\d+(\.\d+)?( -?\d+(\.\d+)?){3}$/)
     }
+  })
+
+  it('gives every venue a unique slug matching the expected query-param values', () => {
+    expect(venues.map((v) => v.slug)).toEqual(['bc', 'cgarden', 'paseo'])
+  })
+
+  it('resolves a venue by slug and falls back to undefined for unknown/null slugs', () => {
+    expect(venueBySlug('bc')?.id).toBe('bc-lobby-quad')
+    expect(venueBySlug('cgarden')?.id).toBe('c-lobby-garden')
+    expect(venueBySlug('paseo')?.id).toBe('paseo-de-maria')
+    expect(venueBySlug('nonexistent')).toBeUndefined()
+    expect(venueBySlug(null)).toBeUndefined()
   })
 
   it('links every orgId to a real organization', () => {

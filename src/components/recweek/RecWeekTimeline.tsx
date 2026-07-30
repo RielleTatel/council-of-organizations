@@ -2,7 +2,9 @@ import { useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion, useScroll, useSpring } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
+import { buttonVariants } from '../ui/Button'
 import { EmbroideredAccent } from '../EmbroideredAccent'
+import { Reveal } from '../ui/Reveal'
 import { milestones, type Milestone } from '../../data/recweek'
 
 function TimelineItem({ milestone, index }: { milestone: Milestone; index: number }) {
@@ -34,11 +36,9 @@ function TimelineItem({ milestone, index }: { milestone: Milestone; index: numbe
           >
             <span className="font-accent text-2xl text-thread-red">Milestone {milestone.number}</span>
             <h3 className="mt-1 font-display text-2xl font-bold text-trust-blue">{milestone.title}</h3>
-            {milestone.date && (
-              <p className="mt-2 font-body text-sm font-medium uppercase tracking-[0.1em] text-stitch-gray">
-                {milestone.date}
-              </p>
-            )}
+            <p className="mt-2 flex items-center gap-1.5 font-body text-sm font-medium uppercase tracking-[0.1em] text-stitch-gray">
+              📅 {milestone.dateLabel}
+            </p>
 
             <div className="mt-4 flex flex-col gap-3 font-body leading-relaxed text-fabric-dark">
               {milestone.body.map((paragraph) => (
@@ -47,23 +47,32 @@ function TimelineItem({ milestone, index }: { milestone: Milestone; index: numbe
             </div>
 
             {milestone.bullets && (
-              <ul className="mt-4 grid grid-cols-1 gap-x-6 gap-y-1.5 font-body text-fabric-dark sm:grid-cols-2">
-                {milestone.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-thread-red" aria-hidden />
-                    {bullet}
-                  </li>
-                ))}
-              </ul>
+              <>
+                {milestone.bulletsLabel && (
+                  <p className="mt-4 font-body text-xs font-medium uppercase tracking-[0.14em] text-thread-pink">
+                    {milestone.bulletsLabel}
+                  </p>
+                )}
+                <ul className="mt-2 grid grid-cols-1 gap-x-6 gap-y-1.5 font-body text-fabric-dark sm:grid-cols-2">
+                  {milestone.bullets.map((bullet) => (
+                    <li key={bullet} className="flex items-start gap-2">
+                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-thread-red" aria-hidden />
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
 
-            <Link
-              to={milestone.ctaHref}
-              className="mt-5 inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors group-hover:text-thread-red"
-            >
-              {milestone.ctaLabel}
-              <ArrowRight size={16} strokeWidth={1.75} />
-            </Link>
+            {milestone.cta && (
+              <Link
+                to={milestone.cta.href}
+                className="mt-5 inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors group-hover:text-thread-red"
+              >
+                {milestone.cta.label}
+                <ArrowRight size={16} strokeWidth={1.75} />
+              </Link>
+            )}
           </motion.article>
         </div>
       </div>
@@ -105,6 +114,19 @@ export function RecWeekTimeline() {
             ))}
           </div>
         </div>
+
+        <Reveal className="mx-auto mt-24 max-w-[700px] rounded-[8px] border border-trust-blue/10 bg-canvas-cream p-10 text-center shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
+          <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
+            Ready to explore?
+          </h2>
+          <p className="mx-auto mt-3 max-w-[48ch] font-body leading-relaxed text-fabric-dark">
+            Find your favorite organizations using the interactive booth maps.
+          </p>
+          <Link to="/recweek/map" className={`${buttonVariants({ variant: 'primary' })} mt-6`}>
+            Explore Booth Maps
+            <ArrowRight size={18} strokeWidth={1.75} />
+          </Link>
+        </Reveal>
       </div>
     </section>
   )

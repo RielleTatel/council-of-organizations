@@ -28,8 +28,11 @@ export type Landmark = {
 
 export type VenueId = 'bc-lobby-quad' | 'c-lobby-garden' | 'paseo-de-maria'
 
+export type VenueSlug = 'bc' | 'cgarden' | 'paseo'
+
 export type Venue = {
   id: VenueId
+  slug: VenueSlug
   label: string
   viewBox: string
   landmarks: Landmark[]
@@ -48,9 +51,14 @@ export function boothHref(booth: BoothShape): string | undefined {
   return boothOrg(booth)?.link
 }
 
+export function venueBySlug(slug: string | null): Venue | undefined {
+  return venues.find((v) => v.slug === slug)
+}
+
 export const venues: Venue[] = [
   {
     id: 'bc-lobby-quad',
+    slug: 'bc',
     label: 'BC Lobby & Quad',
     viewBox: '0 0 100 145',
     landmarks: [
@@ -77,6 +85,7 @@ export const venues: Venue[] = [
   },
   {
     id: 'c-lobby-garden',
+    slug: 'cgarden',
     label: 'C Lobby & Garden',
     viewBox: '0 0 100 170',
     landmarks: [
@@ -111,6 +120,7 @@ export const venues: Venue[] = [
   },
   {
     id: 'paseo-de-maria',
+    slug: 'paseo',
     label: 'Paseo de Maria',
     viewBox: '0 0 150 100',
     landmarks: [

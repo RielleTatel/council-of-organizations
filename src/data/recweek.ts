@@ -3,113 +3,80 @@ import type { ThreadColor } from '../lib/assets'
 export interface Milestone {
   number: string
   title: string
-  date?: string
+  dateLabel: string
   body: string[]
+  bulletsLabel?: string
   bullets?: string[]
-  ctaLabel: string
-  ctaHref: string
+  cta?: { label: string; href: string }
   color: ThreadColor
 }
 
 export const milestones: Milestone[] = [
   {
     number: '01',
-    title: 'A New Beginning',
-    date: 'August 18, 2026',
+    title: 'Opening Ceremony',
+    dateLabel: 'August 11',
     body: [
-      'Every school year welcomes hundreds of new Atenistas ready to begin their college journey. Recruitment Week marks the start of countless friendships, opportunities, and unforgettable experiences.',
-      'Students are invited to explore the vibrant student organization community that makes campus life meaningful beyond the classroom.',
+      "Kick off RecWeek with the official opening ceremony, welcoming students to a week of campus life, organizations, and community engagement.",
     ],
-    ctaLabel: 'Learn About COA-Z',
-    ctaHref: '/about',
+    bulletsLabel: 'Highlights',
+    bullets: ['Opening Program', 'Welcome Remarks', 'Introduction to RecWeek', 'Official Opening of Activities'],
     color: 'red',
   },
   {
     number: '02',
-    title: 'Opening Ceremony',
-    date: 'August 19, 2026',
+    title: 'Organization Fair',
+    dateLabel: 'August 11–13',
     body: [
-      "Recruitment Week officially begins with an opening program introducing COA-Z, its accredited organizations, and this year's theme.",
-      'Student leaders, university administrators, and organization representatives welcome the Ateneo community and celebrate the diversity of student involvement.',
+      'Explore booths from accredited student organizations across Ateneo de Zamboanga University.',
+      'Discover organizations based on your interests, meet current members, learn about upcoming projects, and find communities you can be part of.',
     ],
-    ctaLabel: 'View Program Schedule',
-    ctaHref: '/events',
+    bulletsLabel: 'Locations',
+    bullets: ['BC Lobby & Quad', 'C Lobby & Garden', 'Paseo de Maria'],
+    cta: { label: 'Explore Booth Locations', href: '/recweek/map' },
     color: 'blue',
   },
   {
     number: '03',
-    title: 'Organization Fair',
-    date: 'August 20–22, 2026',
+    title: 'Stage Performances',
+    dateLabel: 'August 11–13',
     body: [
-      'Walk through rows of interactive organization booths and meet passionate student leaders from every accredited organization.',
+      'Enjoy live performances throughout the fair featuring various student organizations.',
+      'Expect music, dance, cultural presentations, interactive games, and special showcases happening throughout the day.',
     ],
-    bullets: [
-      'Academic Organizations',
-      'Culture, Arts & Multimedia',
-      'Faith & Formation',
-      'Publications & Communications',
-      'Socio-Civic & Political',
-      'Wellness & Environmental',
-    ],
-    ctaLabel: 'Browse Organizations',
-    ctaHref: '/organizations',
     color: 'green',
   },
   {
     number: '04',
-    title: 'Interactive Booth Challenges',
+    title: 'Organization Booth Activities',
+    dateLabel: 'August 11–13',
     body: [
-      'Throughout the fair, organizations prepare engaging games, workshops, live demonstrations, performances, and mini competitions.',
+      'Participate in engaging booth activities prepared by each organization.',
+      'Complete challenges, interact with members, and experience firsthand what each organization has to offer.',
     ],
-    bullets: [
-      'Win exclusive merchandise',
-      'Participate in interactive activities',
-      'Meet organization officers',
-      "Experience each organization's culture firsthand",
-    ],
-    ctaLabel: 'See Event Gallery',
-    ctaHref: '/#gallery',
     color: 'yellow',
   },
   {
     number: '05',
-    title: 'Leadership Talks & Showcases',
+    title: 'Featured Programs & Special Activities',
+    dateLabel: 'August 12',
     body: [
-      'Selected organizations host short talks, panel discussions, performances, and exhibitions showcasing their projects and impact within the Ateneo community.',
+      'Join scheduled campus activities, organization-led events, and collaborative programs taking place during the second day of RecWeek.',
+      'More details and schedules will be announced during the event.',
     ],
-    bullets: [
-      'Leadership opportunities',
-      'Community service',
-      'Research initiatives',
-      'Creative projects',
-      'Advocacy campaigns',
-    ],
-    ctaLabel: 'View Featured Organizations',
-    ctaHref: '/organizations',
     color: 'pink',
   },
   {
     number: '06',
-    title: 'Membership Registration',
+    title: 'Closing Program',
+    dateLabel: 'August 13',
     body: [
-      'Found the organization that matches your passion? Students may officially register their interest through organization sign-up booths or digital registration forms provided during Recruitment Week.',
-      'Organization officers are available to answer questions and guide prospective members through the application process.',
+      "Celebrate the successful conclusion of RecWeek with the closing ceremony.",
+      "Reflect on the week's activities, recognize participating organizations, and conclude the event with community celebrations.",
     ],
-    ctaLabel: 'Register Interest',
-    ctaHref: '/organizations',
+    bulletsLabel: 'Highlights',
+    bullets: ['Closing Remarks', 'Recognition of Participants', 'Final Performances', 'Official Closing'],
     color: 'purple',
-  },
-  {
-    number: '07',
-    title: 'Welcome to the COA-Z Community',
-    body: [
-      'Recruitment Week concludes, but your journey is only beginning.',
-      'By joining an accredited organization, you become part of a community dedicated to leadership, service, collaboration, and personal growth. Every project, event, and initiative begins with students willing to make a difference.',
-      'Welcome to the COA-Z family.',
-    ],
-    ctaLabel: 'Explore All Organizations',
-    ctaHref: '/organizations',
-    color: 'red',
   },
 ]
 

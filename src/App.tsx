@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { SiteLayout } from './components/layout/SiteLayout'
 import Home from './pages/Home'
 import RecWeek from './pages/RecWeek'
+import RecWeekMap from './pages/RecWeekMap'
 import About from './pages/About'
 import Leadership from './pages/Leadership'
 import Organizations from './pages/Organizations'
@@ -16,6 +17,7 @@ export default function App() {
       <Route element={<SiteLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/recweek" element={<RecWeek />} />
+        <Route path="/recweek/map" element={<RecWeekMap />} />
         <Route path="/about" element={<About />} />
         <Route path="/leadership" element={<Leadership />} />
         <Route path="/organizations" element={<Organizations />} />
