@@ -9,12 +9,31 @@ describe('boardStyleFor', () => {
     expect(a).toEqual(b)
   })
 
-  it('keeps rotation within ±3 degrees and non-zero', () => {
+  it('keeps rotation within ±2 degrees and non-zero', () => {
     for (const id of ['a', 'bb', 'ccc', 'org-x', 'the-beacon-publications']) {
       const { rotation } = boardStyleFor(id, 'academics', true)
       expect(Math.abs(rotation)).toBeGreaterThanOrEqual(1)
-      expect(Math.abs(rotation)).toBeLessThanOrEqual(3)
+      expect(Math.abs(rotation)).toBeLessThanOrEqual(2)
     }
+  })
+
+  it('keeps pins centered — only tape ever jitters', () => {
+    for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+      const s = boardStyleFor(id, 'academics', true)
+      if (s.fastener === 'pin') expect(s.fastenerOffset).toBe(0)
+    }
+  })
+
+  it('flags decoration on a minority of cards with a valid corner', () => {
+    const corners = ['top-right', 'bottom-left', 'bottom-right']
+    let decorated = 0
+    for (let i = 0; i < 40; i++) {
+      const s = boardStyleFor(`org-${i}`, 'academics', true)
+      expect(corners).toContain(s.decorationCorner)
+      if (s.hasDecoration) decorated++
+    }
+    expect(decorated).toBeGreaterThan(0)
+    expect(decorated).toBeLessThan(40)
   })
 
   it('never returns the polaroid paper when the org has no logo', () => {

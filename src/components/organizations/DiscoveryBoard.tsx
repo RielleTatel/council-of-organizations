@@ -1,5 +1,4 @@
 import { useMemo, useState } from 'react'
-import Masonry from 'react-masonry-css'
 import { AnimatePresence, motion } from 'framer-motion'
 import type { Organization } from '../../lib/contentful/types'
 import { filterOrganizations } from '../../lib/directory'
@@ -12,7 +11,7 @@ import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
 import { DriftingThread } from '../ui/DriftingThread'
 
-const BREAKPOINTS = { default: 4, 1100: 3, 700: 2, 500: 1 }
+const GRID = 'grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'
 
 interface DiscoveryBoardProps {
   organizations: Organization[]
@@ -57,19 +56,19 @@ export function DiscoveryBoard({ organizations, isLoading, activeCluster, onClus
         </div>
 
         {isLoading ? (
-          <Masonry breakpointCols={BREAKPOINTS} className="board-masonry" columnClassName="board-masonry-col">
+          <div className={GRID}>
             {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-              <div key={i} className="h-52 animate-pulse rounded-[6px] bg-linen-white shadow-[0_6px_20px_rgba(46,74,143,0.08)]" />
+              <div key={i} className="h-[420px] animate-pulse rounded-[6px] bg-linen-white shadow-[0_6px_20px_rgba(46,74,143,0.08)]" />
             ))}
-          </Masonry>
+          </div>
         ) : results.length === 0 ? (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
             <EmbroideredAccent color="yellow" index={1} size={56} />
             <p className="font-body text-lg text-stitch-gray">No organizations match — try another name or cluster.</p>
           </div>
         ) : (
-          // Whole-board cross-fade keyed by cluster (react-masonry-css can't do per-card exit);
-          // search filters live within the current view via reconcile.
+          // Whole-board cross-fade keyed by cluster; a fixed grid keeps every
+          // card the same size so search/filter reflows read as a tidy regrid.
           <AnimatePresence mode="wait">
             <motion.div
               key={activeCluster ?? 'all'}
@@ -77,12 +76,11 @@ export function DiscoveryBoard({ organizations, isLoading, activeCluster, onClus
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
+              className={GRID}
             >
-              <Masonry breakpointCols={BREAKPOINTS} className="board-masonry" columnClassName="board-masonry-col">
-                {results.map((org, i) => (
-                  <PinnedCard key={org.slug} organization={org} index={i} />
-                ))}
-              </Masonry>
+              {results.map((org, i) => (
+                <PinnedCard key={org.slug} organization={org} index={i} />
+              ))}
             </motion.div>
           </AnimatePresence>
         )}
