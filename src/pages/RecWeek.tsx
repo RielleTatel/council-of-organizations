@@ -1,20 +1,47 @@
+import { useState } from 'react'
 import { Seo } from '../components/Seo'
-import { RecWeekHero } from '../components/recweek/RecWeekHero'
-import { RecWeekTimeline } from '../components/recweek/RecWeekTimeline'
-import { RecWeekFaq } from '../components/recweek/RecWeekFaq'
-import { RecWeekCta } from '../components/recweek/RecWeekCta'
+import { PageHeader } from '../components/shared/PageHeader'
+import { VenueTabs } from '../components/recweek/VenueTabs'
+import { venues, type VenueId } from '../data/recweekBooths'
 
 export default function RecWeek() {
+  const [activeVenueId, setActiveVenueId] = useState<VenueId>('bc-lobby-quad')
+  const [selectedBoothId, setSelectedBoothId] = useState<string | null>(null)
+  const [hoveredBoothId, setHoveredBoothId] = useState<string | null>(null)
+
+  const venue = venues.find((v) => v.id === activeVenueId) ?? venues[0]
+
+  const changeVenue = (id: VenueId) => {
+    setActiveVenueId(id)
+    setSelectedBoothId(null)
+    setHoveredBoothId(null)
+  }
+
   return (
     <>
       <Seo
         title="RecWeek | COA-Z"
-        description="COA-Z Recruitment Week: discover accredited organizations, meet fellow Atenistas, and find your community at Ateneo de Zamboanga University."
+        description="Explore booth locations across the three RecWeek venues at Ateneo de Zamboanga University."
       />
-      <RecWeekHero />
-      <RecWeekTimeline />
-      <RecWeekFaq />
-      <RecWeekCta />
+      <PageHeader
+        eyebrow="Org Fair 2026"
+        title="RecWeek Booth Locations"
+        description="Explore booth locations across the three RecWeek venues."
+        accent="blue"
+      />
+      <section className="bg-canvas-cream pb-24">
+        <div className="mx-auto max-w-[1200px] px-6">
+          <VenueTabs venues={venues} activeVenueId={activeVenueId} onSelect={changeVenue} />
+
+          {/* Sidebar | Map — wired in Tasks 3-4 */}
+          <div className="mt-10 grid gap-6 lg:grid-cols-[35%_65%]">
+            <div className="rounded-[8px] border border-trust-blue/10 bg-linen-white p-4 shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
+              <p className="font-body text-sm text-stitch-gray">{venue.booths.length} booths</p>
+            </div>
+            <div className="min-h-[420px] rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]" />
+          </div>
+        </div>
+      </section>
     </>
   )
 }
