@@ -42,7 +42,7 @@ export function OrganizationSidebar({ venue, selectedBoothId, hoveredBoothId, on
           Organizations ({venue.booths.length})
           <ChevronDown size={18} className={cn('transition-transform', open && 'rotate-180')} />
         </button>
-        {open && list}
+        {open && <div className="max-h-[45vh] overflow-y-auto pr-1">{list}</div>}
       </div>
       {/* Desktop / tablet */}
       <div className="hidden md:block">

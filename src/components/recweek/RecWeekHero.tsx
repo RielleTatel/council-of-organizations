@@ -3,6 +3,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { CalendarDays, MapPin, PartyPopper, Compass, ArrowRight } from 'lucide-react'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
+import { DriftingThread } from '../ui/DriftingThread'
 import { buttonVariants } from '../ui/Button'
 import { orgFairLogo, flowersByColor, threadsByColor } from '../../lib/assets'
 import { cn } from '../../lib/utils'
@@ -14,21 +15,6 @@ const BADGES = [
   { icon: MapPin, label: 'Ateneo de Zamboanga University', border: 'border-trust-blue/40' },
   { icon: PartyPopper, label: 'Open to All Students', border: 'border-thread-green/50' },
 ] as const
-
-/** A thread illustration with a barely-there opacity pulse — the "stitched" ambient layer. */
-function DriftingThread({ src, className, duration = 5, delay = 0 }: { src: string; className?: string; duration?: number; delay?: number }) {
-  const shouldReduceMotion = useReducedMotion()
-  return (
-    <motion.img
-      src={src}
-      alt=""
-      role="presentation"
-      className={cn('pointer-events-none select-none', className)}
-      animate={shouldReduceMotion ? undefined : { opacity: [0.85, 1, 0.85] }}
-      transition={{ duration, repeat: Infinity, ease: 'easeInOut', delay }}
-    />
-  )
-}
 
 export function RecWeekHero() {
   const shouldReduceMotion = useReducedMotion()

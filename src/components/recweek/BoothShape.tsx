@@ -9,11 +9,19 @@ interface BoothShapeProps {
   onHover: (id: string | null) => void
 }
 
+// Visual gap inset applied to every booth rect so adjacent booths never touch
+// or overlap, regardless of how tightly their data coordinates are packed.
+const GAP_INSET = 0.8
+
 export function BoothShape({ booth, isSelected, isHovered, onSelect, onHover }: BoothShapeProps) {
   const { id, acronym, x, y, width, height, rotation = 0 } = booth
   const cx = x + width / 2
   const cy = y + height / 2
   const active = isSelected || isHovered
+  const rectX = x + GAP_INSET / 2
+  const rectY = y + GAP_INSET / 2
+  const rectWidth = width - GAP_INSET
+  const rectHeight = height - GAP_INSET
 
   // Only the label rotates (matching the source floor plans, where narrow
   // booths keep an axis-aligned outline and just turn the text vertical) —
@@ -40,7 +48,7 @@ export function BoothShape({ booth, isSelected, isHovered, onSelect, onHover }: 
       transition={isSelected ? { duration: 0.5, times: [0, 0.5, 1] } : { duration: 0.2 }}
     >
       <rect
-        x={x} y={y} width={width} height={height} rx={1.6}
+        x={rectX} y={rectY} width={rectWidth} height={rectHeight} rx={1.6}
         fill="var(--color-canvas-cream)"
         stroke="var(--color-trust-blue)"
         strokeOpacity={active ? 0.9 : 0.5}

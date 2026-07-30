@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Seo } from '../components/Seo'
-import { PageHeader } from '../components/shared/PageHeader'
+import { RecWeekMapHero } from '../components/recweek/RecWeekMapHero'
 import { VenueTabs } from '../components/recweek/VenueTabs'
 import { BoothMap } from '../components/recweek/BoothMap'
 import { OrganizationSidebar } from '../components/recweek/OrganizationSidebar'
@@ -32,12 +32,7 @@ export default function RecWeekMap() {
         title="RecWeek Booth Map | COA-Z"
         description="Explore booth locations across the three RecWeek venues at Ateneo de Zamboanga University."
       />
-      <PageHeader
-        eyebrow="Org Fair 2026"
-        title="RecWeek Booth Locations"
-        description="Explore booth locations across the three RecWeek venues."
-        accent="blue"
-      />
+      <RecWeekMapHero />
       <section className="bg-canvas-cream pb-24">
         <div className="mx-auto max-w-[1200px] px-6">
           <VenueTabs venues={venues} activeVenueId={activeVenueId} onSelect={changeVenue} />
