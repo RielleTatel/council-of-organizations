@@ -1,9 +1,9 @@
 import type { ThreadColor } from '../lib/assets'
 
 export interface Milestone {
-  number: string
   title: string
   dateLabel: string
+  image: string
   body: string[]
   bulletsLabel?: string
   bullets?: string[]
@@ -13,9 +13,9 @@ export interface Milestone {
 
 export const milestones: Milestone[] = [
   {
-    number: '01',
     title: 'Opening Ceremony',
     dateLabel: 'August 11',
+    image: '/timeline/openingCeremony.jpg',
     body: [
       "Kick off RecWeek with the official opening ceremony, welcoming students to a week of campus life, organizations, and community engagement.",
     ],
@@ -24,9 +24,9 @@ export const milestones: Milestone[] = [
     color: 'red',
   },
   {
-    number: '02',
     title: 'Organization Fair',
     dateLabel: 'August 11–13',
+    image: '/timeline/orgnanizationFair.jpg',
     body: [
       'Explore booths from accredited student organizations across Ateneo de Zamboanga University.',
       'Discover organizations based on your interests, meet current members, learn about upcoming projects, and find communities you can be part of.',
@@ -37,9 +37,9 @@ export const milestones: Milestone[] = [
     color: 'blue',
   },
   {
-    number: '03',
     title: 'Stage Performances',
     dateLabel: 'August 11–13',
+    image: '/timeline/stagePerformances.jpg',
     body: [
       'Enjoy live performances throughout the fair featuring various student organizations.',
       'Expect music, dance, cultural presentations, interactive games, and special showcases happening throughout the day.',
@@ -47,9 +47,9 @@ export const milestones: Milestone[] = [
     color: 'green',
   },
   {
-    number: '04',
     title: 'Organization Booth Activities',
     dateLabel: 'August 11–13',
+    image: '/timeline/organizationBoothActivities.jpg',
     body: [
       'Participate in engaging booth activities prepared by each organization.',
       'Complete challenges, interact with members, and experience firsthand what each organization has to offer.',
@@ -57,9 +57,9 @@ export const milestones: Milestone[] = [
     color: 'yellow',
   },
   {
-    number: '05',
     title: 'Featured Programs & Special Activities',
     dateLabel: 'August 12',
+    image: '/timeline/copy1.jpg',
     body: [
       'Join scheduled campus activities, organization-led events, and collaborative programs taking place during the second day of RecWeek.',
       'More details and schedules will be announced during the event.',
@@ -67,9 +67,9 @@ export const milestones: Milestone[] = [
     color: 'pink',
   },
   {
-    number: '06',
     title: 'Closing Program',
     dateLabel: 'August 13',
+    image: '/timeline/closingProgram.jpg',
     body: [
       "Celebrate the successful conclusion of RecWeek with the closing ceremony.",
       "Reflect on the week's activities, recognize participating organizations, and conclude the event with community celebrations.",

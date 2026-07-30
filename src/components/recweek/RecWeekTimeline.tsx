@@ -32,10 +32,21 @@ function TimelineItem({ milestone, index }: { milestone: Milestone; index: numbe
             whileInView={{ opacity: 1, y: 0, x: 0, scale: 1 }}
             viewport={{ once: true, amount: 0.35 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
-            className="group rounded-[8px] border border-trust-blue/10 bg-linen-white p-7 shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(46,74,143,0.12)]"
+            className="group overflow-hidden rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(46,74,143,0.12)]"
           >
-            <span className="font-accent text-2xl text-thread-red">Milestone {milestone.number}</span>
-            <h3 className="mt-1 font-display text-2xl font-bold text-trust-blue">{milestone.title}</h3>
+            <div className="relative">
+              <img
+                src={milestone.image}
+                alt=""
+                role="presentation"
+                loading="lazy"
+                className="aspect-[16/10] w-full object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+              />
+              <EmbroideredAccent color={milestone.color} index={0} size={28} className="absolute right-3 top-3 opacity-90" />
+            </div>
+
+            <div className="p-7">
+            <h3 className="font-display text-2xl font-bold text-trust-blue">{milestone.title}</h3>
             <p className="mt-2 flex items-center gap-1.5 font-body text-sm font-medium uppercase tracking-[0.1em] text-stitch-gray">
               📅 {milestone.dateLabel}
             </p>
@@ -73,6 +84,7 @@ function TimelineItem({ milestone, index }: { milestone: Milestone; index: numbe
                 <ArrowRight size={16} strokeWidth={1.75} />
               </Link>
             )}
+            </div>
           </motion.article>
         </div>
       </div>
@@ -110,7 +122,7 @@ export function RecWeekTimeline() {
 
           <div className="flex flex-col gap-16 lg:gap-20">
             {milestones.map((milestone, index) => (
-              <TimelineItem key={milestone.number} milestone={milestone} index={index} />
+              <TimelineItem key={milestone.title} milestone={milestone} index={index} />
             ))}
           </div>
         </div>
