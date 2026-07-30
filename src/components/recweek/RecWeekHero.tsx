@@ -1,62 +1,119 @@
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ChevronDown } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { ChevronDown, MapPin } from 'lucide-react'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
 import { ThreadBorder } from '../ThreadBorder'
 import { Reveal } from '../ui/Reveal'
-import { venues } from '../../data/recweekBooths'
-import { cn } from '../../lib/utils'
+import { buttonVariants } from '../ui/Button'
+import { orgFairLogo } from '../../lib/assets'
 
 export function RecWeekHero() {
+  const [mapHovered, setMapHovered] = useState(false)
+
   return (
-    <section className="relative overflow-hidden bg-canvas-cream pb-20 pt-32 md:pb-28 md:pt-36">
+    <section className="relative overflow-hidden bg-canvas-cream pb-20 pt-28 md:pb-28 md:pt-32">
       <ThreadBorder
         color="red"
         edge="bottom"
         className="absolute -bottom-2 left-1/2 w-72 max-w-none -translate-x-1/2 opacity-40"
       />
 
-      <FloatingAccent duration={6} distance={8} rotate={6} className="absolute left-[8%] top-24 hidden md:block">
-        <EmbroideredAccent color="yellow" index={0} size={44} />
+      {/* Floating embroidered decorations */}
+      <FloatingAccent duration={6} distance={8} rotate={6} className="absolute left-[6%] top-16 hidden opacity-70 md:block">
+        <EmbroideredAccent color="yellow" index={0} size={40} />
       </FloatingAccent>
-      <FloatingAccent duration={7} delay={0.4} distance={9} rotate={-6} className="absolute right-[10%] top-40 hidden md:block">
-        <EmbroideredAccent color="pink" index={0} size={40} />
+      <FloatingAccent duration={7} delay={0.4} distance={9} rotate={-6} className="absolute right-[8%] top-24 hidden opacity-70 md:block">
+        <EmbroideredAccent color="pink" index={0} size={36} />
+      </FloatingAccent>
+      <FloatingAccent duration={6.5} delay={0.8} distance={7} rotate={-8} className="absolute left-[10%] bottom-16 hidden opacity-70 md:block">
+        <EmbroideredAccent color="green" index={0} size={34} />
+      </FloatingAccent>
+      <FloatingAccent duration={7.5} delay={1.2} distance={8} rotate={7} className="absolute right-[12%] bottom-24 hidden opacity-70 md:block">
+        <EmbroideredAccent color="purple" index={0} size={38} />
       </FloatingAccent>
 
       <div className="relative mx-auto max-w-[800px] px-6 text-center">
+        {/* Rendered outside Reveal: Reveal's transform/will-change would create a
+            stacking context that isolates mix-blend-mode from the page background. */}
+        <div className="relative mx-auto flex justify-center">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 opacity-[0.12]"
+            style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-thread-yellow), transparent 70%)' }}
+          />
+          <img
+            src={orgFairLogo}
+            alt="Dia de Colores OrgFair 2026"
+            className="w-[90%] sm:w-[560px] lg:w-[720px]"
+            style={{ mixBlendMode: 'multiply' }}
+          />
+        </div>
+
         <Reveal>
-          <span className="font-accent text-2xl text-thread-red">RecWeek 2026</span>
-          <h1 className="mt-2 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
-            Discover organizations.
+          <h1 className="mt-10 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
+            Discover Organizations.
             <br />
-            Meet new people.
+            Meet New People.
             <br />
-            Find your community.
+            Find Your Community.
           </h1>
-          <p className="mx-auto mt-6 font-body text-lg font-medium uppercase tracking-[0.1em] text-stitch-gray">
-            August 11–13, 2026
+
+          <p className="mx-auto mt-6 max-w-[64ch] font-body text-lg leading-relaxed text-fabric-dark">
+            <strong className="font-bold text-trust-blue">RecWeek</strong> is Ateneo de Zamboanga
+            University&apos;s annual organization recruitment week, where students explore accredited
+            organizations, attend campus-wide activities, discover new opportunities, and find
+            communities that inspire their college journey.
           </p>
 
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            {venues.map((venue) => (
-              <Link
-                key={venue.id}
-                to={`/recweek/map?venue=${venue.slug}`}
-                className={cn(
-                  'w-full rounded-full border-2 border-trust-blue px-6 py-3 text-center font-body font-medium text-trust-blue',
-                  'transition-all duration-300 hover:-translate-y-1 hover:bg-trust-blue hover:text-linen-white sm:w-auto',
-                )}
-              >
-                {venue.label}
-              </Link>
-            ))}
+          <div className="relative mt-9 inline-block">
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 scale-150 opacity-[0.08]"
+              style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-trust-blue), transparent 70%)' }}
+            />
+            <Link to="/recweek/map" className={buttonVariants({ variant: 'primary' })}>
+              <MapPin size={18} strokeWidth={1.75} />
+              Explore Interactive Maps
+            </Link>
           </div>
+
+          <Link
+            to="/recweek/map"
+            aria-label="Explore Booth Locations"
+            className="relative mx-auto mt-10 block w-fit"
+            onMouseEnter={() => setMapHovered(true)}
+            onMouseLeave={() => setMapHovered(false)}
+          >
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 scale-150 opacity-[0.1]"
+              style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-thread-yellow), transparent 70%)' }}
+            />
+            <motion.div
+              animate={{ y: [0, -8, 0], rotate: -6 }}
+              whileHover={{ y: -10, scale: 1.03, rotate: -6 }}
+              transition={{ y: { duration: 5, repeat: Infinity, ease: 'easeInOut' }, default: { duration: 0.25 } }}
+              style={{ filter: 'drop-shadow(0 12px 24px rgba(46,74,143,0.16))' }}
+            >
+              <img src="/map.png" alt="" role="presentation" className="w-[260px] select-none" />
+            </motion.div>
+            <motion.span
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: mapHovered ? 1 : 0, y: mapHovered ? 0 : 4 }}
+              transition={{ duration: 0.2 }}
+              className="absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap rounded-full border border-trust-blue/10 bg-linen-white px-3 py-1 font-body text-xs font-medium text-trust-blue shadow-[0_4px_20px_rgba(46,74,143,0.1)]"
+            >
+              Explore Booth Locations
+            </motion.span>
+          </Link>
 
           <a
             href="#timeline"
-            className="mt-10 inline-flex flex-col items-center gap-1 font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray transition-colors hover:text-trust-blue"
+            className="mt-14 inline-flex flex-col items-center gap-1 font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray transition-colors hover:text-trust-blue"
           >
-            Scroll to Begin
+            Scroll to Discover the Journey
             <ChevronDown size={18} strokeWidth={1.75} />
           </a>
         </Reveal>
