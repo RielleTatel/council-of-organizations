@@ -28,7 +28,7 @@ export default function Organizations() {
     <>
       <Seo
         title="Organizations | COA-Z"
-        description="Explore the accredited member organizations of COA-Z, grouped into six clusters of student formation at Ateneo de Zamboanga University."
+        description="Explore the accredited member organizations of COA-Z, grouped into eight clusters of student formation at Ateneo de Zamboanga University."
       />
 
       <PageHeader
@@ -36,7 +36,7 @@ export default function Organizations() {
         title="Member Organizations"
         accent="blue"
         emblem="blue"
-        description="COA-Z member organizations are grouped into six clusters based on their organizational vision and focus. Each cluster fosters a distinct sphere of student formation."
+        description="COA-Z member organizations are grouped into eight clusters based on their organizational vision and focus. Each cluster fosters a distinct sphere of student formation."
       />
 
       <section className="bg-linen-white py-16 md:py-20">

@@ -1,4 +1,4 @@
-import { flowersByColor, randomFrom, type ThreadColor } from '../lib/assets'
+import { flowersByColor, randomFrom, threadHex, type ThreadColor } from '../lib/assets'
 import { cn } from '../lib/utils'
 
 interface EmbroideredAccentProps {
@@ -13,6 +13,18 @@ interface EmbroideredAccentProps {
 
 export function EmbroideredAccent({ color, index, size = 48, opacity = 100, className }: EmbroideredAccentProps) {
   const options = flowersByColor[color]
+
+  if (options.length === 0) {
+    return (
+      <span
+        aria-hidden
+        role="presentation"
+        className={cn('inline-block select-none rounded-full', className)}
+        style={{ width: size, height: size, backgroundColor: threadHex[color], opacity: opacity / 100 }}
+      />
+    )
+  }
+
   const src = index !== undefined ? options[index % options.length] : randomFrom(options)
 
   return (

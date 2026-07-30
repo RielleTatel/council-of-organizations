@@ -11,6 +11,8 @@ interface PageHeaderProps {
   eyebrow?: string
   title: string
   description?: string
+  /** Small pill shown under the title, e.g. "Coming Soon". */
+  badge?: string
   accent?: ThreadColor
   /** Renders a larger floating embroidered emblem above the eyebrow. */
   emblem?: ThreadColor
@@ -24,6 +26,7 @@ export function PageHeader({
   eyebrow,
   title,
   description,
+  badge,
   accent = 'blue',
   emblem,
   spacious = false,
@@ -68,6 +71,23 @@ export function PageHeader({
         >
           {title}
         </h1>
+
+        {badge && (
+          <span
+            className={cn(
+              'mt-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-body text-xs font-bold uppercase tracking-[0.1em]',
+              ink ? 'bg-linen-white/15 text-linen-white' : '',
+            )}
+            style={
+              ink
+                ? undefined
+                : { backgroundColor: `${threadHex[accent]}1a`, color: threadHex[accent] }
+            }
+          >
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full" style={{ backgroundColor: ink ? '#fff' : threadHex[accent] }} />
+            {badge}
+          </span>
+        )}
 
         {description && (
           <p

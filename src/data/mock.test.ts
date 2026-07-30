@@ -11,8 +11,8 @@ describe('mockLeaders', () => {
     }
   })
 
-  it('has 18 members across all 5 offices', () => {
-    expect(mockLeaders).toHaveLength(18)
+  it('has 19 members across all 5 offices', () => {
+    expect(mockLeaders).toHaveLength(19)
     expect(new Set(mockLeaders.map((l) => l.office)).size).toBe(5)
   })
 

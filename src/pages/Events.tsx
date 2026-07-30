@@ -33,6 +33,8 @@ export default function Events() {
         eyebrow="Event Highlights"
         accent="yellow"
         title="Celebrating student leadership, service, innovation, and the stories that shape the COA-Z community."
+        badge="Coming Soon"
+        description="This is an upcoming feature of COA-Z, where accredited organizations will be able to showcase their own events, achievements, and stories right on this platform."
       />
 
       <section className="bg-canvas-cream py-16 md:py-20">

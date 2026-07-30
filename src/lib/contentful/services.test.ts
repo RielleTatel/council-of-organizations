@@ -27,8 +27,8 @@ describe('data-wired services', () => {
   })
 
   it('finds an event by slug', async () => {
-    const evt = await getEventBySlug('50th-jjc-national-convention-cebu')
-    expect(evt?.organization).toBe('Junior Jaycees Chamber - AdZU')
+    const evt = await getEventBySlug('recweek-orgfair-2026')
+    expect(evt?.organization).toBe('COA-Z')
   })
 
   it('returns null for an unknown event slug', async () => {

@@ -13,6 +13,7 @@ function leader(id: string, name: string, role: string, office: string, team?: s
 }
 
 export const mockLeaders: Leader[] = [
+  leader('chair-chairperson', 'Zoezel Layong', 'Chairperson', 'Office of the Chairperson'),
   leader('chair-exec-sec', 'Aubrey Mae L. Tomong', 'Executive Secretary', 'Office of the Chairperson'),
   leader('chair-under-internal', 'Gina M. Salamuddin', 'Undersecretary for Internal Affairs', 'Office of the Chairperson'),
   leader('chair-under-external', 'Ryle Xyrex L. Jumawan', 'Undersecretary for External Affairs', 'Office of the Chairperson'),
@@ -65,44 +66,21 @@ function story(fields: Omit<Event, 'id' | 'isFeatured' | 'isFlagship'> & { isFea
  */
 export const mockEvents: Event[] = [
   story({
-    slug: '50th-jjc-national-convention-cebu',
-    title: "Exploring Cebu, Embracing Leadership | 50th JJC Philippines National Convention",
-    date: '2026-07-28',
-    organization: 'Junior Jaycees Chamber - AdZU',
+    slug: 'recweek-orgfair-2026',
+    title: 'Dia de Colores | RecWeek OrgFair 2026',
+    date: '2026-08-11',
+    organization: 'COA-Z',
     excerpt:
-      "The third day of the 50th JJC Philippines National Convention paired Cebu's cultural heritage with a formal induction ceremony for incoming national officers.",
+      "COA-Z's Dia de Colores OrgFair invites Ateneans to discover organizations, meet new people, and find their community.",
     description:
-      "The third day of the 50th JJC Philippines National Convention brought together the best of Cebu's cultural heritage and the enduring spirit of leadership, giving delegates a meaningful experience both inside and outside the convention halls.",
+      "COA-Z's Recruitment Week culminates in the Dia de Colores OrgFair, held August 11–13, 2026 at Ateneo de Zamboanga University, where accredited student organizations open their booths to welcome new members.",
     body: [
-      "The third day of the 50th JJC Philippines National Convention brought together the best of Cebu's cultural heritage and the enduring spirit of leadership, giving delegates a meaningful experience both inside and outside the convention halls.",
-      "Delegates toured some of Cebu City's most iconic landmarks, including the University of San Carlos, El Fuerte de San Pedro Museum, Puso Village, and the breathtaking Temple of Leah. Each destination offered a glimpse into the city's rich history, traditions, and vibrant local culture.",
-      'The day concluded with the JJC Philippines National Induction Ceremony, where the National President and Area Vice President for Visayas were formally inducted into office. The evening also recognized outstanding members and chapters through the presentation of special awards, celebrating excellence, service, and leadership across the organization.',
+      "COA-Z's Recruitment Week culminates in the Dia de Colores OrgFair, held August 11–13, 2026 at Ateneo de Zamboanga University and open to all students.",
+      'Accredited member organizations set up booths across campus, giving students the chance to discover organizations, meet new people, and find their community among the many clusters that make up COA-Z.',
     ],
-    credit: 'Caption by JJC Thamara Arrieta · Layout by JJC Sheena Burahan',
-    socialLinks: {
-      facebook: 'https://www.facebook.com/jjcateneo',
-      instagram: 'https://www.instagram.com/jjcadzu/',
-      email: 'jjcateneo@gmail.com',
-    },
-    image: '/jjc.jpeg',
+    image: '/timeline/535016980_812706651154329_7551869367767708264_n.jpg',
     isFeatured: true,
     isFlagship: true,
-  }),
-  story({
-    slug: 'picpa-grand-cups-2026',
-    title: 'Event Highlights | PICPA Grand Cups',
-    date: '2026-07-25',
-    organization: 'JPIA - Ateneo de Zamboanga University',
-    excerpt:
-      "Ten Ateneans represented JPIA-AdZU at PICPA ZAMBASULTA's Fundamentals of Accounting and All Aboard Grand Cups.",
-    description:
-      'The Philippine Institute of Certified Public Accountants – ZAMBASULTA Chapter organized two academic competitions at the PICPA House, Veterans Avenue, Zamboanga City.',
-    body: [
-      'Last July 25, 2026, the Philippine Institute of Certified Public Accountants – ZAMBASULTA Chapter organized two academic competitions, the Fundamentals of Accounting Grand Cup and the All Aboard Grand Cup, at the PICPA House, Veterans Avenue, Zamboanga City.',
-      'Ten Ateneans participated in the event: five competed in the Fundamentals of Accounting Grand Cup, and the other five competed in the All Aboard Grand Cup.',
-      "JPIA-AdZU extends its warmest congratulations to all participants and champions. Let's continue to illuminate with JPIAn spirit.",
-    ],
-    image: '/jpia.jpeg',
   }),
   story({
     slug: 'anyam-tourism-startup-challenge',
@@ -119,6 +97,6 @@ export const mockEvents: Event[] = [
       'Congratulations to the following Bachelor of Science in Computer Science students who participated in the event: Gabrielle Tatel, Adrian Ranier Fabian, Donald Lee Novo, John Marco Antonio Yu, Jon Orillineda, Resham Qhaleed Kadiri, and Kenneth Clyde Que. Mr. Andrae Manguilimotan, a member of the Computer Science Department, coached the team.',
       'Representing both the University and Region IX at the national level reflects the team\'s dedication, creativity, and commitment to innovation. The Computer Science Department and the College of Science, Information Technology, and Engineering proudly commend the team for their accomplishment and for bringing regional pride to the national stage.',
     ],
-    image: '/siteao.jpg',
+    image: '/CSITE.jpeg',
   }),
 ]

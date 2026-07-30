@@ -36,8 +36,6 @@ export function AboutSection() {
                 <Award size={20} strokeWidth={1.75} />
               </span>
               <span className="font-body text-sm font-semibold leading-tight text-trust-blue">
-                Accredited
-                <br />
                 Council
               </span>
             </div>

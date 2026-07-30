@@ -24,8 +24,12 @@ export function EventHighlights() {
           <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
             Event Highlights
           </h2>
+          <span className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-thread-yellow/15 px-3 py-1 font-body text-xs font-bold uppercase tracking-[0.1em] text-thread-yellow">
+            <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-thread-yellow" />
+            Coming Soon
+          </span>
           <p className="mx-auto mt-4 max-w-[60ch] font-body text-lg leading-relaxed text-fabric-dark">
-            Stories celebrating the accomplishments and initiatives of accredited student organizations.
+            An upcoming COA-Z feature where accredited organizations can showcase their own events, accomplishments, and stories.
           </p>
         </Reveal>
 

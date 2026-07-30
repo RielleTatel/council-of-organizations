@@ -3,7 +3,7 @@
  * thread-color language in docs/COA-Z_Interwoven_Beyond_Design_System.md.
  */
 
-export type ThreadColor = 'red' | 'blue' | 'green' | 'yellow' | 'pink' | 'purple'
+export type ThreadColor = 'red' | 'blue' | 'green' | 'yellow' | 'pink' | 'purple' | 'gold' | 'teal'
 
 const flowerBase = '/ELEMENTS/flowers'
 const yarnBase = '/ELEMENTS/yarn'
@@ -25,6 +25,9 @@ export const flowersByColor: Record<ThreadColor, string[]> = {
     `${flowerBase}/flower-purple-bud-1.png`,
     `${flowerBase}/flower-purple-bud-2.png`,
   ],
+  // No dedicated embroidery art yet — EmbroideredAccent falls back to a plain dot for these.
+  gold: [],
+  teal: [],
 }
 
 export const threadsByColor: Record<ThreadColor, string[]> = {
@@ -34,6 +37,8 @@ export const threadsByColor: Record<ThreadColor, string[]> = {
   yellow: [`${yarnBase}/thread-yellow-wave-1.png`, `${yarnBase}/thread-yellow-wave-2.png`],
   pink: [`${yarnBase}/thread-pink-wave.png`],
   purple: [],
+  gold: [],
+  teal: [],
 }
 
 /** Blank embroidery-hoop frames on varying fabric tones, used to frame photos/content. */
@@ -56,4 +61,6 @@ export const threadHex: Record<ThreadColor, string> = {
   yellow: '#e4c41a',
   pink: '#e85a9a',
   purple: '#7b3fa0',
+  gold: '#b8860b',
+  teal: '#1f7a72',
 }

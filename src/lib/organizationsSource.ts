@@ -4,10 +4,9 @@
  * app's Organization shape. The source data's 8-group taxonomy (Student
  * Government, Academic Organizations, Academic Cluster, Culture/Arts/
  * Multimedia, Publications and Communications, Socio-Civic and Political,
- * Wellness and Environmental, Faith and Formation) folds into the app's
- * 6-cluster taxonomy from docs/content.md by merging "Student Government"
- * into Socio-Civic and Political, and both "Academic Organizations" and
- * "Academic Cluster" into a single Academics cluster.
+ * Wellness and Environmental, Faith and Formation) maps 1:1 onto the app's
+ * 8 clusters in src/config/clusters.ts, mirroring the official OSA hierarchy
+ * exactly rather than collapsing any groups together.
  */
 import { organizations as rawOrganizations, type Organization as RawOrganization } from '../data/organizations'
 import { clusterBySlug, type ClusterMeta } from '../config/clusters'
@@ -15,28 +14,28 @@ import type { Organization } from './contentful/types'
 
 const clusterByOrgId: Record<string, ClusterMeta['slug']> = {
   // Student Government
-  'el-consejo-atenista': 'socio-civic-political',
+  'el-consejo-atenista': 'student-government',
 
   // Academic Organizations
-  'accountancy-academic-organization': 'academics',
-  'education-academic-organization': 'academics',
-  siteao: 'academics',
-  'nursing-academic-organization': 'academics',
-  'liberal-arts-academic-organization': 'academics',
-  'management-academic-organization': 'academics',
+  'accountancy-academic-organization': 'academic-organizations',
+  'education-academic-organization': 'academic-organizations',
+  siteao: 'academic-organizations',
+  'nursing-academic-organization': 'academic-organizations',
+  'liberal-arts-academic-organization': 'academic-organizations',
+  'management-academic-organization': 'academic-organizations',
 
   // Academic Cluster
-  'society-of-ateneo-scholars': 'academics',
-  'adzu-ignatian-civil-engineering-students-organization': 'academics',
-  'the-ateneo-communicators': 'academics',
-  'ateneo-psych-icare': 'academics',
-  'samahang-pilosopiya-ng-ateneo': 'academics',
-  'ateneo-biological-society': 'academics',
-  aicg: 'academics',
-  'jieep-adzu': 'academics',
-  jpia: 'academics',
-  'international-studies-organization': 'academics',
-  'jma-adzu': 'academics',
+  'society-of-ateneo-scholars': 'academic-cluster',
+  'adzu-ignatian-civil-engineering-students-organization': 'academic-cluster',
+  'the-ateneo-communicators': 'academic-cluster',
+  'ateneo-psych-icare': 'academic-cluster',
+  'samahang-pilosopiya-ng-ateneo': 'academic-cluster',
+  'ateneo-biological-society': 'academic-cluster',
+  aicg: 'academic-cluster',
+  'jieep-adzu': 'academic-cluster',
+  jpia: 'academic-cluster',
+  'international-studies-organization': 'academic-cluster',
+  'jma-adzu': 'academic-cluster',
 
   // Culture, Arts and Multimedia
   'ateneo-music-club': 'culture-arts-multimedia',

@@ -11,7 +11,7 @@ describe('boardStyleFor', () => {
 
   it('keeps rotation within ±2 degrees and non-zero', () => {
     for (const id of ['a', 'bb', 'ccc', 'org-x', 'the-beacon-publications']) {
-      const { rotation } = boardStyleFor(id, 'academics', true)
+      const { rotation } = boardStyleFor(id, 'academic-cluster', true)
       expect(Math.abs(rotation)).toBeGreaterThanOrEqual(1)
       expect(Math.abs(rotation)).toBeLessThanOrEqual(2)
     }
@@ -19,7 +19,7 @@ describe('boardStyleFor', () => {
 
   it('keeps pins centered — only tape ever jitters', () => {
     for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
-      const s = boardStyleFor(id, 'academics', true)
+      const s = boardStyleFor(id, 'academic-cluster', true)
       if (s.fastener === 'pin') expect(s.fastenerOffset).toBe(0)
     }
   })
@@ -28,7 +28,7 @@ describe('boardStyleFor', () => {
     const corners = ['top-right', 'bottom-left', 'bottom-right']
     let decorated = 0
     for (let i = 0; i < 40; i++) {
-      const s = boardStyleFor(`org-${i}`, 'academics', true)
+      const s = boardStyleFor(`org-${i}`, 'academic-cluster', true)
       expect(corners).toContain(s.decorationCorner)
       if (s.hasDecoration) decorated++
     }
@@ -38,7 +38,7 @@ describe('boardStyleFor', () => {
 
   it('never returns the polaroid paper when the org has no logo', () => {
     for (const id of ['a', 'bb', 'ccc', 'no-logo-org', 'zzz-1', 'zzz-2']) {
-      expect(boardStyleFor(id, 'academics', false).paper).not.toBe('polaroid')
+      expect(boardStyleFor(id, 'academic-cluster', false).paper).not.toBe('polaroid')
     }
   })
 
@@ -55,7 +55,7 @@ describe('boardStyleFor', () => {
 
   it('only ever returns pin or tape', () => {
     for (const id of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
-      expect(['pin', 'tape']).toContain(boardStyleFor(id, 'academics', true).fastener)
+      expect(['pin', 'tape']).toContain(boardStyleFor(id, 'academic-cluster', true).fastener)
     }
   })
 })
