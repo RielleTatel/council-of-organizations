@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { VenueTabs } from '../components/recweek/VenueTabs'
+import { BoothMap } from '../components/recweek/BoothMap'
 import { venues, type VenueId } from '../data/recweekBooths'
 
 export default function RecWeek() {
@@ -38,7 +39,13 @@ export default function RecWeek() {
             <div className="rounded-[8px] border border-trust-blue/10 bg-linen-white p-4 shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
               <p className="font-body text-sm text-stitch-gray">{venue.booths.length} booths</p>
             </div>
-            <div className="min-h-[420px] rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]" />
+            <BoothMap
+              venue={venue}
+              selectedBoothId={selectedBoothId}
+              hoveredBoothId={hoveredBoothId}
+              onBoothSelect={setSelectedBoothId}
+              onBoothHover={setHoveredBoothId}
+            />
           </div>
         </div>
       </section>
