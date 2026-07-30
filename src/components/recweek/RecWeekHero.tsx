@@ -5,7 +5,7 @@ import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
 import { DriftingThread } from '../ui/DriftingThread'
 import { buttonVariants } from '../ui/Button'
-import { orgFairLogo, flowersByColor, threadsByColor } from '../../lib/assets'
+import { orgFairLogo, threadsByColor } from '../../lib/assets'
 import { cn } from '../../lib/utils'
 
 const HEADLINE_LINES = ['Discover Organizations.', 'Meet New People.', 'Find Your Community.']
@@ -20,7 +20,7 @@ export function RecWeekHero() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section className="relative overflow-hidden bg-canvas-cream pb-10 pt-28 md:pb-28 md:pt-32">
+    <section className="relative overflow-hidden bg-canvas-cream pb-6 pt-28 md:pb-14 md:pt-32">
       {/* Layered corner compositions: thread beneath, flower floating on top */}
       <div className="pointer-events-none absolute left-[4%] top-12 hidden opacity-80 md:block">
         <DriftingThread src={threadsByColor.blue[0]} className="w-20" duration={6} />
@@ -182,22 +182,6 @@ export function RecWeekHero() {
             </motion.div>
           </motion.div>
         </div>
-
-        <a
-          href="#timeline"
-          className="mt-14 inline-flex flex-col items-center gap-2 font-body text-xs font-medium uppercase tracking-[0.14em] text-stitch-gray transition-colors hover:text-trust-blue"
-        >
-          Scroll to Discover the Journey
-          <motion.img
-            src={flowersByColor.pink[0]}
-            alt=""
-            role="presentation"
-            className="h-5 w-5"
-            animate={shouldReduceMotion ? undefined : { y: [0, 6, 0] }}
-            transition={{ duration: 1.6, repeat: Infinity, ease: 'easeInOut' }}
-          />
-          <DriftingThread src={threadsByColor.pink[0]} className="w-16" duration={5} />
-        </a>
       </div>
     </section>
   )

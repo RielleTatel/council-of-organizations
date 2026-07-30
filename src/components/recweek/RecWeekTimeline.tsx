@@ -101,7 +101,7 @@ export function RecWeekTimeline() {
   const scaleY = useSpring(scrollYProgress, { stiffness: 60, damping: 20, restDelta: 0.001 })
 
   return (
-    <section id="timeline" className="scroll-mt-24 bg-linen-white py-20 md:py-28">
+    <section id="timeline" className="scroll-mt-24 bg-linen-white pb-20 pt-12 md:pb-28 md:pt-16">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="mx-auto mb-16 max-w-[700px] text-center">
           <span className="font-body text-xs font-medium uppercase tracking-[0.14em] text-thread-pink">
