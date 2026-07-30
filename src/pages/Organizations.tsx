@@ -35,6 +35,7 @@ export default function Organizations() {
         eyebrow="Organizations"
         title="Member Organizations"
         accent="blue"
+        emblem="blue"
         description="COA-Z member organizations are grouped into six clusters based on their organizational vision and focus. Each cluster fosters a distinct sphere of student formation."
       />
 

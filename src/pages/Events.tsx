@@ -4,9 +4,9 @@ import { Seo } from '../components/Seo'
 import { Reveal } from '../components/ui/Reveal'
 import { EventCard } from '../components/shared/EventCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
-import { ThreadBorder } from '../components/ThreadBorder'
 import { SectionGlow } from '../components/ui/SectionGlow'
 import { buttonVariants } from '../components/ui/Button'
+import { PageHeader } from '../components/shared/PageHeader'
 import { useEvents } from '../hooks/useEvents'
 
 function formatDate(iso: string): string {
@@ -28,23 +28,12 @@ export default function Events() {
         description="COA-Z's editorial newsroom: curated stories celebrating the accomplishments, initiatives, and activities of accredited student organizations."
       />
 
-      <section className="relative flex min-h-[50dvh] items-center overflow-hidden bg-trust-blue pb-16 pt-32 md:pt-36">
-        <ThreadBorder
-          color="yellow"
-          edge="bottom"
-          className="absolute -bottom-2 left-1/2 w-72 max-w-none -translate-x-1/2 opacity-50"
-        />
-        <div className="relative mx-auto max-w-[800px] px-6 text-center">
-          <Reveal>
-            <span className="font-body text-xs font-medium uppercase tracking-[0.2em] text-linen-white/70">
-              Event Highlights
-            </span>
-            <h1 className="mt-4 font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-linen-white md:text-5xl">
-              Celebrating student leadership, service, innovation, and the stories that shape the COA-Z community.
-            </h1>
-          </Reveal>
-        </div>
-      </section>
+      <PageHeader
+        variant="ink"
+        eyebrow="Event Highlights"
+        accent="yellow"
+        title="Celebrating student leadership, service, innovation, and the stories that shape the COA-Z community."
+      />
 
       <section className="bg-canvas-cream py-16 md:py-20">
         <div className="mx-auto max-w-[1200px] px-6">

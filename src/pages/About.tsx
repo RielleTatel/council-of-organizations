@@ -71,6 +71,7 @@ export default function About() {
         eyebrow="About"
         title="Who We Are"
         accent="green"
+        emblem="green"
         description="The sole alliance of all Ateneo de Zamboanga University College-accredited organizations, and the primary bridge between El Consejo Atenista and the campus organizations it oversees."
       />
 
