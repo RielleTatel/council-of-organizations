@@ -4,8 +4,9 @@ export const siteConfig = {
   description:
     'The official website of the Council of Organizations of the Ateneo - Zamboanga.',
   url: (import.meta.env.VITE_SITE_URL as string) ?? '',
+  email: 'cola@adzu.edu.ph',
   socialLinks: {
-    facebook: '',
+    facebook: 'https://www.facebook.com/coazadzu',
     instagram: '',
     twitter: '',
   },

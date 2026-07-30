@@ -9,6 +9,7 @@ export const buttonVariants = cva(
       variant: {
         primary: 'bg-trust-blue text-linen-white hover:bg-thread-green',
         secondary: 'border-2 border-trust-blue text-trust-blue hover:border-thread-red hover:text-thread-red',
+        accent: 'bg-thread-red text-linen-white hover:bg-thread-pink',
       },
     },
     defaultVariants: { variant: 'primary' },

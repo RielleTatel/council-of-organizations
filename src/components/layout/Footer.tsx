@@ -42,7 +42,7 @@ export function Footer() {
           <h2 className="font-display text-sm font-bold uppercase tracking-[0.12em] text-trust-blue">Contact</h2>
           <ul className="mt-4 flex flex-col gap-3">
             <li>
-              <a href="mailto:info@coaz.org" className="inline-flex items-center gap-2 font-body text-fabric-dark transition-colors hover:text-thread-red">
+              <a href={`mailto:${siteConfig.email}`} className="inline-flex items-center gap-2 font-body text-fabric-dark transition-colors hover:text-thread-red">
                 <Mail size={18} strokeWidth={1.75} />
                 Email
               </a>

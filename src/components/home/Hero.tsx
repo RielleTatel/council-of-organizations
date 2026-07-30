@@ -197,6 +197,13 @@ export function Hero() {
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center gap-4 pt-2 lg:justify-start"
           >
+            <Link to="/recweek" className={buttonVariants({ variant: 'accent' })}>
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-linen-white/70" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-linen-white" />
+              </span>
+              RecWeek 2026
+            </Link>
             <Link to="/organizations" className={buttonVariants({ variant: 'primary' })}>
               Explore Organizations
             </Link>
