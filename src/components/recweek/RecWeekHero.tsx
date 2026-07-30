@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'framer-motion'
-import { MapPin } from 'lucide-react'
+import { CalendarDays, MapPin, PartyPopper, Compass, ArrowRight } from 'lucide-react'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
 import { ThreadBorder } from '../ThreadBorder'
@@ -10,6 +9,12 @@ import { orgFairLogo, flowersByColor, threadsByColor } from '../../lib/assets'
 import { cn } from '../../lib/utils'
 
 const HEADLINE_LINES = ['Discover Organizations.', 'Meet New People.', 'Find Your Community.']
+
+const BADGES = [
+  { icon: CalendarDays, label: 'August 11–13, 2026', border: 'border-thread-pink/50' },
+  { icon: MapPin, label: 'Ateneo de Zamboanga University', border: 'border-trust-blue/40' },
+  { icon: PartyPopper, label: 'Open to All Students', border: 'border-thread-green/50' },
+] as const
 
 /** A thread illustration with a barely-there opacity pulse — the "stitched" ambient layer. */
 function DriftingThread({ src, className, duration = 5, delay = 0 }: { src: string; className?: string; duration?: number; delay?: number }) {
@@ -27,7 +32,6 @@ function DriftingThread({ src, className, duration = 5, delay = 0 }: { src: stri
 }
 
 export function RecWeekHero() {
-  const [mapHovered, setMapHovered] = useState(false)
   const shouldReduceMotion = useReducedMotion()
 
   return (
@@ -69,7 +73,7 @@ export function RecWeekHero() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 1, ease: 'easeOut' }}
+          transition={{ duration: 1, delay: 0.2, ease: 'easeOut' }}
           className="relative mx-auto flex items-center justify-center gap-4"
         >
           <div
@@ -97,7 +101,7 @@ export function RecWeekHero() {
               key={line}
               initial={shouldReduceMotion ? undefined : { opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 + i * 0.2, ease: 'easeOut' }}
+              transition={{ duration: 0.5, delay: 0.35 + i * 0.1, ease: 'easeOut' }}
               className="block"
             >
               {line}
@@ -108,7 +112,7 @@ export function RecWeekHero() {
         <motion.p
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.9, ease: 'easeOut' }}
+          transition={{ duration: 0.5, delay: 0.5, ease: 'easeOut' }}
           className="mx-auto mt-6 max-w-[64ch] font-body text-lg leading-relaxed text-fabric-dark"
         >
           <strong className="font-bold text-trust-blue">RecWeek</strong> is Ateneo de Zamboanga
@@ -117,59 +121,82 @@ export function RecWeekHero() {
           communities that inspire their college journey.
         </motion.p>
 
+        {/* Event info badges */}
         <motion.div
           initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 1.1, ease: 'easeOut' }}
-          className="relative mt-9 inline-block"
+          transition={{ duration: 0.5, delay: 0.65, ease: 'easeOut' }}
+          className="mt-7 flex flex-wrap items-center justify-center gap-3"
         >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 scale-150 opacity-[0.08]"
-            style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-trust-blue), transparent 70%)' }}
-          />
-          <motion.div whileHover={{ y: -4, scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.2 }}>
-            <Link
-              to="/recweek/map"
-              className={cn(buttonVariants({ variant: 'primary' }), 'transition-shadow hover:shadow-[0_14px_32px_rgba(46,74,143,0.22)]')}
+          {BADGES.map(({ icon: Icon, label, border }) => (
+            <span
+              key={label}
+              className={cn(
+                'inline-flex items-center gap-1.5 rounded-full border-2 bg-linen-white px-4 py-1.5 font-body text-sm font-medium text-fabric-dark shadow-[0_2px_10px_rgba(46,74,143,0.08)] transition-transform duration-300 hover:-translate-y-1',
+                border,
+              )}
             >
-              <MapPin size={18} strokeWidth={1.75} />
-              Explore Interactive Maps
-            </Link>
-          </motion.div>
+              <Icon size={15} strokeWidth={1.75} className="text-trust-blue" />
+              {label}
+            </span>
+          ))}
         </motion.div>
 
-        <DriftingThread src={threadsByColor.pink[0]} className="mx-auto mt-8 w-24" duration={5} />
+        {/* Explore the Organization Fair */}
+        <div className="relative mt-16">
+          <FloatingAccent duration={5} distance={6} rotate={0} className="absolute -left-2 top-0 hidden sm:block">
+            <EmbroideredAccent color="pink" index={0} size={44} opacity={80} />
+          </FloatingAccent>
+          <FloatingAccent duration={6} delay={0.3} distance={0} rotate={3} className="absolute -right-2 top-0 hidden sm:block">
+            <EmbroideredAccent color="yellow" index={1} size={44} opacity={80} />
+          </FloatingAccent>
 
-        <Link
-          to="/recweek/map"
-          aria-label="Explore Booth Locations"
-          className="relative mx-auto mt-2 block w-fit"
-          onMouseEnter={() => setMapHovered(true)}
-          onMouseLeave={() => setMapHovered(false)}
-        >
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-0 -z-10 scale-150 opacity-[0.1]"
-            style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-thread-yellow), transparent 70%)' }}
-          />
+          <motion.h2
+            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.8, ease: 'easeOut' }}
+            className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl"
+          >
+            Explore the Organization Fair
+          </motion.h2>
+
+          <DriftingThread src={threadsByColor.red[0]} className="mx-auto mt-3 w-20" duration={5} />
+
+          <motion.p
+            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.95, ease: 'easeOut' }}
+            className="mx-auto mt-4 max-w-[52ch] font-body leading-relaxed text-fabric-dark"
+          >
+            Looking for a specific organization? Explore our interactive campus maps to locate
+            booths, discover featured organizations, and plan your RecWeek journey with ease.
+          </motion.p>
+
           <motion.div
-            animate={shouldReduceMotion ? undefined : { rotate: [-2, 2, -2] }}
-            whileHover={{ scale: 1.05 }}
-            transition={{ rotate: { duration: 6, repeat: Infinity, ease: 'easeInOut' }, default: { duration: 0.25 } }}
-            style={{ filter: 'drop-shadow(0 12px 24px rgba(46,74,143,0.16))' }}
+            initial={shouldReduceMotion ? undefined : { opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 1.1, ease: 'easeOut' }}
+            className="relative mt-7 inline-block"
           >
-            <img src="/map.png" alt="" role="presentation" className="w-[260px] select-none" />
+            <div
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 scale-150 opacity-[0.08]"
+              style={{ background: 'radial-gradient(50% 50% at 50% 50%, var(--color-trust-blue), transparent 70%)' }}
+            />
+            <motion.div whileHover={{ y: -4, scale: 1.03 }} whileTap={{ scale: 0.97 }} transition={{ duration: 0.2 }}>
+              <Link
+                to="/recweek/map"
+                className={cn(buttonVariants({ variant: 'primary' }), 'group transition-shadow hover:shadow-[0_14px_32px_rgba(46,74,143,0.22)]')}
+              >
+                <Compass size={18} strokeWidth={1.75} />
+                Look for you organization booth!
+                <motion.span className="inline-flex" whileHover={{ x: 6 }} transition={{ duration: 0.2 }}>
+                  <ArrowRight size={18} strokeWidth={1.75} />
+                </motion.span>
+              </Link>
+            </motion.div>
           </motion.div>
-          <motion.span
-            initial={{ opacity: 0, y: 4 }}
-            animate={{ opacity: mapHovered ? 1 : 0, y: mapHovered ? 0 : 4 }}
-            transition={{ duration: 0.2 }}
-            className="absolute left-1/2 top-full -translate-x-1/2 whitespace-nowrap rounded-full border border-trust-blue/10 bg-linen-white px-3 py-1 font-body text-xs font-medium text-trust-blue shadow-[0_4px_20px_rgba(46,74,143,0.1)]"
-          >
-            Explore Booth Locations
-          </motion.span>
-        </Link>
+        </div>
 
         <a
           href="#timeline"
