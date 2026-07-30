@@ -11,7 +11,10 @@ export function PushPin({ hex, offset = 0, className }: PushPinProps) {
   return (
     <span
       aria-hidden
-      className={cn('pointer-events-none absolute -top-2 left-1/2 z-20 h-4 w-4 -translate-x-1/2 rounded-full', className)}
+      className={cn(
+        'pointer-events-none absolute -top-2 left-1/2 z-20 h-4 w-4 -translate-x-1/2 rounded-full transition-transform duration-300 group-hover:-translate-y-1',
+        className,
+      )}
       style={{
         marginLeft: offset,
         background: `radial-gradient(circle at 32% 30%, #ffffff9c, ${hex} 55%, ${hex} 100%)`,

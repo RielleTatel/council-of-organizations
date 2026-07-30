@@ -10,7 +10,10 @@ export function MaskingTape({ offset = 0, className }: MaskingTapeProps) {
   return (
     <span
       aria-hidden
-      className={cn('pointer-events-none absolute -top-2 left-1/2 z-20 h-5 w-16 -translate-x-1/2 -rotate-3 rounded-[2px]', className)}
+      className={cn(
+        'pointer-events-none absolute -top-2 left-1/2 z-20 h-5 w-16 -translate-x-1/2 -rotate-3 rounded-[2px] transition-transform duration-300 group-hover:-translate-y-1',
+        className,
+      )}
       style={{
         marginLeft: offset,
         background: 'repeating-linear-gradient(90deg, rgba(250,248,245,0.72) 0 6px, rgba(240,236,229,0.72) 6px 12px)',
