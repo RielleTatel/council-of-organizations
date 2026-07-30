@@ -2,38 +2,13 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { motion, useReducedMotion } from 'framer-motion'
 import type { Organization } from '../../lib/contentful/types'
-import { boardStyleFor, type PaperStyle, type DecorationCorner } from '../../lib/boardStyle'
+import { boardStyleFor, paperSurface, type DecorationCorner } from '../../lib/boardStyle'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { PushPin } from './PushPin'
 import { MaskingTape } from './MaskingTape'
 import { CategorySticker } from './CategorySticker'
 import { clusterBySlug } from '../../config/clusters'
 import { cn } from '../../lib/utils'
-
-/** Per-paper surface: base color + optional ruled/grid lines. Texture overlay added separately. */
-function paperSurface(paper: PaperStyle): React.CSSProperties {
-  switch (paper) {
-    case 'notebook':
-      return {
-        backgroundColor: 'var(--color-linen-white)',
-        backgroundImage:
-          'repeating-linear-gradient(var(--color-linen-white) 0 26px, rgba(46,74,143,0.10) 26px 27px)',
-      }
-    case 'grid':
-      return {
-        backgroundColor: 'var(--color-linen-white)',
-        backgroundImage:
-          'repeating-linear-gradient(rgba(46,74,143,0.07) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, rgba(46,74,143,0.07) 0 1px, transparent 1px 22px)',
-      }
-    case 'manila':
-      return { backgroundColor: '#ece1c9' }
-    case 'polaroid':
-      return { backgroundColor: '#ffffff' }
-    case 'plain':
-    default:
-      return { backgroundColor: 'var(--color-linen-white)' }
-  }
-}
 
 function initials(name: string): string {
   return name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('').toUpperCase()

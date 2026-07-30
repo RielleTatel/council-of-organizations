@@ -36,6 +36,31 @@ function hash(id: string): number {
   return h >>> 0
 }
 
+/** Per-paper surface: base color + optional ruled/grid lines. Texture overlay applied separately. */
+export function paperSurface(paper: PaperStyle): React.CSSProperties {
+  switch (paper) {
+    case 'notebook':
+      return {
+        backgroundColor: 'var(--color-linen-white)',
+        backgroundImage:
+          'repeating-linear-gradient(var(--color-linen-white) 0 26px, rgba(46,74,143,0.10) 26px 27px)',
+      }
+    case 'grid':
+      return {
+        backgroundColor: 'var(--color-linen-white)',
+        backgroundImage:
+          'repeating-linear-gradient(rgba(46,74,143,0.07) 0 1px, transparent 1px 22px), repeating-linear-gradient(90deg, rgba(46,74,143,0.07) 0 1px, transparent 1px 22px)',
+      }
+    case 'manila':
+      return { backgroundColor: '#ece1c9' }
+    case 'polaroid':
+      return { backgroundColor: '#ffffff' }
+    case 'plain':
+    default:
+      return { backgroundColor: 'var(--color-linen-white)' }
+  }
+}
+
 export function boardStyleFor(orgId: string, clusterSlug: string, hasLogo: boolean): BoardStyle {
   const h = hash(orgId)
   const rotation = ROTATIONS[h % ROTATIONS.length]
