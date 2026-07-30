@@ -154,3 +154,17 @@ body::after {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Discovery board masonry (react-masonry-css) */
+.board-masonry {
+  display: flex;
+  width: auto;
+  margin-left: -24px;
+}
+.board-masonry-col {
+  padding-left: 24px;
+  background-clip: padding-box;
+}
+.board-masonry-col > * {
+  margin-bottom: 28px;
+}
