@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { AnimatePresence, motion } from 'framer-motion'
 import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { VenueTabs } from '../components/recweek/VenueTabs'
@@ -45,13 +46,23 @@ export default function RecWeek() {
               onBoothSelect={selectBooth}
               onBoothHover={setHoveredBoothId}
             />
-            <BoothMap
-              venue={venue}
-              selectedBoothId={selectedBoothId}
-              hoveredBoothId={hoveredBoothId}
-              onBoothSelect={selectBooth}
-              onBoothHover={setHoveredBoothId}
-            />
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeVenueId}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                <BoothMap
+                  venue={venue}
+                  selectedBoothId={selectedBoothId}
+                  hoveredBoothId={hoveredBoothId}
+                  onBoothSelect={selectBooth}
+                  onBoothHover={setHoveredBoothId}
+                />
+              </motion.div>
+            </AnimatePresence>
           </div>
         </div>
       </section>

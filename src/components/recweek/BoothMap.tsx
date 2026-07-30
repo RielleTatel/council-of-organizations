@@ -6,6 +6,7 @@ import { BoothShape } from './BoothShape'
 import { MapControls } from './MapControls'
 import { MapLegend } from './MapLegend'
 import { BoothPreviewCard } from './BoothPreviewCard'
+import { EmbroideredAccent } from '../EmbroideredAccent'
 
 interface BoothMapProps {
   venue: Venue
@@ -28,8 +29,19 @@ export function BoothMap({ venue, selectedBoothId, hoveredBoothId, onBoothSelect
 
   return (
     <div className="relative overflow-hidden rounded-[8px] border border-trust-blue/10 bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)]">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 z-0 opacity-[0.08]"
+        style={{ background: 'radial-gradient(60% 50% at 50% 40%, var(--color-trust-blue), transparent 70%)' }}
+      />
+      <div aria-hidden className="pointer-events-none absolute -left-3 -top-3 z-0 opacity-70">
+        <EmbroideredAccent color="blue" index={0} size={40} />
+      </div>
+      <div aria-hidden className="pointer-events-none absolute -bottom-3 -right-3 z-0 opacity-70">
+        <EmbroideredAccent color="green" index={0} size={40} />
+      </div>
       <TransformWrapper ref={transformRef} minScale={1} maxScale={3} doubleClick={{ mode: 'zoomIn' }} wheel={{ step: 0.15 }} centerOnInit>
-        <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full">
+        <TransformComponent wrapperClass="!w-full !h-full relative z-[1]" contentClass="!w-full">
           <svg viewBox={venue.viewBox} className="h-auto w-full" role="img" aria-label={`${venue.label} booth map`}>
             {venue.landmarks.map((l) => <LandmarkShape key={l.id} landmark={l} />)}
             {venue.booths.map((b) => (
