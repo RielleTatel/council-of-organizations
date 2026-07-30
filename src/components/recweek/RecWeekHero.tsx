@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { CalendarDays, MapPin, PartyPopper, Compass, ArrowRight } from 'lucide-react'
 import { EmbroideredAccent } from '../EmbroideredAccent'
 import { FloatingAccent } from '../ui/FloatingAccent'
-import { ThreadBorder } from '../ThreadBorder'
 import { buttonVariants } from '../ui/Button'
 import { orgFairLogo, flowersByColor, threadsByColor } from '../../lib/assets'
 import { cn } from '../../lib/utils'
@@ -35,7 +34,7 @@ export function RecWeekHero() {
   const shouldReduceMotion = useReducedMotion()
 
   return (
-    <section className="relative overflow-hidden bg-canvas-cream pb-20 pt-28 md:pb-28 md:pt-32">
+    <section className="relative overflow-hidden bg-canvas-cream pb-10 pt-28 md:pb-28 md:pt-32">
       {/* Layered corner compositions: thread beneath, flower floating on top */}
       <div className="pointer-events-none absolute left-[4%] top-12 hidden opacity-80 md:block">
         <DriftingThread src={threadsByColor.blue[0]} className="w-20" duration={6} />
@@ -214,12 +213,6 @@ export function RecWeekHero() {
           <DriftingThread src={threadsByColor.pink[0]} className="w-16" duration={5} />
         </a>
       </div>
-
-      <ThreadBorder
-        color="blue"
-        edge="bottom"
-        className="absolute -bottom-2 left-1/2 w-72 max-w-none -translate-x-1/2 opacity-40"
-      />
     </section>
   )
 }
