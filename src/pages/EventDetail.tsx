@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { Calendar, ArrowLeft, ExternalLink, Mail } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumbListSchema } from '../lib/schema'
 import { Reveal } from '../components/ui/Reveal'
 import { EventCard } from '../components/shared/EventCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
@@ -53,6 +55,13 @@ export default function EventDetail() {
   return (
     <>
       <Seo title={`${event.title} | COA-Z`} description={event.excerpt ?? event.description} canonical={`/events/${event.slug}`} />
+      <JsonLd
+        data={breadcrumbListSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Event Highlights', path: '/events' },
+          { name: event.title, path: `/events/${event.slug}` },
+        ])}
+      />
 
       <section className="bg-canvas-cream pt-24 md:pt-28">
         {event.image && (

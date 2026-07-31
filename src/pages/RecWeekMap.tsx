@@ -2,6 +2,8 @@ import { useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Seo } from '../components/Seo'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumbListSchema } from '../lib/schema'
 import { RecWeekMapHero } from '../components/recweek/RecWeekMapHero'
 import { VenueTabs } from '../components/recweek/VenueTabs'
 import { BoothMap } from '../components/recweek/BoothMap'
@@ -32,6 +34,13 @@ export default function RecWeekMap() {
         title="RecWeek Booth Map | COA-Z"
         description="Explore booth locations across the three RecWeek venues at Ateneo de Zamboanga University."
         canonical="/recweek/map"
+      />
+      <JsonLd
+        data={breadcrumbListSchema([
+          { name: 'Home', path: '/' },
+          { name: 'RecWeek', path: '/recweek' },
+          { name: 'Booth Map', path: '/recweek/map' },
+        ])}
       />
       <RecWeekMapHero />
       <section className="bg-canvas-cream pb-24">
