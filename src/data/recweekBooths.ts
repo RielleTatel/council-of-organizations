@@ -13,7 +13,7 @@ export type BoothShape = {
 }
 
 export type LandmarkType =
-  | 'stage' | 'tent' | 'pond' | 'pathway' | 'church' | 'statue' | 'podium' | 'entrance'
+  | 'stage' | 'tent' | 'pond' | 'pathway' | 'church' | 'statue' | 'podium' | 'entrance' | 'divider'
 
 export type Landmark = {
   id: string
@@ -73,14 +73,14 @@ export const venues: Venue[] = [
       { id: 'bc-apc', orgId: 'ateneo-peers-circle', acronym: 'APC', x: 21, y: 54, width: 10, height: 7 },
       { id: 'bc-judo', orgId: 'adzu-judo-club', acronym: 'JUDO', x: 68, y: 54, width: 10, height: 7 },
       { id: 'bc-fable', orgId: 'fable-adzu', acronym: 'FABLE', x: 78, y: 54, width: 10, height: 7 },
-      { id: 'bc-jjc', orgId: 'junior-jaycees-chamber-adzu', acronym: 'JJC', x: 15, y: 92, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-llhz', orgId: 'la-liga-historia-zamboanguena', acronym: 'LLHZ', x: 22, y: 92, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-ipadz', orgId: 'ipadz', acronym: 'IPAdZ', x: 15, y: 114, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-efph', orgId: 'el-fuente-ph', acronym: 'EF Ph', x: 22, y: 114, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-usad', orgId: 'usad-adzu', acronym: 'USAD', x: 71, y: 92, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-apn', orgId: 'ateneo-pride-network', acronym: 'APN', x: 78, y: 92, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-sadaqah', orgId: 'sadaqah', acronym: 'SADAQAH', x: 71, y: 114, width: 7, height: 14, rotation: 90 },
-      { id: 'bc-rotaract', orgId: 'rotaract-club-adzu', acronym: 'ROTARACT', x: 78, y: 114, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-llhz', orgId: 'la-liga-historia-zamboanguena', acronym: 'LLHZ', x: 15, y: 80, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-jjc', orgId: 'junior-jaycees-chamber-adzu', acronym: 'JJC', x: 15, y: 94, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-efph', orgId: 'el-fuente-ph', acronym: 'EF Ph', x: 15, y: 110, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-ipadz', orgId: 'ipadz', acronym: 'IPAdZ', x: 15, y: 124, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-apn', orgId: 'ateneo-pride-network', acronym: 'APN', x: 78, y: 80, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-usad', orgId: 'usad-adzu', acronym: 'USAD', x: 78, y: 94, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-rotaract', orgId: 'rotaract-club-adzu', acronym: 'ROTARACT', x: 78, y: 110, width: 7, height: 14, rotation: 90 },
+      { id: 'bc-sadaqah', orgId: 'sadaqah', acronym: 'SADAQAH', x: 78, y: 124, width: 7, height: 14, rotation: 90 },
     ],
   },
   {
@@ -92,6 +92,7 @@ export const venues: Venue[] = [
       { id: 'c-stage', type: 'stage', label: 'Stage', x: 28, y: 6, width: 44, height: 16 },
       { id: 'c-pond', type: 'pond', label: 'Pond', x: 80, y: 8, width: 14, height: 30 },
       { id: 'c-lobby', type: 'entrance', label: 'C - Lobby', x: 6, y: 138, width: 88, height: 28 },
+      { id: 'c-divider', type: 'divider', x: 4, y: 78, width: 92, height: 3 },
     ],
     booths: [
       { id: 'c-psych', orgId: 'ateneo-psych-icare', acronym: 'PSYCH iCARE', x: 8, y: 26, width: 7, height: 12, rotation: 90 },
