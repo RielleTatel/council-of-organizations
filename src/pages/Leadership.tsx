@@ -19,6 +19,7 @@ export default function Leadership() {
       <Seo
         title="Leadership | COA-Z"
         description="The Executive Board of COA-Z: five offices and the Buklod Atenista Envoy Committee serving the Council and its member organizations."
+        canonical="/leadership"
       />
 
       <PageHeader

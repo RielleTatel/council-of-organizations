@@ -31,6 +31,7 @@ export default function RecWeekMap() {
       <Seo
         title="RecWeek Booth Map | COA-Z"
         description="Explore booth locations across the three RecWeek venues at Ateneo de Zamboanga University."
+        canonical="/recweek/map"
       />
       <RecWeekMapHero />
       <section className="bg-canvas-cream pb-24">

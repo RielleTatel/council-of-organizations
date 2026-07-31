@@ -31,7 +31,7 @@ export default function OrganizationProfile() {
   if (!organization) {
     return (
       <>
-        <Seo title="Organization Not Found | COA-Z" description="The organization you are looking for could not be found." />
+        <Seo title="Organization Not Found | COA-Z" description="The organization you are looking for could not be found." noindex />
         <section className="mx-auto flex max-w-[700px] flex-col items-center gap-6 px-6 pt-32 pb-24 text-center">
           <EmbroideredAccent color="red" index={0} size={64} />
           <h1 className="font-display text-3xl font-bold text-trust-blue">Organization Not Found</h1>
@@ -52,7 +52,7 @@ export default function OrganizationProfile() {
 
   return (
     <>
-      <Seo title={`${organization.name} | COA-Z`} description={organization.description} />
+      <Seo title={`${organization.name} | COA-Z`} description={organization.description} canonical={`/organizations/${organization.slug}`} />
 
       <section className="relative bg-canvas-cream pt-28 pb-16 md:pt-32 md:pb-20">
         <SectionGlow className="right-0 top-1/3 h-72 w-72" />

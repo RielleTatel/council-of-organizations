@@ -12,7 +12,7 @@ import { HomeCTA } from '../components/home/HomeCTA'
 export default function Home() {
   return (
     <>
-      <Seo title={defaultSeo.title} description={defaultSeo.description} />
+      <Seo title={defaultSeo.title} description={defaultSeo.description} canonical="/" />
       <Hero />
       <QuickStats />
       <AboutSection />

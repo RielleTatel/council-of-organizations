@@ -65,6 +65,7 @@ export default function About() {
       <Seo
         title="About COA-Z | COA-Z"
         description="Who we are, our purpose, vision, mission, and core principles as the alliance of accredited organizations of Ateneo de Zamboanga University."
+        canonical="/about"
       />
 
       <PageHeader

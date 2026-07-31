@@ -26,6 +26,7 @@ export default function Events() {
       <Seo
         title="Event Highlights | COA-Z"
         description="COA-Z's editorial newsroom: curated stories celebrating the accomplishments, initiatives, and activities of accredited student organizations."
+        canonical="/events"
       />
 
       <PageHeader
