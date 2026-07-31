@@ -6,8 +6,11 @@ const LABELS = [
   { key: 'organizations', label: 'Accredited Organizations' },
   { key: 'clusters', label: 'Organization Clusters' },
   { key: 'offices', label: 'Executive Offices' },
-  { key: 'leaders', label: 'Student Leaders' },
+  { key: 'leaders', label: 'Students' },
 ] as const
+
+// Hardcoded rather than derived — represents the wider AdZU student body, not the leadership count `stats.leaders` tracks.
+const STUDENTS_COUNT = '6000+'
 
 export function QuickStats() {
   const { stats, isLoading } = useHomeStats()
@@ -26,7 +29,7 @@ export function QuickStats() {
               <span className="h-12 w-16 animate-pulse rounded-[8px] bg-stitch-gray/20" aria-hidden />
             ) : (
               <span className="font-display text-5xl font-black tracking-[-0.02em] text-trust-blue">
-                {stats[key]}
+                {key === 'leaders' ? STUDENTS_COUNT : stats[key]}
               </span>
             )}
             <span className="font-body text-sm font-medium text-stitch-gray">{label}</span>
