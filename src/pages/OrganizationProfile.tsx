@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { ArrowLeft, ExternalLink } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { JsonLd } from '../components/JsonLd'
+import { educationalOrganizationSchema, breadcrumbListSchema } from '../lib/schema'
 import { Reveal } from '../components/ui/Reveal'
 import { ClusterBadge } from '../components/shared/ClusterBadge'
 import { OrganizationCard } from '../components/shared/OrganizationCard'
@@ -53,6 +55,21 @@ export default function OrganizationProfile() {
   return (
     <>
       <Seo title={`${organization.name} | COA-Z`} description={organization.description} canonical={`/organizations/${organization.slug}`} />
+      <JsonLd
+        data={educationalOrganizationSchema({
+          name: organization.name,
+          description: organization.description,
+          slug: organization.slug,
+          logo: organization.logo,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbListSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Organizations', path: '/organizations' },
+          { name: organization.name, path: `/organizations/${organization.slug}` },
+        ])}
+      />
 
       <section className="relative bg-canvas-cream pt-28 pb-16 md:pt-32 md:pb-20">
         <SectionGlow className="right-0 top-1/3 h-72 w-72" />
