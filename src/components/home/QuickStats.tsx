@@ -5,7 +5,7 @@ import { ThreadBorder } from '../ThreadBorder'
 const LABELS = [
   { key: 'organizations', label: 'Accredited Organizations' },
   { key: 'clusters', label: 'Organization Clusters' },
-  { key: 'offices', label: 'Officers' },
+  { key: 'offices', label: 'Executive Officers' },
   { key: 'leaders', label: 'Students' },
 ] as const
 
@@ -29,7 +29,7 @@ export function QuickStats() {
               <span className="h-12 w-16 animate-pulse rounded-[8px] bg-stitch-gray/20" aria-hidden />
             ) : (
               <span className="font-display text-5xl font-black tracking-[-0.02em] text-trust-blue">
-                {key === 'leaders' ? STUDENTS_COUNT : stats[key]}
+                {key === 'leaders' ? STUDENTS_COUNT : key === 'offices' ? stats.leaders : stats[key]}
               </span>
             )}
             <span className="font-body text-sm font-medium text-stitch-gray">{label}</span>
