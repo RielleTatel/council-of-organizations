@@ -15,4 +15,13 @@ describe('Seo', () => {
     expect(source).not.toContain('og:description')
     expect(source).not.toContain('twitter:card')
   })
+
+  it('renders a canonical link when canonical is provided', () => {
+    expect(source).toContain('rel="canonical"')
+    expect(source).toContain('siteConfig.url')
+  })
+
+  it('renders a noindex robots tag when noindex is true', () => {
+    expect(source).toContain('noindex')
+  })
 })
