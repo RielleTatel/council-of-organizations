@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { OfficeSection } from '../components/shared/OfficeSection'
@@ -19,6 +20,7 @@ export default function Leadership() {
       <Seo
         title="Leadership | COA-Z"
         description="The Executive Board of COA-Z: five offices and the Buklod Atenista Envoy Committee serving the Council and its member organizations."
+        canonical="/leadership"
       />
 
       <PageHeader
@@ -79,6 +81,12 @@ export default function Leadership() {
           <p className="max-w-[60ch] font-body text-lg leading-relaxed text-linen-white/85">
             {buklodCommittee.description}
           </p>
+          <Link
+            to="/organizations"
+            className="font-body font-medium text-linen-white underline decoration-linen-white/50 underline-offset-4 transition-colors hover:text-thread-yellow"
+          >
+            Explore the organizations these leaders represent →
+          </Link>
         </Reveal>
       </section>
     </>

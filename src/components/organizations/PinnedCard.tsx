@@ -79,7 +79,7 @@ export function PinnedCard({ organization, index }: PinnedCardProps) {
           {organization.logo ? (
             <img
               src={organization.logo}
-              alt=""
+              alt={organization.name}
               loading="lazy"
               className="max-h-full max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
             />

@@ -1,6 +1,8 @@
 import { useParams, Link } from 'react-router-dom'
 import { Calendar, ArrowLeft, ExternalLink, Mail } from 'lucide-react'
 import { Seo } from '../components/Seo'
+import { JsonLd } from '../components/JsonLd'
+import { breadcrumbListSchema } from '../lib/schema'
 import { Reveal } from '../components/ui/Reveal'
 import { EventCard } from '../components/shared/EventCard'
 import { EmbroideredAccent } from '../components/EmbroideredAccent'
@@ -32,7 +34,7 @@ export default function EventDetail() {
   if (!event) {
     return (
       <>
-        <Seo title="Story Not Found | COA-Z" description="The story you are looking for could not be found." />
+        <Seo title="Story Not Found | COA-Z" description="The story you are looking for could not be found." noindex />
         <section className="mx-auto flex max-w-[700px] flex-col items-center gap-6 px-6 pt-32 pb-24 text-center">
           <EmbroideredAccent color="red" index={0} size={64} />
           <h1 className="font-display text-3xl font-bold text-trust-blue">Story Not Found</h1>
@@ -52,7 +54,14 @@ export default function EventDetail() {
 
   return (
     <>
-      <Seo title={`${event.title} | COA-Z`} description={event.excerpt ?? event.description} />
+      <Seo title={`${event.title} | COA-Z`} description={event.excerpt ?? event.description} canonical={`/events/${event.slug}`} />
+      <JsonLd
+        data={breadcrumbListSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Event Highlights', path: '/events' },
+          { name: event.title, path: `/events/${event.slug}` },
+        ])}
+      />
 
       <section className="bg-canvas-cream pt-24 md:pt-28">
         {event.image && (

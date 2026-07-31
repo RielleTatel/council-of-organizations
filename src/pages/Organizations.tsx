@@ -29,6 +29,7 @@ export default function Organizations() {
       <Seo
         title="Organizations | COA-Z"
         description="Explore the accredited member organizations of COA-Z, grouped into eight clusters of student formation at Ateneo de Zamboanga University."
+        canonical="/organizations"
       />
 
       <PageHeader

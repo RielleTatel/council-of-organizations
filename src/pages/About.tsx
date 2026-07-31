@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
@@ -65,6 +66,7 @@ export default function About() {
       <Seo
         title="About COA-Z | COA-Z"
         description="Who we are, our purpose, vision, mission, and core principles as the alliance of accredited organizations of Ateneo de Zamboanga University."
+        canonical="/about"
       />
 
       <PageHeader
@@ -195,6 +197,14 @@ export default function About() {
                 {i < PRINCIPLES.length - 1 && <ThreadDivider className="mx-auto max-w-2xl" />}
               </Reveal>
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/leadership"
+              className="inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors hover:text-thread-red"
+            >
+              Meet the people leading COA-Z →
+            </Link>
           </div>
         </div>
       </section>

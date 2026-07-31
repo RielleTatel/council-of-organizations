@@ -7,7 +7,7 @@ import { FloatingAccent } from '../components/ui/FloatingAccent'
 export default function NotFound() {
   return (
     <>
-      <Seo title="Page Not Found | COA-Z" description="The page you are looking for could not be found." />
+      <Seo title="Page Not Found | COA-Z" description="The page you are looking for could not be found." noindex />
       <section className="mx-auto flex min-h-[60dvh] max-w-[700px] flex-col items-center justify-center gap-6 px-6 py-24 text-center">
         <div className="flex items-center gap-3">
           <FloatingAccent duration={5.5} distance={7} rotate={7}>
