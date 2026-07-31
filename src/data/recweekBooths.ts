@@ -92,7 +92,7 @@ export const venues: Venue[] = [
       { id: 'c-stage', type: 'stage', label: 'Stage', x: 28, y: 6, width: 44, height: 16 },
       { id: 'c-pond', type: 'pond', label: 'Pond', x: 80, y: 8, width: 14, height: 30 },
       { id: 'c-lobby', type: 'entrance', label: 'C - Lobby', x: 6, y: 138, width: 88, height: 28 },
-      { id: 'c-divider', type: 'divider', x: 4, y: 76, width: 92, height: 4 },
+      { id: 'c-divider', type: 'divider', x: 4, y: 79, width: 92, height: 3 },
     ],
     booths: [
       { id: 'c-psych', orgId: 'ateneo-psych-icare', acronym: 'PSYCH iCARE', x: 8, y: 26, width: 7, height: 12, rotation: 90 },
