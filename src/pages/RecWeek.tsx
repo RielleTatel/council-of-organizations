@@ -7,7 +7,7 @@ export default function RecWeek() {
     <>
       <Seo
         title="RecWeek 2026 | COA-Z"
-        description="RecWeek 2026: discover accredited organizations, meet fellow Atenistas, and find your community at Ateneo de Zamboanga University, August 11–13, 2026."
+        description="RecWeek 2026: discover accredited organizations, meet fellow Atenistas, and find your community at Ateneo de Zamboanga University, August 3–7, 2026."
       />
       <RecWeekHero />
       <RecWeekTimeline />

@@ -68,14 +68,14 @@ export const mockEvents: Event[] = [
   story({
     slug: 'recweek-orgfair-2026',
     title: 'Dia de Colores | RecWeek OrgFair 2026',
-    date: '2026-08-11',
+    date: '2026-08-03',
     organization: 'COA-Z',
     excerpt:
       "COA-Z's Dia de Colores OrgFair invites Ateneans to discover organizations, meet new people, and find their community.",
     description:
-      "COA-Z's Recruitment Week culminates in the Dia de Colores OrgFair, held August 11–13, 2026 at Ateneo de Zamboanga University, where accredited student organizations open their booths to welcome new members.",
+      "COA-Z's Recruitment Week opens with the Dia de Colores Organization Fair, held August 3–7, 2026 at Ateneo de Zamboanga University, where accredited student organizations open their booths to welcome new members.",
     body: [
-      "COA-Z's Recruitment Week culminates in the Dia de Colores OrgFair, held August 11–13, 2026 at Ateneo de Zamboanga University and open to all students.",
+      "COA-Z's Recruitment Week opens with the Dia de Colores Organization Fair, held August 3–7, 2026 at Ateneo de Zamboanga University and open to all students.",
       'Accredited member organizations set up booths across campus, giving students the chance to discover organizations, meet new people, and find their community among the many clusters that make up COA-Z.',
     ],
     image: '/timeline/535016980_812706651154329_7551869367767708264_n.jpg',

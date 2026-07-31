@@ -14,7 +14,7 @@ export interface Milestone {
 export const milestones: Milestone[] = [
   {
     title: 'Opening Ceremony',
-    dateLabel: 'August 11',
+    dateLabel: 'August 3',
     image: '/timeline/openingCeremony.jpg',
     body: [
       "Kick off RecWeek with the official opening ceremony, welcoming students to a week of campus life, organizations, and community engagement.",
@@ -25,7 +25,7 @@ export const milestones: Milestone[] = [
   },
   {
     title: 'Organization Fair',
-    dateLabel: 'August 11–13',
+    dateLabel: 'August 3–6',
     image: '/timeline/orgnanizationFair.jpg',
     body: [
       'Explore booths from accredited student organizations across Ateneo de Zamboanga University.',
@@ -38,7 +38,7 @@ export const milestones: Milestone[] = [
   },
   {
     title: 'Stage Performances',
-    dateLabel: 'August 11–13',
+    dateLabel: 'August 3–6',
     image: '/timeline/stagePerformances.jpg',
     body: [
       'Enjoy live performances throughout the fair featuring various student organizations.',
@@ -48,7 +48,7 @@ export const milestones: Milestone[] = [
   },
   {
     title: 'Organization Booth Activities',
-    dateLabel: 'August 11–13',
+    dateLabel: 'August 3–6',
     image: '/timeline/organizationBoothActivities.jpg',
     body: [
       'Participate in engaging booth activities prepared by each organization.',
@@ -58,7 +58,7 @@ export const milestones: Milestone[] = [
   },
   {
     title: 'Featured Programs & Special Activities',
-    dateLabel: 'August 12',
+    dateLabel: 'August 4–5',
     image: '/timeline/copy1.jpg',
     body: [
       'Join scheduled campus activities, organization-led events, and collaborative programs taking place during the second day of RecWeek.',
@@ -68,7 +68,7 @@ export const milestones: Milestone[] = [
   },
   {
     title: 'Closing Program',
-    dateLabel: 'August 13',
+    dateLabel: 'August 6',
     image: '/timeline/closingProgram.jpg',
     body: [
       "Celebrate the successful conclusion of RecWeek with the closing ceremony.",
