@@ -106,7 +106,7 @@ export const venues: Venue[] = [
       { id: 'c-aicg', orgId: 'aicg', acronym: 'AICG', x: 8, y: 82, width: 7, height: 12, rotation: 90 },
       { id: 'c-abs', orgId: 'ateneo-biological-society', acronym: 'ABS', x: 8, y: 95, width: 7, height: 12, rotation: 90 },
       { id: 'c-ices', orgId: 'adzu-ignatian-civil-engineering-students-organization', acronym: 'ADZU ICES', x: 8, y: 110, width: 7, height: 12, rotation: 90 },
-      { id: 'c-icpep', acronym: 'ICPEP', x: 8, y: 123, width: 7, height: 12, rotation: 90 },
+      { id: 'c-icpep', orgId: 'jieep-adzu', acronym: 'ICPEP', x: 8, y: 123, width: 7, height: 12, rotation: 90 },
       { id: 'c-nfjpia', orgId: 'jpia', acronym: 'JPIA', x: 85, y: 82, width: 7, height: 12, rotation: 90 },
       { id: 'c-jma', orgId: 'jma-adzu', acronym: 'JMA', x: 85, y: 95, width: 7, height: 12, rotation: 90 },
       { id: 'c-adu', orgId: 'ateneo-debate-union', acronym: 'ADU', x: 40, y: 104, width: 9, height: 7 },

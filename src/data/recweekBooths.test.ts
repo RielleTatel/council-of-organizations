@@ -5,7 +5,7 @@ import { organizations } from './organizations'
 const allBooths: BoothShape[] = venues.flatMap((v) => v.booths)
 
 const UNMATCHED = new Set([
-  'ICPEP', 'FAST',
+  'FAST',
 ])
 
 describe('recweek venues', () => {
