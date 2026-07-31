@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coa-z-adzu.netlify.app/sitemap.xml
