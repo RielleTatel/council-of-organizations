@@ -9,7 +9,7 @@ const FILL: Record<LandmarkType, string> = {
   statue: 'var(--color-stitch-gray)',
   podium: 'var(--color-stitch-gray)',
   entrance: 'var(--color-thread-yellow)',
-  divider: 'var(--color-linen-white)',
+  divider: 'var(--color-stitch-gray)',
 }
 
 export function LandmarkShape({ landmark }: { landmark: Landmark }) {
@@ -18,7 +18,7 @@ export function LandmarkShape({ landmark }: { landmark: Landmark }) {
   const cy = y + height / 2
   const isDivider = type === 'divider'
   return (
-    <g transform={`rotate(${rotation} ${cx} ${cy})`} opacity={isDivider ? 0.9 : type === 'entrance' ? 0.35 : 0.7}>
+    <g transform={`rotate(${rotation} ${cx} ${cy})`} opacity={isDivider ? 0.35 : type === 'entrance' ? 0.35 : 0.7}>
       <rect
         x={x}
         y={y}
