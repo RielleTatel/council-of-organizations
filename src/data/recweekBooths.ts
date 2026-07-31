@@ -96,8 +96,8 @@ export const venues: Venue[] = [
     ],
     booths: [
       { id: 'c-psych', orgId: 'ateneo-psych-icare', acronym: 'PSYCH iCARE', x: 8, y: 26, width: 7, height: 12, rotation: 90 },
-      { id: 'c-alms', acronym: 'ALMS', x: 8, y: 39, width: 7, height: 12, rotation: 90 },
-      { id: 'c-fast', orgId: 'foundation-of-ateneo-student-tutors', acronym: 'FAST', x: 8, y: 54, width: 7, height: 12, rotation: 90 },
+      { id: 'c-alms', orgId: 'ateneo-liturgical-society', acronym: 'ALS', x: 8, y: 39, width: 7, height: 12, rotation: 90 },
+      { id: 'c-fast', acronym: 'FAST', x: 8, y: 54, width: 7, height: 12, rotation: 90 },
       { id: 'c-issoa', orgId: 'international-studies-organization', acronym: 'ISSOA', x: 8, y: 67, width: 7, height: 12, rotation: 90 },
       { id: 'c-isoa', orgId: 'international-studies-organization', acronym: 'ISOA', x: 30, y: 68, width: 9, height: 7 },
       { id: 'c-jiecep', orgId: 'jieep-adzu', acronym: 'JIECEP', x: 39, y: 68, width: 9, height: 7 },

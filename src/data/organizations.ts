@@ -248,15 +248,6 @@ export const organizations: Organization[] = [
 
   // Socio-Civic and Political
   {
-    id: "foundation-of-ateneo-student-tutors",
-    name: "Foundation of Ateneo Student Tutors (FAST)",
-    category: "Socio-Civic and Political",
-    description:
-      "Provides peer tutoring services across academic disciplines, helping students achieve excellence while developing the teaching and leadership skills of its tutors.",
-    logo: "/logos/Foundation of Ateneo Student Tutors.jpg",
-    link: "https://www.facebook.com/FASTAdZU",
-  },
-  {
     id: "rotaract-club-adzu",
     name: "Rotaract Club of Ateneo de Zamboanga University",
     category: "Socio-Civic and Political",
