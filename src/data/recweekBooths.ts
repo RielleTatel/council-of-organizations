@@ -70,7 +70,7 @@ export const venues: Venue[] = [
     ],
     booths: [
       { id: 'bc-ecowatch', orgId: 'the-ecowatch-organization', acronym: 'ECO WATCH', x: 11, y: 54, width: 10, height: 7 },
-      { id: 'bc-apc', acronym: 'APC', x: 21, y: 54, width: 10, height: 7 },
+      { id: 'bc-apc', orgId: 'ateneo-peers-circle', acronym: 'APC', x: 21, y: 54, width: 10, height: 7 },
       { id: 'bc-judo', orgId: 'adzu-judo-club', acronym: 'JUDO', x: 68, y: 54, width: 10, height: 7 },
       { id: 'bc-fable', orgId: 'fable-adzu', acronym: 'FABLE', x: 78, y: 54, width: 10, height: 7 },
       { id: 'bc-jjc', orgId: 'junior-jaycees-chamber-adzu', acronym: 'JJC', x: 15, y: 92, width: 7, height: 14, rotation: 90 },
