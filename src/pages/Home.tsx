@@ -1,4 +1,6 @@
 import { Seo } from '../components/Seo'
+import { JsonLd } from '../components/JsonLd'
+import { organizationSchema } from '../lib/schema'
 import { defaultSeo } from '../config/seo'
 import { Hero } from '../components/home/Hero'
 import { QuickStats } from '../components/home/QuickStats'
@@ -13,6 +15,7 @@ export default function Home() {
   return (
     <>
       <Seo title={defaultSeo.title} description={defaultSeo.description} canonical="/" />
+      <JsonLd data={organizationSchema()} />
       <Hero />
       <QuickStats />
       <AboutSection />
