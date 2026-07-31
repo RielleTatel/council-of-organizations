@@ -50,6 +50,7 @@ const clusterByOrgId: Record<string, ClusterMeta['slug']> = {
   'the-beacon-publications': 'publications-communications',
 
   // Socio-Civic and Political
+  'foundation-of-ateneo-student-tutors': 'socio-civic-political',
   'rotaract-club-adzu': 'socio-civic-political',
   'la-liga-historia-zamboanguena': 'socio-civic-political',
   'ateneo-pride-network': 'socio-civic-political',
