@@ -5,7 +5,7 @@ import { ThreadBorder } from '../ThreadBorder'
 const LABELS = [
   { key: 'organizations', label: 'Accredited Organizations' },
   { key: 'clusters', label: 'Organization Clusters' },
-  { key: 'offices', label: 'Executive Offices' },
+  { key: 'offices', label: 'Officers' },
   { key: 'leaders', label: 'Students' },
 ] as const
 
