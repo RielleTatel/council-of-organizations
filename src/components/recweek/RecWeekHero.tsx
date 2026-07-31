@@ -11,7 +11,7 @@ import { cn } from '../../lib/utils'
 const HEADLINE_LINES = ['Discover Organizations.', 'Meet New People.', 'Find Your Community.']
 
 const BADGES = [
-  { icon: CalendarDays, label: 'August 3–7, 2026', border: 'border-thread-pink/50' },
+  { icon: CalendarDays, label: 'August 3–6, 2026', border: 'border-thread-pink/50' },
   { icon: MapPin, label: 'Ateneo de Zamboanga University', border: 'border-trust-blue/40' },
   { icon: PartyPopper, label: 'Open to All Students', border: 'border-thread-green/50' },
 ] as const
