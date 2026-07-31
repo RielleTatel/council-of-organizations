@@ -20,7 +20,7 @@ export function Footer() {
         <div className="flex flex-col gap-3">
           <span className="flex items-center gap-2 font-display text-lg font-black text-trust-blue">
             <img src={siteLogo} alt="" className="h-8 w-8" />
-            Council of the Organizations of the Ateneo - Zamboanga
+            Council of Organizations of the Ateneo - Zamboanga
           </span>
           <EmbroideredAccent color="blue" index={0} size={40} />
         </div>
