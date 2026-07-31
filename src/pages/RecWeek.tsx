@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { JsonLd } from '../components/JsonLd'
 import { eventSchema } from '../lib/schema'
 import { siteConfig } from '../config/site'
 import { RecWeekHero } from '../components/recweek/RecWeekHero'
 import { RecWeekTimeline } from '../components/recweek/RecWeekTimeline'
+import { buttonVariants } from '../components/ui/Button'
 
 export default function RecWeek() {
   return (
@@ -25,6 +27,11 @@ export default function RecWeek() {
       />
       <RecWeekHero />
       <RecWeekTimeline />
+      <div className="flex justify-center pb-20">
+        <Link to="/organizations" className={buttonVariants({ variant: 'secondary' })}>
+          Browse Accredited Organizations
+        </Link>
+      </div>
     </>
   )
 }

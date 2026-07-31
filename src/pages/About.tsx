@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { Seo } from '../components/Seo'
 import { PageHeader } from '../components/shared/PageHeader'
 import { Reveal } from '../components/ui/Reveal'
@@ -196,6 +197,14 @@ export default function About() {
                 {i < PRINCIPLES.length - 1 && <ThreadDivider className="mx-auto max-w-2xl" />}
               </Reveal>
             ))}
+          </div>
+          <div className="mt-10 text-center">
+            <Link
+              to="/leadership"
+              className="inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors hover:text-thread-red"
+            >
+              Meet the people leading COA-Z →
+            </Link>
           </div>
         </div>
       </section>
