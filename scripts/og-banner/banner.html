@@ -1,0 +1,109 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<style>
+  @font-face {
+    font-family: "Made Tommy";
+    src: url("../../public/FONTS/MADE TOMMY BOLD_PERSONAL USE.OTF") format("opentype");
+    font-weight: 700;
+  }
+  @font-face {
+    font-family: "Made Tommy";
+    src: url("../../public/FONTS/MADE TOMMY MEDIUM_PERSONAL USE.OTF") format("opentype");
+    font-weight: 500;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+  }
+
+  body {
+    position: relative;
+    background-color: #f5f0e8;
+    font-family: "Made Tommy", sans-serif;
+  }
+
+  .texture {
+    position: absolute;
+    inset: 0;
+    background-image: url("../../public/textures/paper-texture-1.webp");
+    background-repeat: repeat;
+    background-size: 400px;
+    opacity: 0.10;
+    mix-blend-mode: multiply;
+  }
+
+  .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 120px;
+  }
+
+  .logo {
+    width: 110px;
+    height: 110px;
+    margin-bottom: 28px;
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 46px;
+    color: #2e4a8f;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+  }
+
+  .tagline {
+    margin-top: 20px;
+    font-weight: 500;
+    font-size: 22px;
+    color: #3d3d3d;
+    line-height: 1.5;
+  }
+
+  .accent {
+    position: absolute;
+  }
+  .accent img { display: block; }
+  .flower-tl { top: 48px; left: 64px; width: 64px; }
+  .flower-tr { top: 56px; right: 72px; width: 48px; }
+  .flower-bl { bottom: 64px; left: 90px; width: 40px; }
+  .flower-br { bottom: 52px; right: 64px; width: 56px; }
+
+  .thread-bottom {
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(-1);
+    width: 260px;
+    opacity: 0.5;
+  }
+</style>
+</head>
+<body>
+  <div class="texture"></div>
+
+  <div class="accent flower-tl"><img src="../../public/ELEMENTS/flowers/flower-pink-bloom-1.png" /></div>
+  <div class="accent flower-tr"><img src="../../public/ELEMENTS/flowers/flower-yellow-1.png" /></div>
+  <div class="accent flower-bl"><img src="../../public/ELEMENTS/flowers/flower-blue-bud-2.png" /></div>
+  <div class="accent flower-br"><img src="../../public/ELEMENTS/flowers/flower-purple-bloom-1.png" /></div>
+  <img class="thread-bottom" src="../../public/ELEMENTS/yarn/thread-blue-wave-1.png" />
+
+  <div class="content">
+    <img class="logo" src="../../public/Icon.png" />
+    <h1>Council of Organizations<br />of the Ateneo &ndash; Zamboanga</h1>
+    <p class="tagline">Empowering Student Organizations.<br />Inspiring Collaborative Leadership.</p>
+  </div>
+</body>
+</html>
