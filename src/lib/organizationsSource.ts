@@ -1,12 +1,12 @@
 /**
  * Adapts the real organization roster (src/data/organizations.ts, matching
  * the official OSA Clusters of Organizations for AY 2026-2027) into the
- * app's Organization shape. The source data's 8-group taxonomy (Student
- * Government, Academic Organizations, Academic Cluster, Culture/Arts/
- * Multimedia, Publications and Communications, Socio-Civic and Political,
- * Wellness and Environmental, Faith and Formation) maps 1:1 onto the app's
- * 8 clusters in src/config/clusters.ts, mirroring the official OSA hierarchy
- * exactly rather than collapsing any groups together.
+ * app's Organization shape. The source data's 7-group taxonomy (Student
+ * Government, Academic Cluster, Culture/Arts/Multimedia, Publications and
+ * Communications, Socio-Civic and Political, Wellness and Environmental,
+ * Faith and Formation) maps 1:1 onto the app's 7 clusters in
+ * src/config/clusters.ts, mirroring the official OSA hierarchy exactly
+ * rather than collapsing any groups together.
  */
 import { organizations as rawOrganizations, type Organization as RawOrganization } from '../data/organizations'
 import { clusterBySlug, type ClusterMeta } from '../config/clusters'
@@ -15,14 +15,6 @@ import type { Organization } from './contentful/types'
 const clusterByOrgId: Record<string, ClusterMeta['slug']> = {
   // Student Government
   'el-consejo-atenista': 'student-government',
-
-  // Academic Organizations
-  'accountancy-academic-organization': 'academic-organizations',
-  'education-academic-organization': 'academic-organizations',
-  siteao: 'academic-organizations',
-  'nursing-academic-organization': 'academic-organizations',
-  'liberal-arts-academic-organization': 'academic-organizations',
-  'management-academic-organization': 'academic-organizations',
 
   // Academic Cluster
   'society-of-ateneo-scholars': 'academic-cluster',

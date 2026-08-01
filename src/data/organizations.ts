@@ -19,62 +19,6 @@ export const organizations: Organization[] = [
     link: "https://www.facebook.com/adzueca",
   },
 
-  // Academic Organizations
-  {
-    id: "accountancy-academic-organization",
-    name: "Accountancy Academic Organization",
-    category: "Academic Organizations",
-    description:
-      "Serves as the official academic home for BS Accountancy students. It supports professional growth, academic excellence, and collaboration among future accountants.",
-    logo: "/logos/Accountancy Academic Organization.jpg",
-    link: "https://www.facebook.com/AAOArdentTigers",
-  },
-  {
-    id: "education-academic-organization",
-    name: "Education Academic Organization",
-    category: "Academic Organizations",
-    description:
-      "Represents students pursuing education-related programs. It fosters leadership, professional development, and a commitment to quality teaching.",
-    logo: "/logos/EAO.jpg",
-    link: "https://www.facebook.com/adzueao",
-  },
-  {
-    id: "siteao",
-    name: "Science, Information Technology, and Engineering Academic Organization (SITEAO)",
-    category: "Academic Organizations",
-    description:
-      "Unites students from science, information technology, and engineering disciplines. It encourages academic achievement, collaboration, and technological innovation.",
-    logo: "/logos/SITEAO.jpg",
-    link: "https://www.facebook.com/adzusiteao",
-  },
-  {
-    id: "nursing-academic-organization",
-    name: "Nursing Academic Organization",
-    category: "Academic Organizations",
-    description:
-      "Serves as the official organization for nursing students. It promotes professional competence, compassionate service, and academic excellence in healthcare.",
-    logo: "/logos/NAO.jpg",
-    link: "https://www.facebook.com/NsgAngels",
-  },
-  {
-    id: "liberal-arts-academic-organization",
-    name: "Liberal Arts Academic Organization",
-    category: "Academic Organizations",
-    description:
-      "Represents students from liberal arts programs. It fosters critical thinking, creativity, and engagement with social and cultural issues.",
-    logo: "/logos/LAAO.jpg",
-    link: "https://www.facebook.com/adzulaao",
-  },
-  {
-    id: "management-academic-organization",
-    name: "Management Academic Organization",
-    category: "Academic Organizations",
-    description:
-      "Supports students enrolled in management-related programs. It promotes leadership, innovation, and practical business learning.",
-    logo: "/logos/MAO.jpg",
-    link: "https://www.facebook.com/AdZUMAOLIONS",
-  },
-
   // Academic Cluster
   {
     id: "society-of-ateneo-scholars",

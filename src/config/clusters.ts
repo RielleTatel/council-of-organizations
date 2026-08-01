@@ -16,13 +16,6 @@ export const clusters: ClusterMeta[] = [
       'The supreme student government of the university, representing and advocating for the interests of the student body.',
   },
   {
-    slug: 'academic-organizations',
-    name: 'Academic Organizations',
-    color: 'teal',
-    description:
-      'The official academic-home organizations for each degree program, supporting professional growth, academic excellence, and collaboration within the discipline.',
-  },
-  {
     slug: 'academic-cluster',
     name: 'Academic Cluster',
     color: 'blue',
