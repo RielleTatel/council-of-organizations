@@ -1,21 +1,27 @@
-import { Reveal } from '../ui/Reveal'
-import { SectionGlow } from '../ui/SectionGlow'
-import { ThreadBorder } from '../ThreadBorder'
-import { OfficeHeader } from './OfficeHeader'
-import { OfficerCard } from './OfficerCard'
-import type { Leader } from '../../lib/contentful/types'
-import type { ThreadColor } from '../../lib/assets'
+import { Reveal } from "../ui/Reveal";
+import { SectionGlow } from "../ui/SectionGlow";
+import { ThreadBorder } from "../ThreadBorder";
+import { OfficeHeader } from "./OfficeHeader";
+import { OfficerCard } from "./OfficerCard";
+import type { Leader } from "../../lib/cms/domain";
+import type { ThreadColor } from "../../lib/assets";
 
 interface OfficeSectionProps {
-  title: string
-  description: string
-  color: ThreadColor
-  leaders: Leader[]
+  title: string;
+  description: string;
+  color: ThreadColor;
+  leaders: Leader[];
   /** Alternates the thread border's curve direction so consecutive sections don't repeat identically. */
-  flip?: boolean
+  flip?: boolean;
 }
 
-export function OfficeSection({ title, description, color, leaders, flip = false }: OfficeSectionProps) {
+export function OfficeSection({
+  title,
+  description,
+  color,
+  leaders,
+  flip = false,
+}: OfficeSectionProps) {
   return (
     <Reveal className="relative overflow-hidden rounded-2xl bg-linen-white p-8 shadow-[0_4px_24px_rgba(46,74,143,0.06)] md:p-12">
       <ThreadBorder
@@ -34,5 +40,5 @@ export function OfficeSection({ title, description, color, leaders, flip = false
         </div>
       </div>
     </Reveal>
-  )
+  );
 }

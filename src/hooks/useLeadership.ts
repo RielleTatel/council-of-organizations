@@ -1,10 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { leadershipKeys } from '../lib/contentful/queries'
-import { getLeadership } from '../lib/contentful/services'
-
+import { usePublished } from "../lib/cms/public";
+import { leadershipFrom } from "../lib/cms/readers";
 export function useLeadership() {
-  return useQuery({
-    queryKey: leadershipKeys.all,
-    queryFn: getLeadership,
-  })
+  return usePublished(leadershipFrom);
 }

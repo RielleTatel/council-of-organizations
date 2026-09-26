@@ -1,18 +1,21 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import type { Organization } from '../../lib/contentful/types'
-import { ClusterBadge } from './ClusterBadge'
-import { EmbroideredAccent } from '../EmbroideredAccent'
-import { threadHex } from '../../lib/assets'
-import { clusterBySlug } from '../../config/clusters'
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import type { Organization } from "../../lib/cms/domain";
+import { ClusterBadge } from "./ClusterBadge";
+import { EmbroideredAccent } from "../EmbroideredAccent";
+import { threadHex } from "../../lib/assets";
+import { useSingleton } from "../../lib/cms/public";
 
 interface OrganizationCardProps {
-  organization: Organization
+  organization: Organization;
 }
 
 export function OrganizationCard({ organization }: OrganizationCardProps) {
-  const cluster = clusterBySlug(organization.cluster.slug)
-  const hex = cluster ? threadHex[cluster.color] : '#8a8a8a'
+  const { items: clusters } = useSingleton("clusters");
+  const clusterBySlug = (slug: string) =>
+    clusters.find((cluster) => cluster.slug === slug);
+  const cluster = clusterBySlug(organization.cluster.slug);
+  const hex = cluster ? threadHex[cluster.color] : "#8a8a8a";
 
   return (
     <Link
@@ -42,22 +45,26 @@ export function OrganizationCard({ organization }: OrganizationCardProps) {
           style={{ backgroundColor: `${hex}14`, color: hex }}
         >
           {organization.name
-            .split(' ')
+            .split(" ")
             .slice(0, 2)
             .map((w) => w[0])
-            .join('')
+            .join("")
             .toUpperCase()}
         </div>
       )}
       <div className="flex flex-1 flex-col gap-3 p-6">
         <ClusterBadge slug={organization.cluster.slug} className="self-start" />
-        <h3 className="font-display text-xl font-bold text-trust-blue">{organization.name}</h3>
-        <p className="line-clamp-3 font-body leading-relaxed text-fabric-dark">{organization.description}</p>
+        <h3 className="font-display text-xl font-bold text-trust-blue">
+          {organization.name}
+        </h3>
+        <p className="line-clamp-3 font-body leading-relaxed text-fabric-dark">
+          {organization.description}
+        </p>
         <span className="mt-auto inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors group-hover:text-thread-red">
           View Organization
           <ArrowRight size={16} strokeWidth={1.75} />
         </span>
       </div>
     </Link>
-  )
+  );
 }

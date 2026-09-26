@@ -1,48 +1,63 @@
-import type { Organization, Event, Leader } from './contentful/types'
+import type { Organization, Event, Leader } from "./cms/domain";
 
 export interface HomeStats {
-  organizations: number
-  clusters: number
-  offices: number
-  leaders: number
+  organizations: number;
+  clusters: number;
+  offices: number;
+  leaders: number;
 }
 
-export function deriveHomeStats(orgs: Organization[], leaders: Leader[]): HomeStats {
+export function deriveHomeStats(
+  orgs: Organization[],
+  leaders: Leader[],
+): HomeStats {
   return {
     organizations: orgs.length,
     clusters: new Set(orgs.map((o) => o.cluster.id)).size,
     offices: new Set(leaders.map((l) => l.office)).size,
     leaders: leaders.length,
-  }
+  };
 }
 
 function dayIndex(date: Date): number {
-  return Math.floor(date.getTime() / 86_400_000)
+  return Math.floor(date.getTime() / 86_400_000);
 }
 
-export function selectFeaturedOrganization(orgs: Organization[], date: Date): Organization | null {
-  if (orgs.length === 0) return null
-  return orgs[dayIndex(date) % orgs.length]
+export function selectFeaturedOrganization(
+  orgs: Organization[],
+  date: Date,
+): Organization | null {
+  if (orgs.length === 0) return null;
+  return orgs[dayIndex(date) % orgs.length];
 }
 
 /** One representative organization per cluster (in cluster order), for the homepage spotlight carousel. */
-export function selectSpotlightOrganizations(orgs: Organization[], clusterSlugs: string[]): Organization[] {
-  const picks: Organization[] = []
+export function selectSpotlightOrganizations(
+  orgs: Organization[],
+  clusterSlugs: string[],
+): Organization[] {
+  const picks: Organization[] = [];
   for (const slug of clusterSlugs) {
-    const match = orgs.find((o) => o.cluster.slug === slug)
-    if (match) picks.push(match)
+    const match = orgs.find((o) => o.cluster.slug === slug);
+    if (match) picks.push(match);
   }
-  return picks
+  return picks;
 }
 
-export function selectUpcomingEvents(events: Event[], now: Date, count: number): Event[] {
+export function selectUpcomingEvents(
+  events: Event[],
+  now: Date,
+  count: number,
+): Event[] {
   return events
     .filter((e) => new Date(e.date).getTime() >= now.getTime())
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
-    .slice(0, count)
+    .slice(0, count);
 }
 
 /** Most recently published Event Highlights stories, newest first. */
 export function selectRecentEvents(events: Event[], count: number): Event[] {
-  return [...events].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, count)
+  return [...events]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, count);
 }

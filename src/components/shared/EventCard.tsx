@@ -1,25 +1,29 @@
-import { Link } from 'react-router-dom'
-import { Calendar, ArrowRight } from 'lucide-react'
-import type { Event } from '../../lib/contentful/types'
-import { cn } from '../../lib/utils'
+import { Link } from "react-router-dom";
+import { Calendar, ArrowRight } from "lucide-react";
+import type { Event } from "../../lib/cms/domain";
+import { cn } from "../../lib/utils";
 
 function formatDate(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' })
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 interface EventCardProps {
-  event: Event
-  muted?: boolean
+  event: Event;
+  muted?: boolean;
 }
 
 export function EventCard({ event, muted = false }: EventCardProps) {
   return (
     <article
       className={cn(
-        'group flex h-full flex-col overflow-hidden rounded-[8px] bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(46,74,143,0.12)]',
-        muted && 'opacity-80',
+        "group flex h-full flex-col overflow-hidden rounded-[8px] bg-linen-white shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(46,74,143,0.12)]",
+        muted && "opacity-80",
       )}
     >
       {event.image ? (
@@ -58,5 +62,5 @@ export function EventCard({ event, muted = false }: EventCardProps) {
         </Link>
       </div>
     </article>
-  )
+  );
 }

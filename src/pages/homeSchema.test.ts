@@ -5,7 +5,7 @@ import { resolve } from 'node:path'
 describe('Home page structured data', () => {
   it('renders the Organization JSON-LD schema', () => {
     const source = readFileSync(resolve(__dirname, 'Home.tsx'), 'utf-8')
-    expect(source).toContain('organizationSchema()')
+    expect(source).toContain('organizationSchema(settings)')
     expect(source).toContain('<JsonLd')
   })
 })

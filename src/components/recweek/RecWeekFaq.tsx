@@ -1,17 +1,19 @@
-import { ChevronDown } from 'lucide-react'
-import { Reveal } from '../ui/Reveal'
-import { faqs } from '../../data/recweek'
+import { useCmsCopy, CmsRichText, useSingleton } from "../../lib/cms/public";
+import { ChevronDown } from "lucide-react";
+import { Reveal } from "../ui/Reveal";
 
 export function RecWeekFaq() {
+  const copy = useCmsCopy("recweek", "RecWeekFaq");
+  const { faqs } = useSingleton("recweek");
   return (
     <section className="bg-canvas-cream py-20 md:py-28">
       <div className="mx-auto max-w-[800px] px-6">
         <Reveal className="mb-12 text-center">
           <span className="font-body text-xs font-medium uppercase tracking-[0.14em] text-thread-pink">
-            Good to Know
+            {copy.text0}
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
-            Frequently Asked Questions
+            {copy.text1}
           </h2>
         </Reveal>
 
@@ -26,11 +28,11 @@ export function RecWeekFaq() {
                   className="shrink-0 text-stitch-gray transition-transform duration-300 group-open:rotate-180"
                 />
               </summary>
-              <p className="mt-3 font-body leading-relaxed text-fabric-dark">{faq.answer}</p>
+              <div className="mt-3 font-body leading-relaxed text-fabric-dark"><CmsRichText value={faq.answer}/></div>
             </details>
           ))}
         </Reveal>
       </div>
     </section>
-  )
+  );
 }

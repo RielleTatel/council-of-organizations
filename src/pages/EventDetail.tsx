@@ -1,64 +1,81 @@
-import { useParams, Link } from 'react-router-dom'
-import { Calendar, ArrowLeft, ExternalLink, Mail } from 'lucide-react'
-import { Seo } from '../components/Seo'
-import { JsonLd } from '../components/JsonLd'
-import { breadcrumbListSchema } from '../lib/schema'
-import { Reveal } from '../components/ui/Reveal'
-import { EventCard } from '../components/shared/EventCard'
-import { EmbroideredAccent } from '../components/EmbroideredAccent'
-import { ThreadBorder } from '../components/ThreadBorder'
-import { SectionGlow } from '../components/ui/SectionGlow'
-import { buttonVariants } from '../components/ui/Button'
-import { useEvent } from '../hooks/useEvent'
-import { useEvents } from '../hooks/useEvents'
+import { useCmsCopy, CmsRichText } from "../lib/cms/public";
+import { useParams, Link } from "react-router-dom";
+import { Calendar, ArrowLeft, ExternalLink, Mail } from "lucide-react";
+import { Seo } from "../components/Seo";
+import { JsonLd } from "../components/JsonLd";
+import { breadcrumbListSchema } from "../lib/schema";
+import { Reveal } from "../components/ui/Reveal";
+import { EventCard } from "../components/shared/EventCard";
+import { EmbroideredAccent } from "../components/EmbroideredAccent";
+import { ThreadBorder } from "../components/ThreadBorder";
+import { SectionGlow } from "../components/ui/SectionGlow";
+import { buttonVariants } from "../components/ui/Button";
+import { useEvent } from "../hooks/useEvent";
+import { useEvents } from "../hooks/useEvents";
 
 function formatDate(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' })
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export default function EventDetail() {
-  const { slug = '' } = useParams()
-  const { data: event, isLoading } = useEvent(slug)
-  const { data: allEvents } = useEvents()
+  const copy = useCmsCopy("settings", "EventDetail");
+  const { slug = "" } = useParams();
+  const { data: event, isLoading } = useEvent(slug);
+  const { data: allEvents } = useEvents();
 
   if (isLoading) {
     return (
       <div className="mx-auto max-w-[1000px] px-6 pt-32 pb-20">
         <div className="aspect-[16/9] w-full animate-pulse rounded-[8px] bg-stitch-gray/20" />
       </div>
-    )
+    );
   }
 
   if (!event) {
     return (
       <>
-        <Seo title="Story Not Found | COA-Z" description="The story you are looking for could not be found." noindex />
+        <Seo title={copy.title0} description={copy.description1} noindex />
         <section className="mx-auto flex max-w-[700px] flex-col items-center gap-6 px-6 pt-32 pb-24 text-center">
           <EmbroideredAccent color="red" index={0} size={64} />
-          <h1 className="font-display text-3xl font-bold text-trust-blue">Story Not Found</h1>
-          <p className="font-body text-lg text-fabric-dark">
-            We could not find that story. It may have been unpublished or moved.
-          </p>
-          <Link to="/events" className={buttonVariants({ variant: 'secondary' })}>
-            Back to Event Highlights
+          <h1 className="font-display text-3xl font-bold text-trust-blue">
+            {copy.text2}
+          </h1>
+          <div className="font-body text-lg text-fabric-dark">
+            <CmsRichText value={copy.paragraph3} />
+          </div>
+          <Link
+            to={copy.link4}
+            className={buttonVariants({ variant: "secondary" })}
+          >
+            {copy.text5}
           </Link>
         </section>
       </>
-    )
+    );
   }
 
-  const related = (allEvents ?? []).filter((e) => e.slug !== event.slug).slice(0, 3)
-  const body = event.body ?? [event.description]
+  const related = (allEvents ?? [])
+    .filter((e) => e.slug !== event.slug)
+    .slice(0, 3);
+  const body = event.body ?? [event.description];
 
   return (
     <>
-      <Seo title={`${event.title} | COA-Z`} description={event.excerpt ?? event.description} canonical={`/events/${event.slug}`} />
+      <Seo
+        title={`${event.title} | COA-Z`}
+        description={event.excerpt ?? event.description}
+        canonical={`/events/${event.slug}`}
+      />
       <JsonLd
         data={breadcrumbListSchema([
-          { name: 'Home', path: '/' },
-          { name: 'Event Highlights', path: '/events' },
+          { name: "Home", path: "/" },
+          { name: "Event Highlights", path: "/events" },
           { name: event.title, path: `/events/${event.slug}` },
         ])}
       />
@@ -68,8 +85,7 @@ export default function EventDetail() {
           <div className="mx-auto max-w-[1200px] px-6">
             <img
               src={event.image}
-              alt=""
-              role="presentation"
+              alt={event.imageAlt || event.title}
               className="aspect-[16/9] w-full rounded-[8px] object-cover shadow-[0_4px_20px_rgba(46,74,143,0.06)]"
               loading="eager"
             />
@@ -94,14 +110,20 @@ export default function EventDetail() {
           </p>
 
           <div className="mt-8 flex flex-col gap-5 font-body text-lg leading-relaxed text-fabric-dark">
-            {body.map((paragraph) => (
-              <p key={paragraph}>{paragraph}</p>
-            ))}
+            {event.bodyHtml ? (
+              <CmsRichText value={event.bodyHtml} />
+            ) : (
+              body.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+            )}
           </div>
 
           {(event.credit || event.socialLinks) && (
             <div className="mt-10 flex flex-col gap-4 border-t border-dashed border-stitch-gray/40 pt-6">
-              {event.credit && <p className="font-body text-sm text-stitch-gray">{event.credit}</p>}
+              {event.credit && (
+                <p className="font-body text-sm text-stitch-gray">
+                  {event.credit}
+                </p>
+              )}
               {event.socialLinks && (
                 <div className="flex flex-wrap items-center gap-5">
                   {event.socialLinks.facebook && (
@@ -112,7 +134,7 @@ export default function EventDetail() {
                       className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-trust-blue transition-colors hover:text-thread-red"
                     >
                       <ExternalLink size={16} strokeWidth={1.75} />
-                      Facebook
+                      {copy.text6}
                     </a>
                   )}
                   {event.socialLinks.instagram && (
@@ -123,7 +145,7 @@ export default function EventDetail() {
                       className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-trust-blue transition-colors hover:text-thread-red"
                     >
                       <ExternalLink size={16} strokeWidth={1.75} />
-                      Instagram
+                      {copy.text7}
                     </a>
                   )}
                   {event.socialLinks.email && (
@@ -132,7 +154,7 @@ export default function EventDetail() {
                       className="inline-flex items-center gap-1.5 font-body text-sm font-medium text-trust-blue transition-colors hover:text-thread-red"
                     >
                       <Mail size={16} strokeWidth={1.75} />
-                      Email
+                      {copy.text8}
                     </a>
                   )}
                 </div>
@@ -153,7 +175,7 @@ export default function EventDetail() {
           <div className="mx-auto max-w-[1200px] px-6">
             <Reveal className="mb-8">
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
-                You May Also Like
+                {copy.text9}
               </h2>
             </Reveal>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -167,13 +189,13 @@ export default function EventDetail() {
 
       <div className="mx-auto max-w-[1200px] px-6 py-12">
         <Link
-          to="/events"
+          to={copy.link10}
           className="inline-flex items-center gap-2 font-body font-medium text-trust-blue transition-colors hover:text-thread-red"
         >
           <ArrowLeft size={18} strokeWidth={1.75} />
-          Back to Event Highlights
+          {copy.text11}
         </Link>
       </div>
     </>
-  )
+  );
 }

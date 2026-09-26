@@ -1,0 +1,9 @@
+project_id = "council-of-organizations"
+
+[functions.cms-admin]
+verify_jwt = false
+import_map = "./functions/deno.json"
+
+[functions.cms-media]
+verify_jwt = false
+import_map = "./functions/deno.json"

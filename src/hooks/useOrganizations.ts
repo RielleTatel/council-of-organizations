@@ -1,10 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { organizationsKeys } from '../lib/contentful/queries'
-import { getOrganizations } from '../lib/contentful/services'
-
+import { usePublished } from "../lib/cms/public";
+import { organizationsFrom } from "../lib/cms/readers";
 export function useOrganizations() {
-  return useQuery({
-    queryKey: organizationsKeys.all,
-    queryFn: getOrganizations,
-  })
+  return usePublished(organizationsFrom);
 }

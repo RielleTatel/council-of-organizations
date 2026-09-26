@@ -1,23 +1,42 @@
-import { Routes, Route } from 'react-router-dom'
-import { SiteLayout } from './components/layout/SiteLayout'
-import Home from './pages/Home'
-import RecWeek from './pages/RecWeek'
-import RecWeekMap from './pages/RecWeekMap'
-import About from './pages/About'
-import Leadership from './pages/Leadership'
-import Organizations from './pages/Organizations'
-import OrganizationProfile from './pages/OrganizationProfile'
-import Events from './pages/Events'
-import EventDetail from './pages/EventDetail'
-import NotFound from './pages/NotFound'
+import { Routes, Route, Navigate } from "react-router-dom";
+import { SiteLayout } from "./components/layout/SiteLayout";
+import Home from "./pages/Home";
+import RecWeek from "./pages/RecWeek";
+import About from "./pages/About";
+import Leadership from "./pages/Leadership";
+import Organizations from "./pages/Organizations";
+import OrganizationProfile from "./pages/OrganizationProfile";
+import Events from "./pages/Events";
+import EventDetail from "./pages/EventDetail";
+import NotFound from "./pages/NotFound";
+import { lazy, Suspense } from "react";
+
+const Admin = lazy(() => import("./pages/Admin"));
 
 export default function App() {
   return (
     <Routes>
+      <Route
+        path="/admin/*"
+        element={
+          <Suspense
+            fallback={
+              <p className="p-12" role="status">
+                Loading staff workspace…
+              </p>
+            }
+          >
+            <Admin />
+          </Suspense>
+        }
+      />
       <Route element={<SiteLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/recweek" element={<RecWeek />} />
-        <Route path="/recweek/map" element={<RecWeekMap />} />
+        <Route
+          path="/recweek/map"
+          element={<Navigate to="/recweek" replace />}
+        />
         <Route path="/about" element={<About />} />
         <Route path="/leadership" element={<Leadership />} />
         <Route path="/organizations" element={<Organizations />} />
@@ -27,5 +46,5 @@ export default function App() {
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
-  )
+  );
 }

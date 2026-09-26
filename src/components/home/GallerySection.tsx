@@ -1,64 +1,49 @@
-import { useEffect, useState, type MouseEvent } from 'react'
-import { createPortal } from 'react-dom'
-import { X, ChevronLeft, ChevronRight, ChevronDown } from 'lucide-react'
-import { Reveal } from '../ui/Reveal'
-import { SectionGlow } from '../ui/SectionGlow'
-import { cn } from '../../lib/utils'
+import { useCmsCopy, useSingleton } from "../../lib/cms/public";
+import { useEffect, useState, type MouseEvent } from "react";
+import { createPortal } from "react-dom";
+import { X, ChevronLeft, ChevronRight, ChevronDown } from "lucide-react";
+import { Reveal } from "../ui/Reveal";
+import { SectionGlow } from "../ui/SectionGlow";
+import { cn } from "../../lib/utils";
 
-const MOBILE_PREVIEW_COUNT = 4
-
-const GALLERY_FILES = [
-  '739118430_1074677254957266_5028353376119372688_n.jpg',
-  '736007994_1074677201623938_5558962443347028691_n.jpg',
-  '738904413_1074677421623916_8931029527660133770_n.jpg',
-  '735945329_1073973625027629_1897203848609486417_n.jpg',
-  '737438238_1073973151694343_1061286527293346826_n.jpg',
-  '739165019_1074677154957276_5148322198685524243_n.jpg',
-  '730749060_1071153625309629_8181401420283714825_n.jpg',
-  '735687372_1073974718360853_3070773254197654702_n.jpg',
-  '735563327_1074677331623925_8378960752112579917_n.jpg',
-  
-]
-
-const GALLERY_IMAGES = GALLERY_FILES.map((file, i) => ({
-  src: `/gallery/${file}`,
-  alt: `COA-Z community moment ${i + 1}`,
-}))
+const MOBILE_PREVIEW_COUNT = 4;
 
 /** Deliberately uneven cell heights (in grid rows) so the grid reads as a hand-arranged
  * bento layout rather than a uniform grid — needed since the source photos are almost
  * all the same landscape aspect ratio and won't create variation on their own. */
-const ROW_SPANS = [2, 1, 2, 1, 1, 2, 1, 1, 1] as const
+const ROW_SPANS = [2, 1, 2, 1, 1, 2, 1, 1, 1] as const;
 
 interface LightboxProps {
-  index: number
-  onClose: () => void
-  onPrev: () => void
-  onNext: () => void
+  index: number;
+  onClose: () => void;
+  onPrev: () => void;
+  onNext: () => void;
 }
 
 function Lightbox({ index, onClose, onPrev, onNext }: LightboxProps) {
   useEffect(() => {
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
 
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'ArrowLeft') onPrev()
-      else if (e.key === 'ArrowRight') onNext()
-      else if (e.key === 'Escape') onClose()
+      if (e.key === "ArrowLeft") onPrev();
+      else if (e.key === "ArrowRight") onNext();
+      else if (e.key === "Escape") onClose();
     }
-    window.addEventListener('keydown', handleKeyDown)
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener('keydown', handleKeyDown)
-    }
-  }, [onClose, onPrev, onNext])
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClose, onPrev, onNext]);
 
-  const image = GALLERY_IMAGES[index]
+  const { gallery: GALLERY_IMAGES } = useSingleton("home");
+  const image = GALLERY_IMAGES[index];
+  if (!image) return null;
 
   function stop(e: MouseEvent, action: () => void) {
-    e.stopPropagation()
-    action()
+    e.stopPropagation();
+    action();
   }
 
   return createPortal(
@@ -99,23 +84,28 @@ function Lightbox({ index, onClose, onPrev, onNext }: LightboxProps) {
       </button>
     </div>,
     document.body,
-  )
+  );
 }
 
 export function GallerySection() {
-  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null)
-  const [showAll, setShowAll] = useState(false)
+  const copy = useCmsCopy("home", "GallerySection");
+  const { gallery: GALLERY_IMAGES } = useSingleton("home");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [showAll, setShowAll] = useState(false);
 
   return (
-    <section id="gallery" className="relative scroll-mt-24 bg-linen-white py-16 md:py-20">
+    <section
+      id="gallery"
+      className="relative scroll-mt-24 bg-linen-white py-16 md:py-20"
+    >
       <div className="mx-auto max-w-[1200px] px-6">
         <Reveal className="relative mb-12 text-center">
           <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
           <span className="font-body text-xs font-medium uppercase tracking-[0.14em] text-thread-pink">
-            Gallery
+            {copy.text0}
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
-            Moments We&apos;ve Woven Together
+            {copy.text1}
           </h2>
         </Reveal>
 
@@ -127,8 +117,8 @@ export function GallerySection() {
               onClick={() => setLightboxIndex(index)}
               aria-label={`View ${item.alt} in full size`}
               className={cn(
-                'group relative overflow-hidden rounded-[8px] shadow-[0_4px_20px_rgba(46,74,143,0.06)]',
-                index >= MOBILE_PREVIEW_COUNT && !showAll && 'hidden sm:block',
+                "group relative overflow-hidden rounded-[8px] shadow-[0_4px_20px_rgba(46,74,143,0.06)]",
+                index >= MOBILE_PREVIEW_COUNT && !showAll && "hidden sm:block",
               )}
               style={{ gridRow: `span ${ROW_SPANS[index % ROW_SPANS.length]}` }}
             >
@@ -148,11 +138,14 @@ export function GallerySection() {
             onClick={() => setShowAll((v) => !v)}
             className="mx-auto mt-6 flex items-center gap-2 font-body text-sm font-medium text-trust-blue transition-colors hover:text-thread-red sm:hidden"
           >
-            {showAll ? 'Show Fewer Photos' : 'Show More Photos'}
+            {showAll ? "Show Fewer Photos" : "Show More Photos"}
             <ChevronDown
               size={16}
               strokeWidth={1.75}
-              className={cn('transition-transform duration-300', showAll && 'rotate-180')}
+              className={cn(
+                "transition-transform duration-300",
+                showAll && "rotate-180",
+              )}
             />
           </button>
         )}
@@ -162,10 +155,17 @@ export function GallerySection() {
         <Lightbox
           index={lightboxIndex}
           onClose={() => setLightboxIndex(null)}
-          onPrev={() => setLightboxIndex((lightboxIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length)}
-          onNext={() => setLightboxIndex((lightboxIndex + 1) % GALLERY_IMAGES.length)}
+          onPrev={() =>
+            setLightboxIndex(
+              (lightboxIndex - 1 + GALLERY_IMAGES.length) %
+                GALLERY_IMAGES.length,
+            )
+          }
+          onNext={() =>
+            setLightboxIndex((lightboxIndex + 1) % GALLERY_IMAGES.length)
+          }
         />
       )}
     </section>
-  )
+  );
 }

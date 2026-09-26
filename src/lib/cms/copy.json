@@ -1,0 +1,183 @@
+{
+  "home": {
+    "AboutSection": {
+      "text0": "About COA-Z",
+      "text1": "Woven by ",
+      "text2": "Purpose",
+      "text3": "United in ",
+      "text4": "Service",
+      "paragraph5": "The Council of the Organizations of the Ateneo - Zamboanga unites accredited student organizations under a shared commitment to leadership, collaboration, and community, building a stronger Ateneo through the people who serve it.",
+      "image6": "/groupPicture.jpg",
+      "alt7": "COA-Z member organizations gathered together",
+      "text8": "Council",
+      "text9": "Our ",
+      "text10": "Story",
+      "paragraph11": "COA-Z serves as the collective voice of accredited student organizations in Ateneo de Zamboanga University. By fostering collaboration, supporting organizational initiatives, and representing the interests of its member organizations, the council helps create opportunities for leadership, service, and holistic student formation.",
+      "paragraph12": "Rather than working independently, organizations become part of a united community that shares resources, develops future leaders, and contributes to a more vibrant Ateneo experience.",
+      "link13": "/about",
+      "text14": "Learn More"
+    },
+    "EventHighlights": {
+      "text0": "Event Highlights",
+      "text1": "Coming Soon",
+      "paragraph2": "An upcoming COA-Z feature where accredited organizations can showcase their own events, accomplishments, and stories.",
+      "paragraph3": "New stories are being woven together. Check back soon.",
+      "link4": "/events",
+      "text5": "View All Event Highlights"
+    },
+    "GallerySection": {
+      "text0": "Gallery",
+      "text1": "Moments We've Woven Together"
+    },
+    "Hero": {
+      "text0": "Empowering Student Organizations. Inspiring Collaborative Leadership.",
+      "paragraph1": "The official alliance of all accredited college organizations of Ateneo de Zamboanga University, strengthening collaboration and empowering student leaders to create meaningful impact.",
+      "link2": "/recweek",
+      "text3": "RecWeek 2026",
+      "link4": "/organizations",
+      "text5": "Explore Organizations",
+      "link6": "/about",
+      "text7": "Learn More About COA-Z",
+      "alt8": "COA-Z logo"
+    },
+    "HomeCTA": {
+      "text0": "Discover the Organizations That Make Ateneo Thrive",
+      "paragraph1": "From academic and professional organizations to cultural, socio-civic, faith-based, and environmental groups, COA-Z brings together diverse communities that shape student life at Ateneo de Zamboanga University. Explore their advocacies and discover ways to get involved.",
+      "link2": "/organizations",
+      "text3": "Explore Organizations"
+    },
+    "OrganizationSpotlight": {
+      "text0": "Organization Spotlight",
+      "paragraph1": "Stories woven together through purpose, creativity, leadership, and service.",
+      "text2": "View Story",
+      "link3": "/organizations",
+      "text4": "View All Organizations"
+    },
+    "PurposeSection": {
+      "text0": "Our Purpose",
+      "text1": "What We Do"
+    }
+  },
+  "about": {
+    "About": {
+      "title0": "About COA-Z | COA-Z",
+      "description1": "Who we are, our purpose, vision, mission, and core principles as the alliance of accredited organizations of Ateneo de Zamboanga University.",
+      "eyebrow2": "About",
+      "title3": "Who We Are",
+      "description4": "The sole alliance of all Ateneo de Zamboanga University College-accredited organizations, and the primary bridge between El Consejo Atenista and the campus organizations it oversees.",
+      "paragraph5": "The Council of the Organizations of the Ateneo - Zamboanga (COA-Z) unites all accredited organizations under a shared commitment to leadership, collaboration, and community. We serve as the primary bridge between El Consejo Atenista and the campus organizations it oversees.",
+      "paragraph6": "For years, COA-Z has been the central body that creates platforms and programs for meaningful collaboration among member organizations and with external institutions alike. We amplify proactive leadership, support student organizations' initiatives, and build spaces where Ateneans can work together toward a greater good.",
+      "text7": "Our Purpose",
+      "paragraph8": "COA-Z fulfills six core functions as the governing alliance of AdZU's accredited organizations.",
+      "text9": "Our Vision",
+      "paragraph10": "The Council of Organizations of Ateneo - Zamboanga envisions itself as an empowered and collaborative community of competent organizations and holistically-formed students, ready to proactively respond to the challenges of their time and initiate positive changes within the Ateneo community and in greater society, through the Ignatian tradition of service and excellence.",
+      "text11": "Our Mission",
+      "paragraph12": "We develop organizations as formative spaces, providing Ateneans venues for critical socio-political discourse, business engagement, spiritual growth, environmental action, physical and mental health, cultural exploration, creative communication, artistic expression, social immersion, and innovation through science and technology. We empower organizations to be united, effective, collaborative, and sustainable through proper guidance, dialogue, and support.",
+      "text13": "Core Principles",
+      "link14": "/leadership",
+      "text15": "Meet the people leading COA-Z →"
+    }
+  },
+  "recweek": {
+    "RecWeekCta": {
+      "text0": "Ready to Find Your Community?",
+      "paragraph1": "Discover organizations that match your interests, build lifelong friendships, and develop your leadership potential through COA-Z.",
+      "link2": "/organizations",
+      "text3": "Explore Organizations"
+    },
+    "RecWeekFaq": {
+      "text0": "Good to Know",
+      "text1": "Frequently Asked Questions"
+    },
+    "RecWeekHero": {
+      "alt0": "Dia de Colores OrgFair 2026",
+      "paragraph2": "<p><strong>RecWeek</strong> is Ateneo de Zamboanga University's annual organization recruitment week, where students explore accredited organizations, attend campus-wide activities, discover new opportunities, and find communities that inspire their college journey.</p>",
+      "text3": "Explore the Organization Fair",
+      "paragraph4": "Discover our accredited organizations and find a community that matches your interests.",
+      "link5": "/organizations",
+      "text6": "Browse Organizations"
+    },
+    "RecWeekTimeline": {
+      "text0": "The Journey",
+      "text1": "One Week, Woven Together",
+      "text2": "Ready to explore?",
+      "paragraph3": "Find your community among our accredited member organizations.",
+      "link4": "/organizations",
+      "text5": "Browse Organizations"
+    },
+    "RecWeek": {
+      "title0": "RecWeek 2026 | COA-Z",
+      "description1": "RecWeek 2026: discover accredited organizations, meet fellow Atenistas, and find your community at Ateneo de Zamboanga University, August 3–7, 2026.",
+      "link2": "/organizations",
+      "text3": "Browse Accredited Organizations"
+    }
+  },
+  "leadership": {
+    "Leadership": {
+      "title0": "Leadership | COA-Z",
+      "description1": "The Executive Board of COA-Z: five offices and the Buklod Atenista Envoy Committee serving the Council and its member organizations.",
+      "eyebrow2": "Leadership",
+      "title3": "Executive Board",
+      "description4": "The Executive Board of COA-Z comprises five offices, each addressing distinct organizational concerns of the Council and its member organizations.",
+      "link5": "/organizations",
+      "text6": "Explore the organizations these leaders represent →"
+    }
+  },
+  "settings": {
+    "Organizations": {
+      "title0": "Organizations | COA-Z",
+      "description1": "Explore the accredited member organizations of COA-Z, grouped into eight clusters of student formation at Ateneo de Zamboanga University.",
+      "eyebrow2": "Organizations",
+      "title3": "Member Organizations",
+      "description4": "COA-Z member organizations are grouped into eight clusters based on their organizational vision and focus. Each cluster fosters a distinct sphere of student formation."
+    },
+    "Events": {
+      "title0": "Event Highlights | COA-Z",
+      "description1": "COA-Z's editorial newsroom: curated stories celebrating the accomplishments, initiatives, and activities of accredited student organizations.",
+      "eyebrow2": "Event Highlights",
+      "title3": "Celebrating student leadership, service, innovation, and the stories that shape the COA-Z community.",
+      "badge4": "Coming Soon",
+      "description5": "This is an upcoming feature of COA-Z, where accredited organizations will be able to showcase their own events, achievements, and stories right on this platform.",
+      "paragraph6": "New stories are being woven together. Check back soon.",
+      "text7": "Read Story",
+      "text8": "More Stories"
+    },
+    "EventDetail": {
+      "title0": "Story Not Found | COA-Z",
+      "description1": "The story you are looking for could not be found.",
+      "text2": "Story Not Found",
+      "paragraph3": "We could not find that story. It may have been unpublished or moved.",
+      "link4": "/events",
+      "text5": "Back to Event Highlights",
+      "text6": "Facebook",
+      "text7": "Instagram",
+      "text8": "Email",
+      "text9": "You May Also Like",
+      "link10": "/events",
+      "text11": "Back to Event Highlights"
+    },
+    "OrganizationProfile": {
+      "title0": "Organization Not Found | COA-Z",
+      "description1": "The organization you are looking for could not be found.",
+      "text2": "Organization Not Found",
+      "paragraph3": "We could not find that organization. It may have been renamed or is no longer accredited.",
+      "link4": "/organizations",
+      "text5": "Back to Organizations",
+      "text6": "Visit Facebook Page",
+      "text7": "Officers",
+      "text8": "More in ",
+      "link9": "/organizations",
+      "text10": "Back to Organizations"
+    },
+    "Navbar": {
+      "link0": "/"
+    },
+    "Footer": {
+      "text1": "Quick Links",
+      "text2": "Contact",
+      "text3": "Email",
+      "text4": "Facebook",
+      "text5": "Instagram"
+    }
+  }
+}

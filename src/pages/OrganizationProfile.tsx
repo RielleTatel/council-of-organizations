@@ -1,60 +1,77 @@
-import { useParams, Link } from 'react-router-dom'
-import { ArrowLeft, ExternalLink } from 'lucide-react'
-import { Seo } from '../components/Seo'
-import { JsonLd } from '../components/JsonLd'
-import { educationalOrganizationSchema, breadcrumbListSchema } from '../lib/schema'
-import { Reveal } from '../components/ui/Reveal'
-import { ClusterBadge } from '../components/shared/ClusterBadge'
-import { OrganizationCard } from '../components/shared/OrganizationCard'
-import { EmbroideredAccent } from '../components/EmbroideredAccent'
-import { ThreadBorder } from '../components/ThreadBorder'
-import { SectionGlow } from '../components/ui/SectionGlow'
-import { FloatingAccent } from '../components/ui/FloatingAccent'
-import { buttonVariants } from '../components/ui/Button'
-import { useOrganization } from '../hooks/useOrganization'
-import { useOrganizations } from '../hooks/useOrganizations'
-import { relatedOrganizations } from '../lib/directory'
-import { clusterBySlug } from '../config/clusters'
-import { threadHex } from '../lib/assets'
+import { useCmsCopy, CmsRichText } from "../lib/cms/public";
+import { useParams, Link } from "react-router-dom";
+import { ArrowLeft, ExternalLink } from "lucide-react";
+import { Seo } from "../components/Seo";
+import { JsonLd } from "../components/JsonLd";
+import {
+  educationalOrganizationSchema,
+  breadcrumbListSchema,
+} from "../lib/schema";
+import { Reveal } from "../components/ui/Reveal";
+import { ClusterBadge } from "../components/shared/ClusterBadge";
+import { OrganizationCard } from "../components/shared/OrganizationCard";
+import { EmbroideredAccent } from "../components/EmbroideredAccent";
+import { ThreadBorder } from "../components/ThreadBorder";
+import { SectionGlow } from "../components/ui/SectionGlow";
+import { FloatingAccent } from "../components/ui/FloatingAccent";
+import { buttonVariants } from "../components/ui/Button";
+import { useOrganization } from "../hooks/useOrganization";
+import { useOrganizations } from "../hooks/useOrganizations";
+import { relatedOrganizations } from "../lib/directory";
+import { useSingleton } from "../lib/cms/public";
+import { threadHex } from "../lib/assets";
 
 export default function OrganizationProfile() {
-  const { slug = '' } = useParams()
-  const { data: organization, isLoading } = useOrganization(slug)
-  const { data: allOrgs } = useOrganizations()
+  const { items: clusters } = useSingleton("clusters");
+  const clusterBySlug = (slug: string) =>
+    clusters.find((cluster) => cluster.slug === slug);
+  const copy = useCmsCopy("settings", "OrganizationProfile");
+  const { slug = "" } = useParams();
+  const { data: organization, isLoading } = useOrganization(slug);
+  const { data: allOrgs } = useOrganizations();
 
   if (isLoading) {
     return (
       <div className="mx-auto max-w-[1200px] px-6 pt-32 pb-20">
         <div className="h-80 w-full animate-pulse rounded-[8px] bg-stitch-gray/20" />
       </div>
-    )
+    );
   }
 
   if (!organization) {
     return (
       <>
-        <Seo title="Organization Not Found | COA-Z" description="The organization you are looking for could not be found." noindex />
+        <Seo title={copy.title0} description={copy.description1} noindex />
         <section className="mx-auto flex max-w-[700px] flex-col items-center gap-6 px-6 pt-32 pb-24 text-center">
           <EmbroideredAccent color="red" index={0} size={64} />
-          <h1 className="font-display text-3xl font-bold text-trust-blue">Organization Not Found</h1>
-          <p className="font-body text-lg text-fabric-dark">
-            We could not find that organization. It may have been renamed or is no longer accredited.
-          </p>
-          <Link to="/organizations" className={buttonVariants({ variant: 'secondary' })}>
-            Back to Organizations
+          <h1 className="font-display text-3xl font-bold text-trust-blue">
+            {copy.text2}
+          </h1>
+          <div className="font-body text-lg text-fabric-dark">
+            <CmsRichText value={copy.paragraph3} />
+          </div>
+          <Link
+            to={copy.link4}
+            className={buttonVariants({ variant: "secondary" })}
+          >
+            {copy.text5}
           </Link>
         </section>
       </>
-    )
+    );
   }
 
-  const related = relatedOrganizations(allOrgs ?? [], organization, 3)
-  const clusterMeta = clusterBySlug(organization.cluster.slug)
-  const hex = clusterMeta ? threadHex[clusterMeta.color] : '#8a8a8a'
+  const related = relatedOrganizations(allOrgs ?? [], organization, 3);
+  const clusterMeta = clusterBySlug(organization.cluster.slug);
+  const hex = clusterMeta ? threadHex[clusterMeta.color] : "#8a8a8a";
 
   return (
     <>
-      <Seo title={`${organization.name} | COA-Z`} description={organization.description} canonical={`/organizations/${organization.slug}`} />
+      <Seo
+        title={`${organization.name} | COA-Z`}
+        description={organization.description}
+        canonical={`/organizations/${organization.slug}`}
+      />
       <JsonLd
         data={educationalOrganizationSchema({
           name: organization.name,
@@ -65,9 +82,12 @@ export default function OrganizationProfile() {
       />
       <JsonLd
         data={breadcrumbListSchema([
-          { name: 'Home', path: '/' },
-          { name: 'Organizations', path: '/organizations' },
-          { name: organization.name, path: `/organizations/${organization.slug}` },
+          { name: "Home", path: "/" },
+          { name: "Organizations", path: "/organizations" },
+          {
+            name: organization.name,
+            path: `/organizations/${organization.slug}`,
+          },
         ])}
       />
 
@@ -78,7 +98,7 @@ export default function OrganizationProfile() {
             {organization.logo ? (
               <img
                 src={organization.logo}
-                alt={organization.name}
+                alt={organization.logoAlt || organization.name}
                 width={600}
                 height={400}
                 loading="eager"
@@ -90,14 +110,19 @@ export default function OrganizationProfile() {
                 style={{ backgroundColor: `${hex}14`, color: hex }}
               >
                 {organization.name
-                  .split(' ')
+                  .split(" ")
                   .slice(0, 2)
                   .map((w) => w[0])
-                  .join('')
+                  .join("")
                   .toUpperCase()}
               </div>
             )}
-            <FloatingAccent duration={6.5} distance={9} rotate={-6} className="absolute -right-3 -top-4">
+            <FloatingAccent
+              duration={6.5}
+              distance={9}
+              rotate={-6}
+              className="absolute -right-3 -top-4"
+            >
               <EmbroideredAccent color="pink" index={0} size={52} />
             </FloatingAccent>
           </Reveal>
@@ -115,15 +140,24 @@ export default function OrganizationProfile() {
                 href={organization.link}
                 target="_blank"
                 rel="noreferrer"
-                className={buttonVariants({ variant: 'secondary' })}
+                className={buttonVariants({ variant: "secondary" })}
               >
-                Visit Facebook Page
+                {copy.text6}
                 <ExternalLink size={18} strokeWidth={1.75} />
               </a>
             )}
           </Reveal>
         </div>
       </section>
+
+      {organization.descriptionHtml && (
+        <section className="bg-linen-white py-12">
+          <CmsRichText
+            value={organization.descriptionHtml}
+            className="mx-auto max-w-[1000px] px-6 font-body text-lg leading-relaxed"
+          />
+        </section>
+      )}
 
       {organization.officers.length > 0 && (
         <section className="relative bg-linen-white py-16 md:py-20">
@@ -135,11 +169,14 @@ export default function OrganizationProfile() {
           <div className="mx-auto max-w-[1000px] px-6">
             <Reveal>
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
-                Officers
+                {copy.text7}
               </h2>
               <ul className="mt-6 flex flex-col divide-y divide-dashed divide-stitch-gray/40">
                 {organization.officers.map((officer) => (
-                  <li key={officer} className="py-3 font-body text-lg text-fabric-dark">
+                  <li
+                    key={officer}
+                    className="py-3 font-body text-lg text-fabric-dark"
+                  >
                     {officer}
                   </li>
                 ))}
@@ -160,7 +197,8 @@ export default function OrganizationProfile() {
           <div className="mx-auto max-w-[1200px] px-6">
             <Reveal className="mb-8">
               <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
-                More in {organization.cluster.name}
+                {copy.text8}
+                {organization.cluster.name}
               </h2>
             </Reveal>
             <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -174,13 +212,13 @@ export default function OrganizationProfile() {
 
       <div className="mx-auto max-w-[1200px] px-6 pb-20">
         <Link
-          to="/organizations"
+          to={copy.link9}
           className="inline-flex items-center gap-2 font-body font-medium text-trust-blue transition-colors hover:text-thread-red"
         >
           <ArrowLeft size={18} strokeWidth={1.75} />
-          Back to Organizations
+          {copy.text10}
         </Link>
       </div>
     </>
-  )
+  );
 }

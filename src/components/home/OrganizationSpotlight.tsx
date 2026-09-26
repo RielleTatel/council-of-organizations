@@ -1,18 +1,23 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
-import { useSpotlightOrganizations } from '../../hooks/useHomeData'
-import { ClusterBadge } from '../shared/ClusterBadge'
-import { EmbroideredAccent } from '../EmbroideredAccent'
-import { ThreadBorder } from '../ThreadBorder'
-import { Reveal } from '../ui/Reveal'
-import { SectionGlow } from '../ui/SectionGlow'
-import { hoopFrames, threadHex } from '../../lib/assets'
-import { clusterBySlug } from '../../config/clusters'
+import { useCmsCopy, CmsRichText } from "../../lib/cms/public";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { useSpotlightOrganizations } from "../../hooks/useHomeData";
+import { ClusterBadge } from "../shared/ClusterBadge";
+import { EmbroideredAccent } from "../EmbroideredAccent";
+import { ThreadBorder } from "../ThreadBorder";
+import { Reveal } from "../ui/Reveal";
+import { SectionGlow } from "../ui/SectionGlow";
+import { hoopFrames, threadHex } from "../../lib/assets";
+import { useSingleton } from "../../lib/cms/public";
 
 export function OrganizationSpotlight() {
-  const { organizations, isLoading } = useSpotlightOrganizations(4)
+  const { items: clusters } = useSingleton("clusters");
+  const clusterBySlug = (slug: string) =>
+    clusters.find((cluster) => cluster.slug === slug);
+  const copy = useCmsCopy("home", "OrganizationSpotlight");
+  const { organizations, isLoading } = useSpotlightOrganizations(4);
 
-  if (!isLoading && organizations.length === 0) return null
+  if (!isLoading && organizations.length === 0) return null;
 
   return (
     <section className="relative bg-linen-white py-20 md:py-28">
@@ -25,29 +30,32 @@ export function OrganizationSpotlight() {
         <Reveal className="relative mb-14 text-center">
           <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
           <h2 className="font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
-            Organization Spotlight
+            {copy.text0}
           </h2>
-          <p className="mx-auto mt-4 max-w-[60ch] font-body text-lg leading-relaxed text-fabric-dark">
-            Stories woven together through purpose, creativity, leadership, and service.
-          </p>
+          <div className="mx-auto mt-4 max-w-[60ch] font-body text-lg leading-relaxed text-fabric-dark">
+            <CmsRichText value={copy.paragraph1} />
+          </div>
         </Reveal>
 
         {isLoading ? (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[0, 1, 2, 3].map((i) => (
-              <div key={i} className="h-72 animate-pulse rounded-[8px] bg-canvas-cream" />
+              <div
+                key={i}
+                className="h-72 animate-pulse rounded-[8px] bg-canvas-cream"
+              />
             ))}
           </div>
         ) : (
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {organizations.map((org, i) => {
-              const color = clusterBySlug(org.cluster.slug)?.color ?? 'blue'
-              const hex = threadHex[color]
+              const color = clusterBySlug(org.cluster.slug)?.color ?? "blue";
+              const hex = threadHex[color];
               return (
                 <Reveal key={org.id} delay={i * 100}>
                   <article
                     className="group relative flex h-full flex-col overflow-hidden rounded-[8px] border border-trust-blue/10 bg-canvas-cream shadow-[0_4px_20px_rgba(46,74,143,0.06)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(46,74,143,0.14)]"
-                    style={{ '--accent': hex } as React.CSSProperties}
+                    style={{ "--accent": hex } as React.CSSProperties}
                   >
                     <div className="relative">
                       <img
@@ -59,7 +67,12 @@ export function OrganizationSpotlight() {
                       />
                       {org.logo && (
                         <div className="absolute left-1/2 top-1/2 h-14 w-14 -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-full border-[3px] border-linen-white bg-linen-white shadow-[0_4px_16px_rgba(46,74,143,0.16)]">
-                          <img src={org.logo} alt={`${org.name} logo`} className="h-full w-full object-cover" loading="lazy" />
+                          <img
+                            src={org.logo}
+                            alt={`${org.name} logo`}
+                            className="h-full w-full object-cover"
+                            loading="lazy"
+                          />
                         </div>
                       )}
                       <EmbroideredAccent
@@ -71,8 +84,13 @@ export function OrganizationSpotlight() {
                     </div>
 
                     <div className="flex flex-1 flex-col gap-2 p-4 text-center md:text-left">
-                      <h3 className="font-display text-base font-bold leading-tight text-trust-blue">{org.name}</h3>
-                      <ClusterBadge slug={org.cluster.slug} className="mx-auto px-2 py-0.5 text-[10px] md:mx-0" />
+                      <h3 className="font-display text-base font-bold leading-tight text-trust-blue">
+                        {org.name}
+                      </h3>
+                      <ClusterBadge
+                        slug={org.cluster.slug}
+                        className="mx-auto px-2 py-0.5 text-[10px] md:mx-0"
+                      />
                       <p className="line-clamp-3 font-body text-sm leading-relaxed text-fabric-dark">
                         {org.description}
                       </p>
@@ -81,27 +99,27 @@ export function OrganizationSpotlight() {
                         to={`/organizations/${org.slug}`}
                         className="mt-auto inline-flex items-center justify-center gap-1.5 self-center pt-1 font-body text-sm font-medium text-trust-blue transition-all duration-300 hover:gap-2.5 hover:text-[var(--accent)] md:justify-start md:self-start"
                       >
-                        View Story
+                        {copy.text2}
                         <ArrowRight size={14} strokeWidth={1.75} />
                       </Link>
                     </div>
                   </article>
                 </Reveal>
-              )
+              );
             })}
           </div>
         )}
 
         <div className="mt-14 text-center">
           <Link
-            to="/organizations"
+            to={copy.link3}
             className="inline-flex items-center gap-1.5 font-body font-medium text-trust-blue transition-colors hover:text-thread-red"
           >
-            View All Organizations
+            {copy.text4}
             <ArrowRight size={16} strokeWidth={1.75} />
           </Link>
         </div>
       </div>
     </section>
-  )
+  );
 }

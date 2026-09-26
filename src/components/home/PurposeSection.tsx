@@ -1,33 +1,22 @@
-import { EmbroideredAccent } from '../EmbroideredAccent'
-import { Reveal } from '../ui/Reveal'
-import { SectionGlow } from '../ui/SectionGlow'
-import { FloatingAccent } from '../ui/FloatingAccent'
-import type { ThreadColor } from '../../lib/assets'
-
-interface Purpose {
-  title: string
-  body: string
-  color: ThreadColor
-}
-
-const PURPOSES: Purpose[] = [
-  { title: 'Represent', body: 'Advocate for the welfare, interests, and voices of accredited student organizations within the university.', color: 'red' },
-  { title: 'Support', body: 'Provide guidance, administrative assistance, and essential resources that strengthen organizational operations.', color: 'blue' },
-  { title: 'Develop', body: 'Promote leadership formation, organizational growth, and the continuous development of student leaders.', color: 'green' },
-  { title: 'Connect', body: 'Create opportunities for collaboration among organizations, university offices, and external partners.', color: 'purple' },
-]
+import { useCmsCopy, CmsRichText, useSingleton } from "../../lib/cms/public";
+import { EmbroideredAccent } from "../EmbroideredAccent";
+import { Reveal } from "../ui/Reveal";
+import { SectionGlow } from "../ui/SectionGlow";
+import { FloatingAccent } from "../ui/FloatingAccent";
 
 export function PurposeSection() {
+  const copy = useCmsCopy("home", "PurposeSection");
+  const { purposes: PURPOSES } = useSingleton("home");
   return (
     <section className="bg-canvas-cream py-10 md:py-10">
       <div className="mx-auto max-w-[1200px] px-6">
         <Reveal className="relative mb-12 text-center">
           <SectionGlow className="left-1/2 top-0 -translate-x-1/2" />
           <span className="font-body text-xs font-medium uppercase tracking-[0.14em] text-thread-purple">
-            Our Purpose
+            {copy.text0}
           </span>
           <h2 className="mt-3 font-display text-3xl font-bold tracking-[-0.02em] text-trust-blue md:text-4xl">
-            What We Do
+            {copy.text1}
           </h2>
         </Reveal>
 
@@ -44,13 +33,15 @@ export function PurposeSection() {
                 >
                   <EmbroideredAccent color={p.color} index={0} size={44} />
                 </FloatingAccent>
-                <h3 className="font-display text-2xl font-bold text-trust-blue">{p.title}</h3>
-                <p className="mt-3 max-w-[42ch] font-body leading-relaxed text-fabric-dark">{p.body}</p>
+                <h3 className="font-display text-2xl font-bold text-trust-blue">
+                  {p.title}
+                </h3>
+                <div className="mt-3 max-w-[42ch] font-body leading-relaxed text-fabric-dark"><CmsRichText value={p.body}/></div>
               </article>
             </Reveal>
           ))}
         </div>
       </div>
     </section>
-  )
+  );
 }

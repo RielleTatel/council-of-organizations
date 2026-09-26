@@ -1,10 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
-import { eventsKeys } from '../lib/contentful/queries'
-import { getEvents } from '../lib/contentful/services'
-
+import { usePublished } from "../lib/cms/public";
+import { eventsFrom } from "../lib/cms/readers";
 export function useEvents() {
-  return useQuery({
-    queryKey: eventsKeys.all,
-    queryFn: getEvents,
-  })
+  return usePublished(eventsFrom);
 }

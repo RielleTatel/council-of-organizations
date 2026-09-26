@@ -1,10 +1,8 @@
-import { useQuery } from '@tanstack/react-query'
-import { eventsKeys } from '../lib/contentful/queries'
-import { getEventBySlug } from '../lib/contentful/services'
-
+import { usePublished } from "../lib/cms/public";
+import { eventsFrom } from "../lib/cms/readers";
 export function useEvent(slug: string) {
-  return useQuery({
-    queryKey: eventsKeys.bySlug(slug),
-    queryFn: () => getEventBySlug(slug),
-  })
+  return usePublished(
+    (records) =>
+      eventsFrom(records).find((event) => event.slug === slug) ?? null,
+  );
 }

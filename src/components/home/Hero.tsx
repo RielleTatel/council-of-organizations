@@ -1,54 +1,70 @@
-import { Link } from 'react-router-dom'
-import { motion, useMotionValue, useReducedMotion, useSpring, useTransform, type Variants } from 'framer-motion'
-import { buttonVariants } from '../ui/Button'
-import { EmbroideredAccent } from '../EmbroideredAccent'
-import { ThreadBorder } from '../ThreadBorder'
-import { SectionGlow } from '../ui/SectionGlow'
-import { siteLogo } from '../../lib/assets'
+import { useCmsCopy, CmsRichText } from "../../lib/cms/public";
+import { Link } from "react-router-dom";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useSpring,
+  useTransform,
+  type Variants,
+} from "framer-motion";
+import { buttonVariants } from "../ui/Button";
+import { EmbroideredAccent } from "../EmbroideredAccent";
+import { ThreadBorder } from "../ThreadBorder";
+import { SectionGlow } from "../ui/SectionGlow";
+import { useSiteSettings } from "../../hooks/useSiteSettings";
 
 const fabricNoise =
-  'data:image/svg+xml;utf8,' +
+  "data:image/svg+xml;utf8," +
   encodeURIComponent(
     "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'>" +
       "<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/>" +
       "<feColorMatrix type='matrix' values='0 0 0 0 0.24  0 0 0 0 0.24  0 0 0 0 0.24  0 0 0 0.5 0'/></filter>" +
       "<rect width='100%' height='100%' filter='url(#n)'/></svg>",
-  )
+  );
 
 const containerVariants: Variants = {
   hidden: {},
   visible: { transition: { staggerChildren: 0.14, delayChildren: 2.3 } },
-}
+};
 
 const itemVariants: Variants = {
   hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
-}
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
 
 export function Hero() {
-  const shouldReduceMotion = useReducedMotion()
+  const siteLogo = useSiteSettings().logo;
+  const copy = useCmsCopy("home", "Hero");
+  const shouldReduceMotion = useReducedMotion();
 
-  const pointerX = useMotionValue(0)
-  const pointerY = useMotionValue(0)
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
 
-  const spring = { stiffness: 50, damping: 20, mass: 0.5 }
-  const bgX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-3, 3]), spring)
-  const bgY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-3, 3]), spring)
-  const logoX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-6, 6]), spring)
-  const logoY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-6, 6]), spring)
-  const flowerX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-10, 10]), spring)
-  const flowerY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-10, 10]), spring)
+  const spring = { stiffness: 50, damping: 20, mass: 0.5 };
+  const bgX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-3, 3]), spring);
+  const bgY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-3, 3]), spring);
+  const logoX = useSpring(useTransform(pointerX, [-0.5, 0.5], [-6, 6]), spring);
+  const logoY = useSpring(useTransform(pointerY, [-0.5, 0.5], [-6, 6]), spring);
+  const flowerX = useSpring(
+    useTransform(pointerX, [-0.5, 0.5], [-10, 10]),
+    spring,
+  );
+  const flowerY = useSpring(
+    useTransform(pointerY, [-0.5, 0.5], [-10, 10]),
+    spring,
+  );
 
   function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
-    if (shouldReduceMotion) return
-    const rect = e.currentTarget.getBoundingClientRect()
-    pointerX.set((e.clientX - rect.left) / rect.width - 0.5)
-    pointerY.set((e.clientY - rect.top) / rect.height - 0.5)
+    if (shouldReduceMotion) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    pointerX.set((e.clientX - rect.left) / rect.width - 0.5);
+    pointerY.set((e.clientY - rect.top) / rect.height - 0.5);
   }
 
   function handleMouseLeave() {
-    pointerX.set(0)
-    pointerY.set(0)
+    pointerX.set(0);
+    pointerY.set(0);
   }
 
   return (
@@ -60,7 +76,10 @@ export function Hero() {
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
-        style={{ backgroundImage: `url("${fabricNoise}")`, backgroundSize: '220px 220px' }}
+        style={{
+          backgroundImage: `url("${fabricNoise}")`,
+          backgroundSize: "220px 220px",
+        }}
       />
 
       <motion.div
@@ -93,8 +112,12 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.4 }}
       >
         <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, -8, 0], rotate: [0, 6, 0] }}
-          transition={{ duration: 5.5, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { y: [0, -8, 0], rotate: [0, 6, 0] }
+          }
+          transition={{ duration: 5.5, repeat: Infinity, ease: "easeInOut" }}
         >
           <EmbroideredAccent color="purple" size={22} />
         </motion.div>
@@ -107,8 +130,17 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.6 }}
       >
         <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, 7, 0], rotate: [0, -8, 0] }}
-          transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 0.3 }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { y: [0, 7, 0], rotate: [0, -8, 0] }
+          }
+          transition={{
+            duration: 6.5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.3,
+          }}
         >
           <EmbroideredAccent color="red" size={18} />
         </motion.div>
@@ -121,8 +153,17 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.5 }}
       >
         <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, -6, 0], rotate: [0, 5, 0] }}
-          transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 0.5 }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { y: [0, -6, 0], rotate: [0, 5, 0] }
+          }
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
         >
           <EmbroideredAccent color="green" size={20} />
         </motion.div>
@@ -135,8 +176,12 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.7 }}
       >
         <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, 9, 0], rotate: [0, -6, 0] }}
-          transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { y: [0, 9, 0], rotate: [0, -6, 0] }
+          }
+          transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }}
         >
           <EmbroideredAccent color="blue" size={24} />
         </motion.div>
@@ -149,8 +194,17 @@ export function Hero() {
         transition={{ duration: 0.5, delay: 0.45 }}
       >
         <motion.div
-          animate={shouldReduceMotion ? undefined : { y: [0, -7, 0], rotate: [0, 7, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut', delay: 0.2 }}
+          animate={
+            shouldReduceMotion
+              ? undefined
+              : { y: [0, -7, 0], rotate: [0, 7, 0] }
+          }
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.2,
+          }}
         >
           <EmbroideredAccent color="pink" size={18} />
         </motion.div>
@@ -161,7 +215,7 @@ export function Hero() {
         className="pointer-events-none absolute right-0 top-1/2 h-[460px] w-[460px] -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(46,74,143,0.14),transparent_70%)] blur-3xl lg:h-[680px] lg:w-[680px]"
         style={{ x: bgX, y: bgY }}
         animate={shouldReduceMotion ? undefined : { opacity: [0.7, 1, 0.7] }}
-        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <div className="relative mx-auto grid max-w-[1200px] grid-cols-1 items-center gap-8 px-10 pb-24 pt-8 md:pb-28 md:pt-10 lg:grid-cols-[1.1fr_0.9fr]">
@@ -173,7 +227,10 @@ export function Hero() {
         >
           <SectionGlow className="left-1/4 top-0 hidden lg:block" />
 
-          <motion.div variants={itemVariants} className="relative mx-auto lg:mx-0">
+          <motion.div
+            variants={itemVariants}
+            className="relative mx-auto lg:mx-0"
+          >
             <EmbroideredAccent
               color="green"
               index={0}
@@ -181,34 +238,42 @@ export function Hero() {
               className="absolute -left-8 bottom-0 hidden opacity-80 lg:block"
             />
             <h1 className="font-display text-4xl font-bold leading-[1.1] tracking-[-0.02em] text-trust-blue md:text-5xl lg:text-6xl">
-              Empowering Student Organizations. Inspiring Collaborative Leadership.
+              {copy.text0}
             </h1>
           </motion.div>
 
-          <motion.p
+          <motion.div
             variants={itemVariants}
             className="mx-auto max-w-[60ch] font-body text-lg leading-relaxed text-fabric-dark lg:mx-0"
           >
-            The official alliance of all accredited college organizations of Ateneo de Zamboanga
-            University, strengthening collaboration and empowering student leaders to create meaningful impact.
-          </motion.p>
+            <CmsRichText value={copy.paragraph1} />
+          </motion.div>
 
           <motion.div
             variants={itemVariants}
             className="flex flex-wrap items-center justify-center gap-4 pt-2 lg:justify-start"
           >
-            <Link to="/recweek" className={buttonVariants({ variant: 'accent' })}>
+            <Link
+              to={copy.link2}
+              className={buttonVariants({ variant: "accent" })}
+            >
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-linen-white/70" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-linen-white" />
               </span>
-              RecWeek 2026
+              {copy.text3}
             </Link>
-            <Link to="/organizations" className={buttonVariants({ variant: 'primary' })}>
-              Explore Organizations
+            <Link
+              to={copy.link4}
+              className={buttonVariants({ variant: "primary" })}
+            >
+              {copy.text5}
             </Link>
-            <Link to="/about" className={buttonVariants({ variant: 'secondary' })}>
-              Learn More About COA-Z
+            <Link
+              to={copy.link6}
+              className={buttonVariants({ variant: "secondary" })}
+            >
+              {copy.text7}
             </Link>
           </motion.div>
         </motion.div>
@@ -238,8 +303,13 @@ export function Hero() {
             aria-hidden
             className="pointer-events-none absolute inset-[-4%] -z-10 rounded-full border-2 border-dashed border-stitch-gray/15"
             initial={{ opacity: 0 }}
-            animate={shouldReduceMotion ? { opacity: 1 } : { opacity: 1, rotate: 360 }}
-            transition={{ opacity: { duration: 0.5, delay: 1.6 }, rotate: { duration: 90, repeat: Infinity, ease: 'linear' } }}
+            animate={
+              shouldReduceMotion ? { opacity: 1 } : { opacity: 1, rotate: 360 }
+            }
+            transition={{
+              opacity: { duration: 0.5, delay: 1.6 },
+              rotate: { duration: 90, repeat: Infinity, ease: "linear" },
+            }}
           />
 
           <motion.div
@@ -277,8 +347,17 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 0.9 }}
           >
             <motion.div
-              animate={shouldReduceMotion ? undefined : { y: [0, -12, 0], rotate: [0, 8, 0], scale: [1, 1.08, 1] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut', delay: 1.4 }}
+              animate={
+                shouldReduceMotion
+                  ? undefined
+                  : { y: [0, -12, 0], rotate: [0, 8, 0], scale: [1, 1.08, 1] }
+              }
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.4,
+              }}
             >
               <EmbroideredAccent color="yellow" index={0} size={64} />
             </motion.div>
@@ -292,8 +371,17 @@ export function Hero() {
             transition={{ duration: 0.5, delay: 1.05 }}
           >
             <motion.div
-              animate={shouldReduceMotion ? undefined : { y: [0, 10, 0], rotate: [0, -10, 0], scale: [1, 1.06, 1] }}
-              transition={{ duration: 6.5, repeat: Infinity, ease: 'easeInOut', delay: 1.5 }}
+              animate={
+                shouldReduceMotion
+                  ? undefined
+                  : { y: [0, 10, 0], rotate: [0, -10, 0], scale: [1, 1.06, 1] }
+              }
+              transition={{
+                duration: 6.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: 1.5,
+              }}
             >
               <EmbroideredAccent color="pink" index={0} size={56} />
             </motion.div>
@@ -304,23 +392,32 @@ export function Hero() {
             className="relative z-10"
             initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 1.6, ease: 'easeOut' }}
+            transition={{ duration: 0.6, delay: 1.6, ease: "easeOut" }}
           >
             <motion.div style={{ x: logoX, y: logoY }}>
               <motion.img
                 src={siteLogo}
-                alt="COA-Z logo"
+                alt={copy.alt8}
                 width={1200}
                 height={1200}
                 loading="eager"
                 className="h-auto w-full"
-                animate={shouldReduceMotion ? undefined : { y: [0, -10, 0], rotate: [-3, 3, -3] }}
-                transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut', delay: 2.2 }}
+                animate={
+                  shouldReduceMotion
+                    ? undefined
+                    : { y: [0, -10, 0], rotate: [-3, 3, -3] }
+                }
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                  delay: 2.2,
+                }}
               />
             </motion.div>
           </motion.div>
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,41 +1,47 @@
-import { Link } from 'react-router-dom'
-import { Calendar, ArrowRight } from 'lucide-react'
-import { Seo } from '../components/Seo'
-import { Reveal } from '../components/ui/Reveal'
-import { EventCard } from '../components/shared/EventCard'
-import { EmbroideredAccent } from '../components/EmbroideredAccent'
-import { SectionGlow } from '../components/ui/SectionGlow'
-import { buttonVariants } from '../components/ui/Button'
-import { PageHeader } from '../components/shared/PageHeader'
-import { useEvents } from '../hooks/useEvents'
+import { useCmsCopy, CmsRichText } from "../lib/cms/public";
+import { Link } from "react-router-dom";
+import { Calendar, ArrowRight } from "lucide-react";
+import { Seo } from "../components/Seo";
+import { Reveal } from "../components/ui/Reveal";
+import { EventCard } from "../components/shared/EventCard";
+import { EmbroideredAccent } from "../components/EmbroideredAccent";
+import { SectionGlow } from "../components/ui/SectionGlow";
+import { buttonVariants } from "../components/ui/Button";
+import { PageHeader } from "../components/shared/PageHeader";
+import { useEvents } from "../hooks/useEvents";
 
 function formatDate(iso: string): string {
-  const d = new Date(iso)
-  if (Number.isNaN(d.getTime())) return ''
-  return d.toLocaleDateString('en-PH', { year: 'numeric', month: 'long', day: 'numeric' })
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return d.toLocaleDateString("en-PH", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
 }
 
 export default function Events() {
-  const { data, isLoading } = useEvents()
-  const stories = data ?? []
-  const featured = stories.find((s) => s.isFeatured) ?? stories[0]
-  const rest = stories.filter((s) => s.id !== featured?.id)
+  const copy = useCmsCopy("settings", "Events");
+  const { data, isLoading } = useEvents();
+  const stories = data ?? [];
+  const featured = stories.find((s) => s.isFeatured) ?? stories[0];
+  const rest = stories.filter((s) => s.id !== featured?.id);
 
   return (
     <>
       <Seo
-        title="Event Highlights | COA-Z"
-        description="COA-Z's editorial newsroom: curated stories celebrating the accomplishments, initiatives, and activities of accredited student organizations."
+        title={copy.title0}
+        description={copy.description1}
         canonical="/events"
       />
 
       <PageHeader
         variant="ink"
-        eyebrow="Event Highlights"
+        eyebrow={copy.eyebrow2}
         accent="yellow"
-        title="Celebrating student leadership, service, innovation, and the stories that shape the COA-Z community."
-        badge="Coming Soon"
-        description="This is an upcoming feature of COA-Z, where accredited organizations will be able to showcase their own events, achievements, and stories right on this platform."
+        title={copy.title3}
+        badge={copy.badge4}
+        description={copy.description5}
       />
 
       <section className="bg-canvas-cream py-16 md:py-20">
@@ -45,9 +51,9 @@ export default function Events() {
           ) : !featured ? (
             <Reveal className="flex flex-col items-center gap-4 py-12 text-center">
               <EmbroideredAccent color="yellow" index={1} size={56} />
-              <p className="font-body text-lg text-stitch-gray">
-                New stories are being woven together. Check back soon.
-              </p>
+              <div className="font-body text-lg text-stitch-gray">
+                <CmsRichText value={copy.paragraph6} />
+              </div>
             </Reveal>
           ) : (
             <>
@@ -77,9 +83,9 @@ export default function Events() {
                   </p>
                   <Link
                     to={`/events/${featured.slug}`}
-                    className={`${buttonVariants({ variant: 'primary' })} mt-2 self-center md:self-start`}
+                    className={`${buttonVariants({ variant: "primary" })} mt-2 self-center md:self-start`}
                   >
-                    Read Story
+                    {copy.text7}
                     <ArrowRight size={18} strokeWidth={1.75} />
                   </Link>
                 </div>
@@ -90,7 +96,7 @@ export default function Events() {
                   <Reveal className="relative mb-8">
                     <SectionGlow className="left-0 top-0 h-48 w-48" />
                     <h2 className="font-display text-2xl font-bold tracking-[-0.02em] text-trust-blue md:text-3xl">
-                      More Stories
+                      {copy.text8}
                     </h2>
                   </Reveal>
                   <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
@@ -107,5 +113,5 @@ export default function Events() {
         </div>
       </section>
     </>
-  )
+  );
 }
