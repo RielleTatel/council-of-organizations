@@ -1,6 +1,31 @@
 export const MAX_FEATURED_STORIES = 5;
 export const FEATURED_STORY_INTERVAL_MS = 4000;
 
+export function moveFeaturedStory(
+  currentIndex: number,
+  storyCount: number,
+  direction: -1 | 1,
+): number {
+  if (storyCount <= 0) return 0;
+  return (currentIndex + direction + storyCount) % storyCount;
+}
+
+export function scheduleFeaturedStoryAutoAdvance({
+  storyCount,
+  paused,
+  reducedMotion,
+  onAdvance,
+}: {
+  storyCount: number;
+  paused: boolean;
+  reducedMotion: boolean | null;
+  onAdvance: () => void;
+}): () => void {
+  if (storyCount < 2 || paused || reducedMotion !== false) return () => {};
+  const timeout = setTimeout(onAdvance, FEATURED_STORY_INTERVAL_MS);
+  return () => clearTimeout(timeout);
+}
+
 interface FeaturedStory {
   id: string;
   isFeatured: boolean;
@@ -11,11 +36,23 @@ export function canFeatureAnotherStory(occupiedCount: number): boolean {
   return occupiedCount < MAX_FEATURED_STORIES;
 }
 
+export function isValidFeaturePosition(value: unknown): value is number {
+  return typeof value === "number" && Number.isFinite(value) && value >= 0;
+}
+
+export function isFeaturePositionAvailable(
+  position: unknown,
+  otherPositions: number[],
+): boolean {
+  return (
+    position === undefined ||
+    position === null ||
+    (isValidFeaturePosition(position) && !otherPositions.includes(position))
+  );
+}
+
 function carouselPosition(order?: number): number {
-  return typeof order === "number" &&
-    Number.isInteger(order) &&
-    order >= 1 &&
-    order <= MAX_FEATURED_STORIES
+  return isValidFeaturePosition(order)
     ? order
     : Number.POSITIVE_INFINITY;
 }

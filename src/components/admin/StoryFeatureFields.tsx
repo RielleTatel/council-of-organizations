@@ -1,6 +1,8 @@
 import {
   canFeatureAnotherStory,
   FEATURED_STORY_INTERVAL_MS,
+  isFeaturePositionAvailable,
+  isValidFeaturePosition,
   MAX_FEATURED_STORIES,
 } from "../../lib/eventStories";
 
@@ -24,13 +26,16 @@ export function StoryFeatureFields({
     { length: MAX_FEATURED_STORIES },
     (_, index) => index + 1,
   ).find((position) => !otherFeaturedOrders.includes(position));
-  const order =
-    typeof featuredOrder === "number" &&
-    Number.isInteger(featuredOrder) &&
-    featuredOrder >= 1 &&
-    featuredOrder <= MAX_FEATURED_STORIES
-      ? featuredOrder
-      : undefined;
+  const positionIsValid = isValidFeaturePosition(featuredOrder);
+  const positionIsAvailable = isFeaturePositionAvailable(
+    featuredOrder,
+    otherFeaturedOrders,
+  );
+  const order = positionIsValid ? featuredOrder : undefined;
+  const nextPosition =
+    positionIsAvailable && order !== undefined
+      ? order
+      : (availablePosition ?? 1);
 
   return (
     <section
@@ -52,9 +57,7 @@ export function StoryFeatureFields({
             const nextFeatured = event.target.checked;
             onChange({
               isFeatured: nextFeatured,
-              featuredOrder: nextFeatured
-                ? (order ?? availablePosition ?? 1)
-                : featuredOrder,
+              featuredOrder: nextFeatured ? nextPosition : featuredOrder,
             });
           }}
         />
@@ -62,13 +65,16 @@ export function StoryFeatureFields({
       </label>
       {!isFeatured && !canFeature && (
         <p className="cms-feature-limit" role="status">
-          All {MAX_FEATURED_STORIES} feature positions are in use. Unfeature
-          another story before adding this one.
+        {MAX_FEATURED_STORIES} stories are already featured. Unfeature
+        another story before adding this one.
         </p>
       )}
       <label className="cms-field">
         Carousel position
-        <select
+        <input
+          type="number"
+          min="0"
+          step="any"
           value={order ?? ""}
           disabled={!isFeatured}
           onChange={(event) =>
@@ -79,19 +85,24 @@ export function StoryFeatureFields({
                 : undefined,
             })
           }
-        >
-          <option value="">After numbered stories</option>
-          {Array.from({ length: MAX_FEATURED_STORIES }, (_, index) => (
-            <option key={index + 1} value={index + 1}>
-              Position {index + 1}
-            </option>
-          ))}
-        </select>
+        />
       </label>
       <p className="cms-feature-help">
-        Lower positions appear first. Stories with the same or blank position
-        follow their published story order.
+        Lower positions appear first. Use a unique number; decimals let you
+        insert between stories. Leave blank to place this after numbered
+        stories.
       </p>
+      {isFeatured && !positionIsAvailable && (
+        <p className="cms-feature-limit" role="alert">
+          Another featured story already uses this position. Choose a different
+          number before saving.
+        </p>
+      )}
+      {isFeatured && featuredOrder !== undefined && !positionIsValid && (
+        <p className="cms-feature-limit" role="alert">
+          Position must be a finite, nonnegative number.
+        </p>
+      )}
     </section>
   );
 }

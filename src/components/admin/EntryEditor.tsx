@@ -15,7 +15,11 @@ import {
 } from "../../lib/cms/content";
 import { publishedKey, useSingleton } from "../../lib/cms/public";
 import { useEvents } from "../../hooks/useEvents";
-import { MAX_FEATURED_STORIES } from "../../lib/eventStories";
+import {
+  isFeaturePositionAvailable,
+  isValidFeaturePosition,
+  MAX_FEATURED_STORIES,
+} from "../../lib/eventStories";
 import { Fields } from "./Fields";
 import { StoryFeatureFields } from "./StoryFeatureFields";
 import { entriesKey, entryStatus, entryTitle } from "./EntryList";
@@ -98,6 +102,20 @@ function DocumentEditor({
     entry.kind === "story" &&
     document.isFeatured === true &&
     otherFeaturedCount >= MAX_FEATURED_STORIES;
+  const hasFeaturePosition =
+    document.featuredOrder !== undefined && document.featuredOrder !== null;
+  const invalidFeaturePosition =
+    entry.kind === "story" &&
+    document.isFeatured === true &&
+    hasFeaturePosition &&
+    !isValidFeaturePosition(document.featuredOrder);
+  const duplicateFeaturePosition =
+    entry.kind === "story" &&
+    document.isFeatured === true &&
+    isValidFeaturePosition(document.featuredOrder) &&
+    !isFeaturePositionAvailable(document.featuredOrder, otherFeaturedOrders);
+  const featureConfigurationInvalid =
+    featureLimitExceeded || invalidFeaturePosition || duplicateFeaturePosition;
   useEffect(() => {
     function beforeUnload(event: BeforeUnloadEvent) {
       if (dirty) {
@@ -201,14 +219,14 @@ function DocumentEditor({
       <div className="cms-editor-actions cms-actions">
         <button
           className="cms-btn primary"
-          disabled={busy || !dirty || featureLimitExceeded}
+          disabled={busy || !dirty || featureConfigurationInvalid}
           onClick={() => void act("save")}
         >
           {busy ? "Working…" : "Save draft"}
         </button>
         <button
           className="cms-btn publish"
-          disabled={busy || dirty || featureLimitExceeded}
+          disabled={busy || dirty || featureConfigurationInvalid}
           onClick={() => void act("publish")}
         >
           Publish
@@ -265,6 +283,18 @@ function DocumentEditor({
         <p className="cms-error" role="alert">
           Five other stories are already featured. Remove this story from the
           carousel or unfeature another story before saving or publishing.
+        </p>
+      )}
+      {invalidFeaturePosition && (
+        <p className="cms-error" role="alert">
+          Carousel position must be a finite, nonnegative number. Correct it
+          before saving or publishing.
+        </p>
+      )}
+      {duplicateFeaturePosition && (
+        <p className="cms-error" role="alert">
+          Another featured story already uses this position. Choose a different
+          number before saving or publishing.
         </p>
       )}
       {showHistory && (

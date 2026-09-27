@@ -331,6 +331,94 @@ describe("CMS database interface", () => {
     ).toBe("Pending caption");
   });
 
+  it("keeps carousel changes in drafts until publish and rejects duplicate positions", async () => {
+    const firstSlug = "featured-order-first";
+    const firstId = await create("story", firstSlug, {
+      ...blankDocument("story", firstSlug),
+      isFeatured: true,
+      featuredOrder: 1,
+    });
+    const secondSlug = "featured-order-second";
+    const secondId = await create("story", secondSlug, {
+      ...blankDocument("story", secondSlug),
+      isFeatured: true,
+      featuredOrder: 2,
+    });
+    await asStaff(editor, `select cms_publish('${firstId}',1)`);
+    await asStaff(editor, `select cms_publish('${secondId}',1)`);
+
+    const duplicatePositionDraft = {
+      ...blankDocument("story", secondSlug),
+      isFeatured: true,
+      featuredOrder: 1,
+    };
+    await asStaff(
+      editor,
+      `select cms_save_draft('${secondId}',1,${json(duplicatePositionDraft)})`,
+    );
+    const liveBeforePublish = (
+      await db.query<{ document: { featuredOrder: number } }>(
+        `select document from cms_published where entry_id='${secondId}'`,
+      )
+    ).rows[0].document;
+    expect(liveBeforePublish.featuredOrder).toBe(2);
+    await expect(
+      asStaff(editor, `select cms_publish('${secondId}',2)`),
+    ).rejects.toThrow("Featured story positions must be unique");
+
+    const revisedPositionDraft = { ...duplicatePositionDraft, featuredOrder: 1.5 };
+    await asStaff(
+      editor,
+      `select cms_save_draft('${secondId}',2,${json(revisedPositionDraft)})`,
+    );
+    await asStaff(editor, `select cms_publish('${secondId}',3)`);
+    expect(
+      (
+        await db.query<{ document: { featuredOrder: number } }>(
+          `select document from cms_published where entry_id='${secondId}'`,
+        )
+      ).rows[0].document.featuredOrder,
+    ).toBe(1.5);
+
+    const unfeaturedDraft = { ...revisedPositionDraft, isFeatured: false };
+    await asStaff(
+      editor,
+      `select cms_save_draft('${secondId}',3,${json(unfeaturedDraft)})`,
+    );
+    expect(
+      (
+        await db.query<{ document: { isFeatured: boolean } }>(
+          `select document from cms_published where entry_id='${secondId}'`,
+        )
+      ).rows[0].document.isFeatured,
+    ).toBe(true);
+    await asStaff(editor, `select cms_publish('${secondId}',4)`);
+    expect(
+      (
+        await db.query<{ document: { isFeatured: boolean } }>(
+          `select document from cms_published where entry_id='${secondId}'`,
+        )
+    ).rows[0].document.isFeatured,
+    ).toBe(false);
+
+    for (const [suffix, order] of [
+      ["negative", -1],
+      ["text", "first"],
+    ] as const) {
+      const invalidSlug = `featured-order-${suffix}`;
+      const invalidId = await create("story", invalidSlug, {
+        ...blankDocument("story", invalidSlug),
+        isFeatured: true,
+        featuredOrder: order,
+      });
+      await expect(
+        asStaff(editor, `select cms_publish('${invalidId}',1)`),
+      ).rejects.toThrow("Featured story positions must be nonnegative numbers");
+    }
+
+    await asStaff(editor, `select cms_transition('${firstId}','unpublish',1)`);
+  });
+
   it("allows at most five published stories in the feature carousel", async () => {
     for (let position = 1; position <= 5; position += 1) {
       const slug = `featured-${position}`;

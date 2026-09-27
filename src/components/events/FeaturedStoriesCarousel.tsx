@@ -3,7 +3,10 @@ import { AnimatePresence, useReducedMotion, motion } from "framer-motion";
 import { ArrowRight, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import type { Event } from "../../lib/cms/domain";
-import { FEATURED_STORY_INTERVAL_MS } from "../../lib/eventStories";
+import {
+  moveFeaturedStory,
+  scheduleFeaturedStoryAutoAdvance,
+} from "../../lib/eventStories";
 import { buttonVariants } from "../ui/Button";
 import { Reveal } from "../ui/Reveal";
 
@@ -35,20 +38,22 @@ export function FeaturedStoriesCarousel({
   }, [stories.length]);
 
   useEffect(() => {
-    if (stories.length < 2 || paused || shouldReduceMotion !== false) return;
-    const timeout = window.setTimeout(
-      () => setActiveIndex((index) => (index + 1) % stories.length),
-      FEATURED_STORY_INTERVAL_MS,
-    );
-    return () => window.clearTimeout(timeout);
+    return scheduleFeaturedStoryAutoAdvance({
+      storyCount: stories.length,
+      paused,
+      reducedMotion: shouldReduceMotion,
+      onAdvance: () =>
+        setActiveIndex((index) => moveFeaturedStory(index, stories.length, 1)),
+    });
   }, [activeIndex, paused, shouldReduceMotion, stories.length]);
 
   if (!stories.length) return null;
 
   const story = stories[activeIndex] ?? stories[0];
   const previous = () =>
-    setActiveIndex((index) => (index - 1 + stories.length) % stories.length);
-  const next = () => setActiveIndex((index) => (index + 1) % stories.length);
+    setActiveIndex((index) => moveFeaturedStory(index, stories.length, -1));
+  const next = () =>
+    setActiveIndex((index) => moveFeaturedStory(index, stories.length, 1));
 
   return (
     <Reveal className="relative mb-20">
