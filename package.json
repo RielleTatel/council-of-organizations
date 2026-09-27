@@ -8,6 +8,7 @@
     "build": "bun scripts/generate-sitemap.ts && npm run typecheck && vite build",
     "typecheck": "tsc -b && tsc -p tsconfig.backend.json",
     "cms:setup": "bun --env-file=.env.setup.local scripts/cms/setup.ts",
+    "cms:migrate-auth": "bun --env-file=.env.setup.local scripts/cms/migrate-auth.ts",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run"

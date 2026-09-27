@@ -3,6 +3,7 @@ import { basename, resolve, extname } from "node:path";
 import { spawnSync } from "node:child_process";
 import { createClient } from "@supabase/supabase-js";
 import { bootstrapEntries } from "../../src/lib/cms/bootstrap";
+import { configureStaffAuth } from "./auth-config";
 import {
   imagePaths,
   imageDescriptions,
@@ -31,9 +32,7 @@ async function main() {
     publicKey = required("VITE_SUPABASE_PUBLISHABLE_KEY");
   const token = required("SUPABASE_ACCESS_TOKEN"),
     secret = required("SUPABASE_SERVICE_ROLE_KEY");
-  const resend = required("RESEND_API_KEY"),
-    sender = required("RESEND_FROM_EMAIL"),
-    ownerEmail = required("CMS_OWNER_EMAIL").toLowerCase();
+  const ownerEmail = required("CMS_OWNER_EMAIL").toLowerCase();
   const siteUrl = required("CMS_SITE_URL").replace(/\/$/, ""),
     localOrigin = (
       process.env.CMS_LOCAL_ORIGIN || "http://localhost:5173"
@@ -46,11 +45,8 @@ async function main() {
     parsed.protocol !== "https:"
   )
     throw new Error("Use the standard Supabase project URL for setup.");
-  if (
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(sender) ||
-    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail)
-  )
-    throw new Error("Set valid sender and owner email addresses.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ownerEmail))
+    throw new Error("Set a valid owner email address.");
   if (!siteUrl.startsWith("https://") || new URL(siteUrl).pathname !== "/")
     throw new Error("CMS_SITE_URL must be your HTTPS website origin.");
   const api = async (path: string, method: string, body?: unknown) => {
@@ -74,6 +70,10 @@ async function main() {
   };
   const sql = (query: string, parameters: unknown[] = []) =>
     api("database/query", "POST", { query, parameters });
+  const ownerAccounts = await sql("select id from auth.users where lower(email)=$1", [ownerEmail]) as { id: string }[];
+  const ownerPassword = ownerAccounts.length ? undefined : required("CMS_OWNER_PASSWORD");
+  if (ownerPassword && (ownerPassword.length < 8 || ownerPassword.length > 128))
+    throw new Error("CMS_OWNER_PASSWORD must contain 8 to 128 characters.");
   console.log("Applying CMS database migrations…");
   await sql(
     "create schema if not exists cms_setup; revoke all on schema cms_setup from public,anon,authenticated; create table if not exists cms_setup.migrations(version text primary key,applied_at timestamptz default now());",
@@ -154,33 +154,8 @@ async function main() {
   console.log(
     `Imported ${seeded[0]?.imported ?? 0} new published entries. Existing entries were preserved.`,
   );
-  console.log("Configuring invite-only Auth with Resend SMTP…");
-  const previous = (await api("config/auth", "GET")) as {
-    uri_allow_list?: string;
-  };
-  const redirects = [
-    ...new Set([
-      ...(previous.uri_allow_list || "").split(",").filter(Boolean),
-      `${siteUrl}/admin/reset`,
-      `${localOrigin}/admin/reset`,
-    ]),
-  ].join(",");
-  await api("config/auth", "PATCH", {
-    site_url: siteUrl,
-    uri_allow_list: redirects,
-    disable_signup: true,
-    external_email_enabled: true,
-    external_anonymous_users_enabled: false,
-    mailer_autoconfirm: false,
-    password_min_length: 8,
-    smtp_host: "smtp.resend.com",
-    smtp_port: "465",
-    smtp_user: "resend",
-    smtp_pass: resend,
-    smtp_admin_email: sender,
-    smtp_sender_name: "COA staff CMS",
-    rate_limit_email_sent: 30,
-  });
+  console.log("Configuring owner-managed Supabase Auth…");
+  await configureStaffAuth(api, siteUrl, localOrigin);
   await api("secrets", "POST", [
     { name: "CMS_SITE_URL", value: siteUrl },
     { name: "CMS_LOCAL_ORIGIN", value: localOrigin },
@@ -218,32 +193,31 @@ async function main() {
       throw new Error(
         "CMS_OWNER_EMAIL is already registered without active owner access. Ask an existing owner to update its role.",
       );
-    console.log("Initial owner already exists; no new email sent.");
+    console.log("Initial owner already exists; its password was preserved.");
   } else {
-    const users = (await sql(
-      "select id from auth.users where lower(email)=$1",
-      [ownerEmail],
-    )) as { id: string }[];
+    const users = ownerAccounts;
     let id = users[0]?.id;
     if (!id) {
-      const invitation = await client.auth.admin.inviteUserByEmail(ownerEmail, {
-        redirectTo: `${siteUrl}/admin/reset`,
+      const account = await client.auth.admin.createUser({
+        email: ownerEmail, password: ownerPassword, email_confirm: true,
       });
-      if (invitation.error)
-        throw new Error(
-          "Owner invitation failed. Check Resend SMTP configuration.",
-        );
-      id = invitation.data.user?.id;
-      if (!id) throw new Error("Owner invitation failed.");
+      if (account.error) throw new Error("Owner account creation failed. Check the email and password requirements.");
+      id = account.data.user?.id;
+      if (!id) throw new Error("Owner account creation failed.");
     }
-    await sql(
-      "insert into public.cms_staff(user_id,email,role,active) values($1::uuid,$2,'owner',true) on conflict(user_id) do nothing",
-      [id, ownerEmail],
-    );
+    try {
+      await sql(
+        "insert into public.cms_staff(user_id,email,role,active) values($1::uuid,$2,'owner',true) on conflict(user_id) do nothing",
+        [id, ownerEmail],
+      );
+    } catch (error) {
+      if (!users.length) await client.auth.admin.deleteUser(id);
+      throw error;
+    }
     console.log(
       users.length
         ? "Existing Auth account granted owner access."
-        : "Owner invitation sent.",
+        : "Owner account created. Sign in using CMS_OWNER_PASSWORD, then change it in the CMS.",
     );
   }
   const publicClient = createClient(projectUrl, publicKey, {

@@ -65,6 +65,7 @@ function AdminWorkspace() {
             {staff.email}
             <small>{staff.role}</small>
           </p>
+          <Link to="/admin/password">Change password</Link>
           <Link to="/" target="_blank" rel="noreferrer">
             View website ↗
           </Link>
@@ -123,6 +124,7 @@ export default function Admin() {
             <Route path="login" element={<AuthForms />} />
             <Route path="forgot" element={<AuthForms />} />
             <Route path="reset" element={<AuthForms />} />
+            <Route path="password" element={<AuthForms />} />
             <Route path="*" element={<AdminWorkspace />} />
           </Routes>
         </AuthProvider>
