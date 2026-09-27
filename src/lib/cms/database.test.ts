@@ -1,6 +1,6 @@
 import { beforeAll, afterAll, describe, expect, it } from "vitest";
 import { PGlite } from "@electric-sql/pglite";
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { blankDocument, singletonDefaults } from "./bootstrap";
 
 const owner = "00000000-0000-0000-0000-000000000001";
@@ -42,15 +42,12 @@ beforeAll(async () => {
     grant select, insert on storage.objects to anon, authenticated;
     insert into auth.users values ('${owner}', 'owner@example.com'), ('${editor}', 'editor@example.com');
   `);
-  await db.exec(
-    readFileSync(
-      new URL(
-        "../../../supabase/migrations/20260926000100_cms.sql",
-        import.meta.url,
-      ),
-      "utf8",
-    ),
-  );
+  const migrations = new URL("../../../supabase/migrations/", import.meta.url);
+  for (const file of readdirSync(migrations)
+    .filter((name) => name.endsWith(".sql"))
+    .sort()) {
+    await db.exec(readFileSync(new URL(file, migrations), "utf8"));
+  }
   await db.exec(
     `insert into cms_staff(user_id,email,role) values ('${owner}','owner@example.com','owner'),('${editor}','editor@example.com','editor')`,
   );
@@ -332,5 +329,30 @@ describe("CMS database interface", () => {
         )
       ).rows[0].document.imageAlt,
     ).toBe("Pending caption");
+  });
+
+  it("allows at most five published stories in the feature carousel", async () => {
+    for (let position = 1; position <= 5; position += 1) {
+      const slug = `featured-${position}`;
+      const id = await create("story", slug, {
+        ...blankDocument("story", slug),
+        isFeatured: true,
+        featuredOrder: position,
+      });
+      await asStaff(editor, `select cms_publish('${id}',1)`);
+    }
+
+    const overflowSlug = "featured-overflow";
+    const overflowId = await create("story", overflowSlug, {
+      ...blankDocument("story", overflowSlug),
+      isFeatured: true,
+    });
+    await expect(
+      asStaff(editor, `select cms_publish('${overflowId}',1)`),
+    ).rejects.toThrow("At most five stories may be featured");
+    const count = await db.query<{ count: number }>(
+      `select count(*)::int as count from cms_published where kind='story' and document->'isFeatured'='true'::jsonb`,
+    );
+    expect(count.rows[0].count).toBe(5);
   });
 });

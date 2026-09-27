@@ -14,7 +14,10 @@ import {
   type Revision,
 } from "../../lib/cms/content";
 import { publishedKey, useSingleton } from "../../lib/cms/public";
+import { useEvents } from "../../hooks/useEvents";
+import { MAX_FEATURED_STORIES } from "../../lib/eventStories";
 import { Fields } from "./Fields";
+import { StoryFeatureFields } from "./StoryFeatureFields";
 import { entriesKey, entryStatus, entryTitle } from "./EntryList";
 
 export function EntryEditor() {
@@ -30,9 +33,21 @@ export function EntryEditor() {
         <Link to="/admin/trash">Open trash</Link>
       </p>
     );
-  return <DocumentEditor key={entry.id} initialEntry={entry} />;
+  return (
+    <DocumentEditor
+      key={entry.id}
+      initialEntry={entry}
+      allEntries={query.data}
+    />
+  );
 }
-function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
+function DocumentEditor({
+  initialEntry,
+  allEntries,
+}: {
+  initialEntry: Entry;
+  allEntries: Entry[];
+}) {
   const [entry, setEntry] = useState(initialEntry),
     [document, setDocument] = useState<Document>(
       structuredClone(initialEntry.draft.document),
@@ -42,6 +57,7 @@ function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
     [message, setMessage] = useState(""),
     [showHistory, setShowHistory] = useState(false);
   const { items: clusters } = useSingleton("clusters"),
+    { data: publishedStories = [] } = useEvents(),
     cache = useQueryClient(),
     navigate = useNavigate();
   const revisions = useQuery({
@@ -54,6 +70,34 @@ function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
   const template =
     bootstrapEntries.find((row) => row.kind === entry.kind)?.document ??
     document;
+  const reservedFeatured = new Map<string, number | undefined>();
+  for (const story of publishedStories) {
+    if (story.isFeatured) reservedFeatured.set(story.slug, story.featuredOrder);
+  }
+  for (const row of allEntries) {
+    if (
+      row.kind === "story" &&
+      !row.deleted_at &&
+      row.draft.document.isFeatured === true
+    ) {
+      const order = row.draft.document.featuredOrder;
+      reservedFeatured.set(
+        row.slug,
+        typeof order === "number" ? order : undefined,
+      );
+    }
+  }
+  const otherFeaturedOrders = [...reservedFeatured.entries()]
+    .filter(([slug]) => slug !== entry.slug)
+    .map(([, order]) => order)
+    .filter((order): order is number => typeof order === "number");
+  const otherFeaturedCount = [...reservedFeatured.keys()].filter(
+    (slug) => slug !== entry.slug,
+  ).length;
+  const featureLimitExceeded =
+    entry.kind === "story" &&
+    document.isFeatured === true &&
+    otherFeaturedCount >= MAX_FEATURED_STORIES;
   useEffect(() => {
     function beforeUnload(event: BeforeUnloadEvent) {
       if (dirty) {
@@ -157,14 +201,14 @@ function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
       <div className="cms-editor-actions cms-actions">
         <button
           className="cms-btn primary"
-          disabled={busy || !dirty}
+          disabled={busy || !dirty || featureLimitExceeded}
           onClick={() => void act("save")}
         >
           {busy ? "Working…" : "Save draft"}
         </button>
         <button
           className="cms-btn publish"
-          disabled={busy || dirty}
+          disabled={busy || dirty || featureLimitExceeded}
           onClick={() => void act("publish")}
         >
           Publish
@@ -217,6 +261,12 @@ function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
           {message}
         </p>
       )}
+      {featureLimitExceeded && (
+        <p className="cms-error" role="alert">
+          Five other stories are already featured. Remove this story from the
+          carousel or unfeature another story before saving or publishing.
+        </p>
+      )}
       {showHistory && (
         <section className="cms-history">
           <h2>Publication history</h2>
@@ -247,6 +297,22 @@ function DocumentEditor({ initialEntry }: { initialEntry: Entry }) {
         </section>
       )}
       <fieldset className="cms-editor" disabled={busy}>
+        {entry.kind === "story" && (
+          <StoryFeatureFields
+            isFeatured={document.isFeatured === true}
+            featuredOrder={
+              typeof document.featuredOrder === "number"
+                ? document.featuredOrder
+                : undefined
+            }
+            otherFeaturedCount={otherFeaturedCount}
+            otherFeaturedOrders={otherFeaturedOrders}
+            onChange={(value) => {
+              setDocument((current) => ({ ...current, ...value }));
+              setMessage("");
+            }}
+          />
+        )}
         <Fields
           value={document}
           template={template}

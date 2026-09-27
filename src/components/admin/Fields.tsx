@@ -173,6 +173,10 @@ export function Fields({
             ([key]) =>
               key !== "id" &&
               key !== "url" &&
+              !(
+                path === "" &&
+                ["isFeatured", "featuredOrder", "isFlagship"].includes(key)
+              ) &&
               !(key === "body" && "bodyHtml" in source),
           )
           .map(([key, item]) => {

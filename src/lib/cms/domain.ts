@@ -26,6 +26,8 @@ export interface Event {
   image: string;
   imageAlt?: string;
   isFeatured: boolean;
+  /** Position within the published event feature carousel. Smaller values appear first. */
+  featuredOrder?: number;
   isFlagship: boolean;
   /** Organization the story is about, e.g. "Junior Jaycees Chamber - AdZU". */
   organization?: string;
